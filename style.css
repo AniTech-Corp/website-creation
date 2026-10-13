@@ -2725,59 +2725,59 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 .footer-center-wrapper {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 8.5rem 1.75rem 3.5rem;
+  padding: 13rem 1.75rem 2.25rem;
 }
 
 @media (min-width: 1024px) {
   .footer-center-wrapper {
-    padding: 13rem 2.5rem 4rem;
+    padding: 20rem 2.5rem 2.5rem;
   }
 }
 
 .footer-content-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3.5rem;
+  gap: 2.5rem;
 }
 
 @media (min-width: 640px) {
   .footer-content-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 2.25rem;
   }
 }
 
 @media (min-width: 900px) {
   .footer-content-grid {
-    grid-template-columns: 1.6fr 1fr 1fr 1fr;
-    gap: 3.5rem;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 2.5rem;
     align-items: flex-start;
   }
 }
 
 @media (min-width: 1100px) {
   .footer-content-grid {
-    grid-template-columns: 1.75fr 1fr 1fr 1fr;
-    gap: 4.5rem;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 3.25rem;
   }
 }
 
 .footer-brand-box {
-  max-width: 380px;
+  max-width: 320px;
 }
 
 .footer-brand-box p {
-  color: rgba(255, 255, 255, 0.78) !important;
-  font-size: 0.9375rem !important;
-  line-height: 1.7 !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+  font-size: 0.8125rem !important;
+  line-height: 1.6 !important;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
 }
 
 .footer-col-title {
-  font-size: 1.0625rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #ffffff;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   letter-spacing: -0.01em;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
 }
@@ -2785,15 +2785,15 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 .footer-links-list {
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
+  gap: 0.75rem;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
 .footer-link {
-  font-size: 0.975rem;
-  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.7);
   transition: all 0.2s ease;
   display: inline-block;
   text-decoration: none;
@@ -2809,15 +2809,15 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 .footer-social-row {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
-  padding-top: 0.5rem;
+  padding-top: 0.25rem;
 }
 
 .footer-social-badge {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2829,8 +2829,8 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 }
 
 .footer-social-badge svg {
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   transition: transform 0.25s ease;
 }
 
@@ -2847,14 +2847,14 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 }
 
 .footer-divider-row {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  margin-top: 4.5rem;
-  padding-top: 2.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 2.25rem;
+  padding-top: 1.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  gap: 1.75rem;
+  gap: 1rem;
 }
 
 @media (min-width: 768px) {
@@ -2864,8 +2864,8 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 }
 
 .footer-copy-text {
-  font-size: 0.9375rem;
-  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.6);
   margin: 0;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
