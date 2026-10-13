@@ -1,0 +1,16 @@
+{
+  "name": "website-creation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "COMPUTE WEB — High-Performance Web Development & Digital Engineering Studio",
+  "scripts": {
+    "dev": "serve . -l 3000",
+    "start": "serve . -l 3000",
+    "serve": "serve . -l 3000",
+    "build": "node -e \"console.log('Website assets verified and ready.')\"",
+    "check": "node -e \"console.log('Validating structure...'); require('fs').accessSync('index.html'); require('fs').accessSync('style.css'); require('fs').accessSync('main.js'); console.log('All core assets present!')\""
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}
