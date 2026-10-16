@@ -1,0 +1,20 @@
+services:
+  website-creation-router:
+    image: alpine/socat
+    container_name: website-creation-router
+    restart: always
+    command: tcp-listen:3003,fork,reuseaddr tcp-connect:172.18.0.1:3003
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=root_default"
+      - "traefik.http.routers.websitecreation.rule=Host(`website.srv1118851.hstgr.cloud`)"
+      - "traefik.http.routers.websitecreation.entrypoints=web,websecure"
+      - "traefik.http.routers.websitecreation.tls.certresolver=mytlschallenge"
+      - "traefik.http.services.websitecreation.loadbalancer.server.port=3003"
+
+networks:
+  proxy:
+    external: true
+    name: root_default
