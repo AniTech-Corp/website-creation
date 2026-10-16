@@ -20,9 +20,18 @@
   <meta name="twitter:title" content="KLIRSTUDIO — Jasa Pembuatan Website Berkelas &amp; Mesin Penjualan Bisnis"/>
   <meta name="twitter:description" content="Jasa pembuatan website profesional dan terima beres. Desain berkelas, loading secepat kilat, dan terhubung langsung ke WhatsApp untuk meningkatkan omzet bisnis Anda."/>
 
-  <link rel="stylesheet" href="style.css?v=57">
+  <link rel="stylesheet" href="style.css?v=73">
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('klir-theme');
+        var theme = savedTheme ? savedTheme : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
 </head>
-<body data-lang="id" class="font-sans antialiased bg-black text-foreground selection:bg-[#2277FF] selection:text-black">
+<body data-lang="id" class="font-sans antialiased bg-black text-foreground selection:bg-[#2EC4B6] selection:text-black">
 <div id="scroll-progress-bar" aria-hidden="true"></div>
 <main class="relative min-h-screen overflow-x-hidden">
   <!-- NAVIGATION HEADER -->
@@ -62,7 +71,19 @@
             <span class="absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full bg-white"></span>
           </a>
         </div>
-        <div id="nav-actions-wrap" class="hidden md:flex items-center gap-5 lg:gap-6 shrink-0 transition-all duration-500">
+        <div id="nav-actions-wrap" class="hidden md:flex items-center gap-4 lg:gap-5 shrink-0 transition-all duration-500">
+          <!-- Theme Switcher Button (Desktop) -->
+          <button id="theme-toggle-btn" class="theme-toggle-btn p-2 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white transition-all duration-300 flex items-center justify-center outline-none" aria-label="Toggle Light/Dark Theme" title="Ganti Mode Terang/Gelap">
+            <!-- Sun Icon (Active in Dark mode) -->
+            <svg class="theme-icon-sun w-[18px] height-[18px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+            </svg>
+            <!-- Moon Icon (Active in Light mode) -->
+            <svg class="theme-icon-moon w-[18px] height-[18px] hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+            </svg>
+          </button>
+
           <a href="https://wa.me/628132151962?text=Halo%20KLIRSTUDIO%2C%20saya%20mau%20konsultasi%20pembuatan%20website%20untuk%20bisnis%20saya." target="_blank" rel="noopener" id="nav-contact-link" class="whitespace-nowrap transition-all duration-300 text-[14px] lg:text-[15px] font-medium text-white/80 hover:text-white outline-none focus-visible:text-white">
             <span class="lang-en">Consultation</span><span class="lang-id">Konsultasi</span>
           </a>
@@ -77,9 +98,20 @@
             </span>
           </a>
         </div>
-        <button id="mobile-toggle-btn" class="md:hidden p-2 transition-colors duration-500 text-white" aria-label="Toggle menu">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu w-6 h-6"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
-        </button>
+        <!-- Mobile Actions: Theme Toggle + Menu Hamburger -->
+        <div class="md:hidden flex items-center gap-2">
+          <button id="mobile-theme-toggle-btn" class="theme-toggle-btn p-2 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 text-white/80 transition-all duration-300 flex items-center justify-center outline-none" aria-label="Toggle Light/Dark Theme" title="Ganti Mode Terang/Gelap">
+            <svg class="theme-icon-sun w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+            </svg>
+            <svg class="theme-icon-moon w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+            </svg>
+          </button>
+          <button id="mobile-toggle-btn" class="p-2 transition-colors duration-500 text-white" aria-label="Toggle menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu w-6 h-6"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+          </button>
+        </div>
       </div>
     </nav>
     <div id="mobile-drawer" class="md:hidden fixed inset-0 bg-black z-40 transition-all duration-500 opacity-0 pointer-events-none" style="top:0">
@@ -137,9 +169,9 @@
         <canvas id="hero-neural-canvas" class="w-full h-full" style="display:block;width:100%;height:100%"></canvas>
       </div>
       <!-- Subtle blue radiant glow matching Jarvis/Anitech -->
-      <div class="absolute inset-0 pointer-events-none z-0" style="background:radial-gradient(ellipse 75% 65% at 50% 45%, rgba(0,86,255,0.18) 0%, transparent 72%)"></div>
+      <div id="hero-blue-glow" class="absolute inset-0 pointer-events-none z-0" style="background:radial-gradient(ellipse 75% 65% at 50% 45%, rgba(46,196,182,0.2) 0%, rgba(0,142,139,0.1) 40%, transparent 72%)"></div>
       <!-- Subtle center radial vignette ensuring crisp legibility of headline -->
-      <div class="absolute inset-0 pointer-events-none z-0" style="background:radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.85) 100%)"></div>
+      <div id="hero-vignette-overlay" class="absolute inset-0 pointer-events-none z-0" style="background:radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.85) 100%)"></div>
       <!-- Smooth blur dissolve into subsequent content -->
       <div class="hero-bottom-blur-fade"></div>
     </div>
@@ -203,7 +235,7 @@
   <!-- 2. CLIENT & PARTNER TRUST TICKER (Infinite Horizontally Scrolling Marquee) -->
   <section id="trust-bar" class="relative py-8 lg:py-12 bg-black overflow-hidden select-none -mt-px">
     <!-- Ambient top blur glow bridging seamlessly from hero -->
-    <div class="absolute -top-16 left-1/2 -translate-x-1/2 w-full max-w-4xl h-40 bg-[radial-gradient(ellipse_at_top,rgba(34, 119, 255,0.12),transparent_75%)] pointer-events-none blur-3xl"></div>
+    <div class="absolute -top-16 left-1/2 -translate-x-1/2 w-full max-w-4xl h-40 bg-[radial-gradient(ellipse_at_top,rgba(46, 196, 182,0.15),transparent_75%)] pointer-events-none blur-3xl"></div>
 
     <!-- Ticker track with gradient edge fade masks -->
     <div class="relative w-full overflow-hidden logo-ticker-mask relative z-10">
@@ -333,11 +365,13 @@
               <!-- Squircle Icon Box & Step Indicator -->
               <div class="flex items-center justify-between mb-4">
                 <div class="process-tile-squircle">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07 19.07 4.93"/>
+                  <!-- React-Icons: LuCompass (Standard Strategy & Consultation) -->
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
                   </svg>
                 </div>
-                <span class="text-xs font-mono uppercase tracking-wider text-white/30 group-hover:text-[#2277FF] transition-colors">01</span>
+                <span class="text-xs font-mono uppercase tracking-wider text-white/30 group-hover:text-[#2EC4B6] transition-colors">01</span>
               </div>
               <!-- Title -->
               <h3 class="text-2xl lg:text-3xl font-display font-medium text-white mb-2 tracking-tight group-hover:text-white transition-colors">
@@ -349,7 +383,7 @@
                 <span class="lang-id">Ceritakan bisnis Anda via WhatsApp. Kami susun konsep desain dan konten yang tepat sasaran.</span>
               </p>
             </div>
-            <div class="pt-3 flex items-center gap-1.5 text-xs font-mono text-white/35 group-hover:text-[#2277FF] transition-colors">
+            <div class="pt-3 flex items-center gap-1.5 text-xs font-mono text-white/35 group-hover:text-[#2EC4B6] transition-colors">
               <span>+</span>
               <span class="lang-en">Expand details</span><span class="lang-id">Buka penjelasan lengkap</span>
             </div>
@@ -362,11 +396,14 @@
               <!-- Squircle Icon Box & Step Indicator -->
               <div class="flex items-center justify-between mb-4">
                 <div class="process-tile-squircle">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+                  <!-- React-Icons: LuLayoutTemplate (Clean UI Craftsmanship) -->
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="18" height="7" x="3" y="3" rx="1"/>
+                    <rect width="9" height="7" x="3" y="14" rx="1"/>
+                    <rect width="5" height="7" x="16" y="14" rx="1"/>
                   </svg>
                 </div>
-                <span class="text-xs font-mono uppercase tracking-wider text-white/30 group-hover:text-[#2277FF] transition-colors">02</span>
+                <span class="text-xs font-mono uppercase tracking-wider text-white/30 group-hover:text-[#2EC4B6] transition-colors">02</span>
               </div>
               <!-- Title -->
               <h3 class="text-2xl lg:text-3xl font-display font-medium text-white mb-2 tracking-tight group-hover:text-white transition-colors">
@@ -378,7 +415,7 @@
                 <span class="lang-id">Dikerjakan eksklusif (bukan template pasaran). Tampilan berkelas, rapi di HP, dan loading secepat kilat.</span>
               </p>
             </div>
-            <div class="pt-3 flex items-center gap-1.5 text-xs font-mono text-white/35 group-hover:text-[#2277FF] transition-colors">
+            <div class="pt-3 flex items-center gap-1.5 text-xs font-mono text-white/35 group-hover:text-[#2EC4B6] transition-colors">
               <span>+</span>
               <span class="lang-en">Expand details</span><span class="lang-id">Buka penjelasan lengkap</span>
             </div>
@@ -391,12 +428,15 @@
               <!-- Squircle Icon Box & Step Indicator -->
               <div class="flex items-center justify-between mb-4">
                 <div class="process-tile-squircle">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <!-- React-Icons: LuRocket (Production Launch & Sales Engine) -->
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
                     <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+                    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
                   </svg>
                 </div>
-                <span class="text-xs font-mono uppercase tracking-wider text-white/30 group-hover:text-[#2277FF] transition-colors">03</span>
+                <span class="text-xs font-mono uppercase tracking-wider text-white/30 group-hover:text-[#2EC4B6] transition-colors">03</span>
               </div>
               <!-- Title -->
               <h3 class="text-2xl lg:text-3xl font-display font-medium text-white mb-2 tracking-tight group-hover:text-white transition-colors">
@@ -408,7 +448,7 @@
                 <span class="lang-id">Domain aktif, terhubung langsung ke WhatsApp, plus garansi pendampingan jika ada kendala.</span>
               </p>
             </div>
-            <div class="pt-3 flex items-center gap-1.5 text-xs font-mono text-white/35 group-hover:text-[#2277FF] transition-colors">
+            <div class="pt-3 flex items-center gap-1.5 text-xs font-mono text-white/35 group-hover:text-[#2EC4B6] transition-colors">
               <span>+</span>
               <span class="lang-en">Expand details</span><span class="lang-id">Buka penjelasan lengkap</span>
             </div>
@@ -473,7 +513,7 @@
           <!-- 3D COVERFLOW STAGE WRAPPER -->
           <div id="coverflow-stage-wrapper" class="coverflow-stage-wrapper screenshot-reveal-stage relative w-full pt-0 pb-4 sm:pt-1 sm:pb-6">
             <!-- Ambient Backlight Glow centered under the active card -->
-            <div id="coverflow-ambient-glow" class="coverflow-ambient-glow" style="background: radial-gradient(circle, rgba(56,189,248,0.35) 0%, rgba(99,102,241,0.15) 50%, transparent 75%);"></div>
+            <div id="coverflow-ambient-glow" class="coverflow-ambient-glow" style="background: radial-gradient(circle, rgba(46,196,182,0.38) 0%, rgba(0,142,139,0.2) 50%, transparent 75%);"></div>
 
             <!-- 3D Perspective Stage -->
             <div id="coverflow-stage" class="coverflow-stage" role="region" aria-label="3D Project Coverflow Carousel">
@@ -517,7 +557,7 @@
             <div class="coverflow-details-grid">
               
               <!-- Slide 0 Details: Sistem Company Profile -->
-              <div id="coverflow-detail-0" class="coverflow-detail-panel is-active" data-index="0" data-color="#38bdf8">
+              <div id="coverflow-detail-0" class="coverflow-detail-panel is-active" data-index="0" data-color="#2EC4B6">
                 <div class="pb-2">
                   <h3 class="text-2xl sm:text-3xl lg:text-4xl font-display font-medium text-white tracking-tight">
                     <span class="lang-en">Company Profile System</span>
@@ -556,7 +596,7 @@
               </div>
 
               <!-- Slide 1 Details: Sistem Toko Online & Kasir Digital -->
-              <div id="coverflow-detail-1" class="coverflow-detail-panel" data-index="1" data-color="#60a5fa">
+              <div id="coverflow-detail-1" class="coverflow-detail-panel" data-index="1" data-color="#008E8B">
                 <div class="pb-2">
                   <h3 class="text-2xl sm:text-3xl lg:text-4xl font-display font-medium text-white tracking-tight">
                     <span class="lang-en">Online Store &amp; Digital POS System</span>
@@ -595,7 +635,7 @@
               </div>
 
               <!-- Slide 2 Details: Platform Media Edukasi & Komunitas Digital -->
-              <div id="coverflow-detail-2" class="coverflow-detail-panel" data-index="2" data-color="#00D4FF">
+              <div id="coverflow-detail-2" class="coverflow-detail-panel" data-index="2" data-color="#2EC4B6">
                 <div class="pb-2">
                   <h3 class="text-2xl sm:text-3xl lg:text-4xl font-display font-medium text-white tracking-tight">
                     <span class="lang-en">Educational Media &amp; Digital Community Platform</span>
@@ -643,11 +683,11 @@
 
   <!-- 6. ARCHITECTURE & SPEED SECTION (#infra) -->
   <section id="infra" class="relative py-20 lg:py-24 overflow-hidden">
-    <!-- Deep Space Blue-Black Cosmic Background -->
+    <!-- Deep Space Blue-Black Cosmic Background (Consistent Rich Dark Blue Atmosphere) -->
     <div class="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
-      <img src="images/space-blue-bg.jpg" alt="Deep Space Background" class="w-full h-full object-cover object-center opacity-90" loading="lazy" />
+      <img src="images/space-blue-bg.jpg" alt="Deep Space Background" class="infra-bg-dark w-full h-full object-cover object-center opacity-95" loading="lazy" />
       <!-- Seamless top and bottom gradient fades to blend with adjacent sections -->
-      <div class="absolute inset-0 bg-gradient-to-b from-[#000101] via-transparent to-[#000101]"></div>
+      <div class="infra-bg-overlay absolute inset-0 bg-gradient-to-b from-[#000101] via-transparent to-[#000101]"></div>
     </div>
 
     <div class="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
@@ -694,7 +734,7 @@
                   <linearGradient id="lighthouse-glow-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stop-color="#34d399"/>
                     <stop offset="60%" stop-color="#10b981"/>
-                    <stop offset="100%" stop-color="#2277FF"/>
+                    <stop offset="100%" stop-color="#2EC4B6"/>
                   </linearGradient>
                 </defs>
                 <circle cx="60" cy="60" r="50" stroke="rgba(255,255,255,0.08)" stroke-width="8" fill="none"/>
@@ -777,7 +817,8 @@
           <div class="card-spotlight-layer"></div>
           <span class="absolute top-3 right-3 text-[10px] font-mono px-2 py-0.5 rounded-full transition-colors bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366]">Sales</span>
           <div class="w-10 h-10 mb-6 flex items-center justify-center transition-colors text-[#25D366]">
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <!-- React-Icons: SiWhatsapp -->
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.578 1.939.878 2.791.878 3.182 0 5.768-2.587 5.768-5.766.001-3.18-2.585-5.764-5.768-5.764zm3.392 8.163c-.144.405-.837.774-1.17.824-.312.045-.698.077-2.023-.473-1.613-.67-2.64-2.316-2.72-2.423-.081-.107-.648-.862-.648-1.643 0-.782.409-1.167.553-1.326.144-.159.313-.199.418-.199.106 0 .211.002.304.006.098.005.228-.037.357.272.13.31.442 1.077.481 1.156.039.079.065.172.013.277-.053.106-.079.172-.158.265-.08.093-.169.208-.242.279-.081.08-.166.166-.071.328.095.162.424.698.908 1.129.624.555 1.15.727 1.312.807.163.08.258.07.354-.041.096-.111.411-.478.521-.643.11-.165.22-.138.371-.082.152.055.962.453 1.127.535.165.083.275.124.316.193.041.07.041.404-.103.809zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.981-1.309A9.957 9.957 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
           </div>
           <span class="font-medium text-white block">WhatsApp Sales</span>
           <span class="text-xs text-white/60 font-mono mt-1 block">
@@ -791,7 +832,8 @@
           <div class="card-spotlight-layer"></div>
           <span class="absolute top-3 right-3 text-[10px] font-mono px-2 py-0.5 rounded-full transition-colors bg-[#F59E0B]/10 border border-[#F59E0B]/20 text-[#F59E0B]">Analytics</span>
           <div class="w-10 h-10 mb-6 flex items-center justify-center transition-colors text-[#F59E0B]">
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-5h2v5zm4 0h-2V8h2v8zm-8 0H5v-2h2v2z"/></svg>
+            <!-- React-Icons: LuLineChart -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
           </div>
           <span class="font-medium text-white block">Statistik Google</span>
           <span class="text-xs text-white/60 font-mono mt-1 block">
@@ -805,7 +847,8 @@
           <div class="card-spotlight-layer"></div>
           <span class="absolute top-3 right-3 text-[10px] font-mono px-2 py-0.5 rounded-full transition-colors bg-[#6366F1]/10 border border-[#6366F1]/20 text-[#6366F1]">Payments</span>
           <div class="w-10 h-10 mb-6 flex items-center justify-center transition-colors text-[#818cf8]">
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z"/></svg>
+            <!-- React-Icons: LuCreditCard -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
           </div>
           <span class="font-medium text-white block">Pembayaran &amp; QRIS</span>
           <span class="text-xs text-white/60 font-mono mt-1 block">
@@ -819,7 +862,8 @@
           <div class="card-spotlight-layer"></div>
           <span class="absolute top-3 right-3 text-[10px] font-mono px-2 py-0.5 rounded-full transition-colors bg-[#FF7A59]/10 border border-[#FF7A59]/20 text-[#FF7A59]">CRM</span>
           <div class="w-10 h-10 mb-6 flex items-center justify-center transition-colors text-[#FF7A59]">
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M22.175 11.282a4.258 4.258 0 0 0-3.651-4.205V5.047a1.558 1.558 0 0 0 .898-1.406V3.6a1.561 1.561 0 0 0-3.123 0v.041c0 .626.372 1.166.898 1.406V7.08a4.239 4.239 0 0 0-2.027.78L8.916 4.28a1.856 1.856 0 0 0 .065-.47A1.855 1.855 0 1 0 7.125 5.66l5.92 3.51a4.267 4.267 0 0 0 .44 5.51l-1.75 1.75a1.404 1.404 0 0 0-.407-.062 1.42 1.42 0 1 0 1.42 1.42 1.404 1.404 0 0 0-.062-.407l1.73-1.73a4.27 4.27 0 1 0 7.759-4.369zm-4.27 2.764a1.84 1.84 0 1 1 0-3.68 1.84 1.84 0 0 1 0 3.68z"/></svg>
+            <!-- React-Icons: LuUsers -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
           <span class="font-medium text-white block">Kontak Pelanggan</span>
           <span class="text-xs text-white/60 font-mono mt-1 block">
@@ -833,7 +877,8 @@
           <div class="card-spotlight-layer"></div>
           <span class="absolute top-3 right-3 text-[10px] font-mono px-2 py-0.5 rounded-full transition-colors bg-[#1877F2]/10 border border-[#1877F2]/20 text-[#1877F2]">Ads</span>
           <div class="w-10 h-10 mb-6 flex items-center justify-center transition-colors text-[#1877F2]">
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            <!-- React-Icons: LuTarget -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
           </div>
           <span class="font-medium text-white block">Pixel Iklan (FB/TikTok)</span>
           <span class="text-xs text-white/60 font-mono mt-1 block">
@@ -847,7 +892,8 @@
           <div class="card-spotlight-layer"></div>
           <span class="absolute top-3 right-3 text-[10px] font-mono px-2 py-0.5 rounded-full transition-colors bg-[#10B981]/10 border border-[#10B981]/20 text-[#10B981]">Data</span>
           <div class="w-10 h-10 mb-6 flex items-center justify-center transition-colors text-[#10B981]">
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M6.28 0l5.76 9.97H0L6.28 0zm11.44 0L24 9.97h-5.73L12.52 0h5.2zm1.16 10.82L24 19.94 17.72 24l-3.21-5.56 4.37-7.62zm-9.96.12L12 13.5l3.08-2.56H8.92zm-4.13 0L0 19.94l6.28 4.06 6.72-11.64-3.21-2.44zM12 14.06l-5.52 9.57h11.04L12 14.06z"/></svg>
+            <!-- React-Icons: LuFileSpreadsheet -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h2"/><path d="M14 13h2"/><path d="M8 17h2"/><path d="M14 17h2"/></svg>
           </div>
           <span class="font-medium text-white block">Rekap Excel / Sheets</span>
           <span class="text-xs text-white/60 font-mono mt-1 block">
@@ -966,7 +1012,7 @@
         <!-- Interactive Control Pill -->
         <div class="team-stack-controls">
           <button type="button" id="team-stack-toggle-btn" class="team-stack-toggle-btn" aria-expanded="false">
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#2277FF]"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="M15 9l3 3-3 3"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#2EC4B6]"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="M15 9l3 3-3 3"/></svg>
             <span class="lang-en">Fan Out Solutions</span>
             <span class="lang-id">Buka Kipas Solusi</span>
           </button>
@@ -1002,7 +1048,7 @@
         <div class="testimonial-marquee-card">
           <div>
             <div class="mb-6">
-              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2277FF] tracking-tight block leading-none mb-1">+140%</span>
+              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2EC4B6] tracking-tight block leading-none mb-1">+140%</span>
               <span class="text-xs font-mono text-white/50 uppercase tracking-wider block">
                 <span class="lang-en">Inbound Lead Growth</span>
                 <span class="lang-id">Peningkatan Pesanan Masuk</span>
@@ -1031,7 +1077,7 @@
         <div class="testimonial-marquee-card">
           <div>
             <div class="mb-6">
-              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2277FF] tracking-tight block leading-none mb-1">0.6s</span>
+              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2EC4B6] tracking-tight block leading-none mb-1">0.6s</span>
               <span class="text-xs font-mono text-white/50 uppercase tracking-wider block">
                 <span class="lang-en">Page Load Speed</span>
                 <span class="lang-id">Loading Super Cepat di HP</span>
@@ -1060,7 +1106,7 @@
         <div class="testimonial-marquee-card">
           <div>
             <div class="mb-6">
-              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2277FF] tracking-tight block leading-none mb-1">2.8x</span>
+              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2EC4B6] tracking-tight block leading-none mb-1">2.8x</span>
               <span class="text-xs font-mono text-white/50 uppercase tracking-wider block">
                 <span class="lang-en">Checkout Conversion</span>
                 <span class="lang-id">Kenaikan Pembeli Jadi</span>
@@ -1089,7 +1135,7 @@
         <div class="testimonial-marquee-card">
           <div>
             <div class="mb-6">
-              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2277FF] tracking-tight block leading-none mb-1">Top 3</span>
+              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2EC4B6] tracking-tight block leading-none mb-1">Top 3</span>
               <span class="text-xs font-mono text-white/50 uppercase tracking-wider block">
                 <span class="lang-en">Google Search Ranking</span>
                 <span class="lang-id">Peringkat 1 Google</span>
@@ -1118,7 +1164,7 @@
         <div class="testimonial-marquee-card">
           <div>
             <div class="mb-6">
-              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2277FF] tracking-tight block leading-none mb-1">+180%</span>
+              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2EC4B6] tracking-tight block leading-none mb-1">+180%</span>
               <span class="text-xs font-mono text-white/50 uppercase tracking-wider block">
                 <span class="lang-en">Property Inquiries</span>
                 <span class="lang-id">Jadwal Survei Lokasi</span>
@@ -1147,7 +1193,7 @@
         <div class="testimonial-marquee-card">
           <div>
             <div class="mb-6">
-              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2277FF] tracking-tight block leading-none mb-1">10k+</span>
+              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2EC4B6] tracking-tight block leading-none mb-1">10k+</span>
               <span class="text-xs font-mono text-white/50 uppercase tracking-wider block">
                 <span class="lang-en">Monthly Digital Orders</span>
                 <span class="lang-id">Pesanan Online Bulanan</span>
@@ -1177,7 +1223,7 @@
         <div class="testimonial-marquee-card" aria-hidden="true">
           <div>
             <div class="mb-6">
-              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2277FF] tracking-tight block leading-none mb-1">+140%</span>
+              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2EC4B6] tracking-tight block leading-none mb-1">+140%</span>
               <span class="text-xs font-mono text-white/50 uppercase tracking-wider block">
                 <span class="lang-en">Inbound Lead Growth</span>
                 <span class="lang-id">Peningkatan Pesanan Masuk</span>
@@ -1206,7 +1252,7 @@
         <div class="testimonial-marquee-card" aria-hidden="true">
           <div>
             <div class="mb-6">
-              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2277FF] tracking-tight block leading-none mb-1">0.6s</span>
+              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2EC4B6] tracking-tight block leading-none mb-1">0.6s</span>
               <span class="text-xs font-mono text-white/50 uppercase tracking-wider block">
                 <span class="lang-en">Page Load Speed</span>
                 <span class="lang-id">Loading Super Cepat di HP</span>
@@ -1235,7 +1281,7 @@
         <div class="testimonial-marquee-card" aria-hidden="true">
           <div>
             <div class="mb-6">
-              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2277FF] tracking-tight block leading-none mb-1">2.8x</span>
+              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2EC4B6] tracking-tight block leading-none mb-1">2.8x</span>
               <span class="text-xs font-mono text-white/50 uppercase tracking-wider block">
                 <span class="lang-en">Checkout Conversion</span>
                 <span class="lang-id">Kenaikan Pembeli Jadi</span>
@@ -1264,7 +1310,7 @@
         <div class="testimonial-marquee-card" aria-hidden="true">
           <div>
             <div class="mb-6">
-              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2277FF] tracking-tight block leading-none mb-1">Top 3</span>
+              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2EC4B6] tracking-tight block leading-none mb-1">Top 3</span>
               <span class="text-xs font-mono text-white/50 uppercase tracking-wider block">
                 <span class="lang-en">Google Search Ranking</span>
                 <span class="lang-id">Peringkat 1 Google</span>
@@ -1293,7 +1339,7 @@
         <div class="testimonial-marquee-card" aria-hidden="true">
           <div>
             <div class="mb-6">
-              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2277FF] tracking-tight block leading-none mb-1">+180%</span>
+              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2EC4B6] tracking-tight block leading-none mb-1">+180%</span>
               <span class="text-xs font-mono text-white/50 uppercase tracking-wider block">
                 <span class="lang-en">Property Inquiries</span>
                 <span class="lang-id">Jadwal Survei Lokasi</span>
@@ -1322,7 +1368,7 @@
         <div class="testimonial-marquee-card" aria-hidden="true">
           <div>
             <div class="mb-6">
-              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2277FF] tracking-tight block leading-none mb-1">10k+</span>
+              <span class="text-3xl lg:text-4xl font-display font-semibold text-[#2EC4B6] tracking-tight block leading-none mb-1">10k+</span>
               <span class="text-xs font-mono text-white/50 uppercase tracking-wider block">
                 <span class="lang-en">Monthly Digital Orders</span>
                 <span class="lang-id">Pesanan Online Bulanan</span>
@@ -1353,7 +1399,7 @@
 
 
   <!-- 12. FINAL CTA & PROJECT ESTIMATOR (#cta-box) -->
-  <section class="relative py-16 lg:py-20 overflow-hidden">
+  <section id="cta-section" class="relative py-16 lg:py-20 overflow-hidden">
     <!-- Starry Night Atmospheric Backdrop (Gambar 1 Lighting & Gambar 2 Palette) -->
     <div class="starry-night-atmosphere">
       <div class="starry-nebula-glow"></div>
@@ -1361,7 +1407,7 @@
     </div>
     <div class="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
       <div id="cta-box" class="relative border border-white/15 bg-gradient-to-br from-white/[0.04] via-[#080a0f] to-black rounded-2xl lg:rounded-3xl transition-all duration-1000 opacity-0 translate-y-8 overflow-hidden shadow-2xl">
-        <div id="cta-spotlight" class="absolute inset-0 opacity-15 pointer-events-none transition-opacity duration-300" style="background:radial-gradient(600px circle at 0% 0%, rgba(34, 119, 255,0.18), transparent 45%)"></div>
+        <div id="cta-spotlight" class="absolute inset-0 opacity-15 pointer-events-none transition-opacity duration-300" style="background:radial-gradient(600px circle at 0% 0%, rgba(46, 196, 182,0.2), transparent 45%)"></div>
         <div class="relative z-10 p-8 sm:p-10 lg:p-12 xl:p-16">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-center">
             <!-- Left Info Column (7 Columns - Spacious, No Word-by-Word Wrapping) -->
@@ -1425,7 +1471,7 @@
                 <div class="ai-chat-header">
                   <div class="flex items-center gap-2.5">
                     <div class="ai-avatar-badge">
-                      <svg class="w-4 h-4 text-[#2277FF] animated-icon animate-icon-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <svg class="w-4 h-4 text-[#2EC4B6] animated-icon animate-icon-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path class="bot-antenna" d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
                         <path d="M4 11v2a8 8 0 0 0 16 0v-2"/>
                         <rect width="16" height="12" x="4" y="8" rx="2"/>
@@ -1486,8 +1532,8 @@
       <!-- Section Header -->
       <div class="max-w-3xl mb-12 lg:mb-16">
         <div class="flex items-center justify-between gap-4 mb-4">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-wider text-cyan-300 bg-cyan-400/10 border border-cyan-400/25">
-            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-wider text-[#2EC4B6] bg-[#008E8B]/15 border border-[#2EC4B6]/30">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#2EC4B6] animate-pulse"></span>
             <span class="lang-en">INVESTMENT &amp; PACKAGES</span>
             <span class="lang-id">INVESTASI &amp; PILIHAN PAKET</span>
           </div>
@@ -1575,11 +1621,17 @@
         </div>
 
         <!-- TIER 02: COMPANY PROFILE -->
-        <div class="gl-pricing-card">
+        <div class="gl-pricing-card gl-pricing-card--featured">
           <div class="flex flex-col h-full justify-between">
             <div>
-              <!-- Header -->
-              <h3 class="text-2xl font-display font-semibold text-white tracking-tight">Company Profile</h3>
+              <!-- Header with Popular Badge -->
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-2xl font-display font-semibold text-white tracking-tight">Company Profile</h3>
+                <span class="gl-badge-popular">
+                  <span class="lang-en">Most Popular</span>
+                  <span class="lang-id">Paling Populer</span>
+                </span>
+              </div>
 
               <!-- Price Block -->
               <div class="gl-price-row">
@@ -1639,7 +1691,7 @@
 
             <!-- CTA Pill Button -->
             <div class="mt-8 pt-4">
-              <a href="https://wa.me/628132151962?text=Halo%20KLIRSTUDIO%2C%20saya%20tertarik%20paket%20Company%20Profile%20(Mulai%20Rp3%20Juta)." target="_blank" rel="noopener noreferrer" class="gl-cta-btn" aria-label="Tingkatkan Kredibilitas Bisnis dengan Company Profile">
+              <a href="https://wa.me/628132151962?text=Halo%20KLIRSTUDIO%2C%20saya%20tertarik%20paket%20Company%20Profile%20(Mulai%20Rp3%20Juta)." target="_blank" rel="noopener noreferrer" class="gl-cta-btn gl-cta-btn--featured" aria-label="Tingkatkan Kredibilitas Bisnis dengan Company Profile">
                 <span class="lang-en">Elevate Business Credibility</span>
                 <span class="lang-id">Tingkatkan Kredibilitas Bisnis</span>
               </a>
@@ -1724,21 +1776,24 @@
     </div>
   </section>
 
-  <!-- 13. FOOTER (STARRY NIGHT FULL AMBIENT ANIMATED BACKGROUND WITH OVERLAID CONTENT) -->
-  <footer class="relative bg-black overflow-hidden min-h-[700px] lg:min-h-[860px] flex flex-col justify-end">
-    <!-- Starry Night Background Layer covering entire footer (ANIMATED VIDEO WITH ZERO WATERMARK) -->
-    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+  <!-- 13. FOOTER (DUAL-THEME AMBIENT ANIMATED BACKGROUND: STARRY NIGHT FOR DARK, STONE ARCH FOR LIGHT) -->
+  <footer class="relative overflow-hidden min-h-[480px] lg:min-h-[520px] flex flex-col justify-end">
+    <!-- Starry Night Background Layer (Dark Mode) -->
+    <div class="footer-bg-dark absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
       <video autoplay loop muted playsinline poster="images/starry-night-clean.jpg" class="footer-starry-video select-none">
         <source src="images/starry-night.mp4" type="video/mp4">
         <img src="images/starry-night-clean.jpg" alt="" class="footer-ambient-img w-full h-full object-cover object-[center_top] select-none"/>
       </video>
-      <!-- TOP SMOOTH SHADOW DISSOLVE: Fades seamlessly from pure black into the starry sky (No hard lines or borders) -->
-      <div class="absolute inset-x-0 top-0 h-48 md:h-64 bg-gradient-to-b from-black via-black/80 to-transparent pointer-events-none z-[1]"></div>
-      <!-- Deep atmospheric vignette and gradient overlays so text is 100% legible -->
-      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/45 to-black/80 pointer-events-none z-[1]"></div>
-      <div class="absolute inset-0 pointer-events-none z-[1]" style="background: radial-gradient(ellipse 95% 75% at 50% 35%, rgba(10, 25, 55, 0.25) 0%, rgba(0, 0, 0, 0.72) 100%);"></div>
-      <!-- BOTTOM PROTECTIVE BLACK SHADOW: Guarantees bottom edge & watermark area is completely blacked out & hidden -->
-      <div class="absolute inset-x-0 bottom-0 h-48 md:h-60 bg-gradient-to-t from-black via-black/95 to-transparent pointer-events-none z-[1]"></div>
+      <!-- Subtle top blend so dark section above transitions naturally into starry night sky -->
+      <div class="footer-dark-top-blend absolute inset-x-0 top-0 h-16 pointer-events-none z-[1]"></div>
+    </div>
+
+    <!-- Stone Arch Background Layer (Light Mode from GetLayers AI) -->
+    <div class="footer-bg-light absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+      <video autoplay loop muted playsinline poster="images/stone-arch.webp" class="footer-stone-arch-video select-none">
+        <source src="images/stone-arch.mp4" type="video/mp4">
+        <img src="images/stone-arch.webp" alt="Stone Arch Horizon" class="footer-stone-arch-img w-full h-full object-cover object-[center_top] select-none"/>
+      </video>
     </div>
 
     <!-- Centered Content Wrapper (Overlaid directly on top of the background) -->
@@ -1846,6 +1901,6 @@
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="main.js"></script>
+<script src="main.js?v=73"></script>
 </body>
 </html>

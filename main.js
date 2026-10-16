@@ -269,7 +269,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "Sistem Bisnis"
       ]
     };
-    const palette = ["#eca8d6", "#be95ee", "#92aafa", "#67e8f9", "#fbbf24", "#f472b6", "#eca8d6"];
+    const darkPalette = ["#2EC4B6", "#008E8B", "#2EC4B6", "#5eead4", "#2EC4B6", "#008E8B"];
+    const lightPalette = ["#008E8B", "#2EC4B6", "#008E8B", "#2EC4B6", "#008E8B"];
     let wordIdx = 0;
     let animFrames = [];
     let animTimeouts = [];
@@ -286,6 +287,8 @@ document.addEventListener('DOMContentLoaded', () => {
       animFrames = [];
       animTimeouts = [];
 
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      const palette = isLight ? lightPalette : darkPalette;
       const chars = word.split('');
       const totalLen = chars.length;
       const revealTotalTime = 45 * totalLen + 500 + 200;
@@ -302,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
         span.style.display = 'inline-block';
         span.style.whiteSpace = 'pre';
         span.style.opacity = isInitial ? '1' : '0';
-        span.style.filter = isInitial ? 'blur(0px)' : 'blur(20px)';
+        span.style.filter = isInitial ? 'none' : (isLight ? 'none' : 'blur(16px)');
         span.style.transition = 'color 0.4s ease';
 
         const a = (r / Math.max(totalLen - 1, 1)) * (palette.length - 1);
@@ -314,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const b = Math.round(u + (h - u) * i);
         const v = Math.round(m + (f - m) * i);
         const y = Math.round(x + (g - x) * i);
-        span.style.color = `rgb(${b},${v},${y})`;
+        span.style.color = isLight && isInitial ? '#090d16' : `rgb(${b},${v},${y})`;
 
         heroShimmerSpan.appendChild(span);
         return span;
@@ -330,7 +333,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
               if (spans[t]) {
                 spans[t].style.opacity = ease;
-                spans[t].style.filter = `blur(${20 * (1 - ease)}px)`;
+                if (!isLight) {
+                  spans[t].style.filter = `blur(${16 * (1 - ease)}px)`;
+                } else {
+                  spans[t].style.filter = 'none';
+                }
               }
 
               if (progress < 1) {
@@ -345,16 +352,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
-      // Smoothly transition all letters to crisp pure white
+      // Smoothly transition all letters to crisp final color (theme-aware)
       const whiteTimeout = setTimeout(() => {
+        const currentlyLight = document.documentElement.getAttribute('data-theme') === 'light';
         spans.forEach(span => {
-          span.style.color = '#ffffff';
-          span.style.filter = 'blur(0px)';
+          span.style.color = currentlyLight ? '#090d16' : '#ffffff';
+          span.style.filter = 'none';
           span.style.opacity = '1';
         });
       }, revealTotalTime);
       animTimeouts.push(whiteTimeout);
     };
+
+    window.addEventListener('themechange', () => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      if (heroShimmerSpan) {
+        const spans = heroShimmerSpan.querySelectorAll('span');
+        spans.forEach(s => {
+          s.style.color = isLight ? '#090d16' : '#ffffff';
+          s.style.filter = 'none';
+        });
+      }
+    });
 
     cycleShimmerWord = (reset = false, isInitial = false) => {
       const list = shimmerWords[currentLang] || shimmerWords.en;
@@ -386,7 +405,19 @@ document.addEventListener('DOMContentLoaded', () => {
       let animId;
       let w = 0, h = 0;
       let nodes = [];
-      const blueColor = '34, 119, 255'; // Electric Jarvis Blue #2196f3
+      const getThemeColors = () => {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        return {
+          primary: isLight ? '0, 142, 139' : '46, 196, 182',
+          subtle: isLight ? '167, 243, 208' : '0, 142, 139',
+          hubCore: isLight ? '0, 142, 139' : '226, 250, 247'
+        };
+      };
+      let colors = getThemeColors();
+      window.addEventListener('themechange', () => {
+        colors = getThemeColors();
+        initNodes();
+      });
 
       let mouse = { x: -1000, y: -1000, active: false };
       const heroSection = document.getElementById('hero') || neuralCanvas.closest('section');
@@ -405,16 +436,23 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const initNodes = () => {
-        const count = Math.max(45, Math.floor((w * h) / 4200));
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const count = isLight 
+          ? Math.max(32, Math.floor((w * h) / 6400)) 
+          : Math.max(45, Math.floor((w * h) / 4200));
         nodes = Array.from({ length: count }, () => {
           const rand = Math.random();
           const type = rand < 0.08 ? 'hub' : rand < 0.28 ? 'relay' : 'node';
+          const speedFactor = isLight ? (type === 'hub' ? 0.12 : 0.26) : (type === 'hub' ? 0.15 : 0.4);
+          const baseRadius = isLight 
+            ? (type === 'hub' ? 4.5 : type === 'relay' ? 3 : 2)
+            : (type === 'hub' ? 6 : type === 'relay' ? 4 : 2.5);
           return {
             x: Math.random() * w,
             y: Math.random() * h,
-            vx: (Math.random() - 0.5) * (type === 'hub' ? 0.15 : 0.4),
-            vy: (Math.random() - 0.5) * (type === 'hub' ? 0.15 : 0.4),
-            radius: type === 'hub' ? 6 : type === 'relay' ? 4 : 2.5,
+            vx: (Math.random() - 0.5) * speedFactor,
+            vy: (Math.random() - 0.5) * speedFactor,
+            radius: baseRadius,
             baseAlpha: type === 'hub' ? 0.95 : type === 'relay' ? 0.8 : (0.55 + 0.35 * Math.random()),
             pulseOffset: Math.random() * Math.PI * 2,
             type: type
@@ -437,7 +475,34 @@ document.addEventListener('DOMContentLoaded', () => {
       const render = () => {
         if (w === 0 || h === 0) resizeCanvas();
         ctx.clearRect(0, 0, w, h);
+
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
         time += 0.014;
+
+        // Headline text protection in light mode
+        const heroTitle = document.getElementById('hero-title');
+        let titleArea = null;
+        if (isLight && heroTitle) {
+          const cRect = neuralCanvas.getBoundingClientRect();
+          const tRect = heroTitle.getBoundingClientRect();
+          titleArea = {
+            cx: (tRect.left + tRect.right) / 2 - cRect.left,
+            cy: (tRect.top + tRect.bottom) / 2 - cRect.top,
+            rx: Math.max(160, tRect.width * 0.54),
+            ry: Math.max(80, tRect.height * 0.6)
+          };
+        }
+
+        const getFade = (px, py) => {
+          if (!isLight || !titleArea) return 1;
+          const dx = (px - titleArea.cx) / titleArea.rx;
+          const dy = (py - titleArea.cy) / titleArea.ry;
+          const dSq = dx * dx + dy * dy;
+          if (dSq < 1) {
+            return Math.max(0.08, dSq * 0.85);
+          }
+          return 1;
+        };
 
         // Draw connections & moving pulse packets
         for (let i = 0; i < nodes.length; i++) {
@@ -447,31 +512,47 @@ document.addEventListener('DOMContentLoaded', () => {
             const dx = p1.x - p2.x;
             const dy = p1.y - p2.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            const maxDist = (p1.type === 'hub' || p2.type === 'hub') ? 220 : 140;
+            const maxDist = isLight
+              ? ((p1.type === 'hub' || p2.type === 'hub') ? 185 : 120)
+              : ((p1.type === 'hub' || p2.type === 'hub') ? 220 : 140);
 
             if (dist < maxDist) {
               const proximity = 1 - dist / maxDist;
               const isNotable = (p1.type !== 'node' || p2.type !== 'node');
-              const alpha = isNotable ? (0.55 * proximity) : (0.18 * proximity);
-              const color = isNotable ? blueColor : '70, 95, 125';
-              const lineWidth = isNotable ? 1 : 0.5;
+              const midX = (p1.x + p2.x) * 0.5;
+              const midY = (p1.y + p2.y) * 0.5;
+              const fade = getFade(midX, midY);
 
-              ctx.beginPath();
-              ctx.moveTo(p1.x, p1.y);
-              ctx.lineTo(p2.x, p2.y);
-              ctx.strokeStyle = `rgba(${color}, ${alpha})`;
-              ctx.lineWidth = lineWidth;
-              ctx.stroke();
+              let alpha, color, lineWidth;
+              if (isLight) {
+                alpha = (isNotable ? 0.20 : 0.07) * proximity * fade;
+                color = isNotable ? colors.primary : colors.subtle;
+                lineWidth = isNotable ? 0.7 : 0.4;
+              } else {
+                alpha = isNotable ? (0.55 * proximity) : (0.18 * proximity);
+                color = isNotable ? colors.primary : colors.subtle;
+                lineWidth = isNotable ? 1 : 0.5;
+              }
 
-              // Moving data packet
-              if (isNotable && dist < 0.8 * maxDist) {
-                const packetProgress = (0.6 * time + 0.37 * i + 0.19 * j) % 1;
-                const px = p1.x + (p2.x - p1.x) * packetProgress;
-                const py = p1.y + (p2.y - p1.y) * packetProgress;
+              if (alpha > 0.01) {
                 ctx.beginPath();
-                ctx.arc(px, py, 2, 0, 2 * Math.PI);
-                ctx.fillStyle = `rgba(${blueColor}, 0.95)`;
-                ctx.fill();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.strokeStyle = `rgba(${color}, ${alpha})`;
+                ctx.lineWidth = lineWidth;
+                ctx.stroke();
+
+                // Moving data packet
+                if (isNotable && dist < 0.85 * maxDist) {
+                  const packetProgress = (0.55 * time + 0.37 * i + 0.19 * j) % 1;
+                  const px = p1.x + (p2.x - p1.x) * packetProgress;
+                  const py = p1.y + (p2.y - p1.y) * packetProgress;
+                  const pktFade = getFade(px, py);
+                  ctx.beginPath();
+                  ctx.arc(px, py, isLight ? 1.6 : 2, 0, 2 * Math.PI);
+                  ctx.fillStyle = `rgba(${colors.primary}, ${isLight ? 0.85 * pktFade : 0.95})`;
+                  ctx.fill();
+                }
               }
             }
           }
@@ -479,18 +560,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Draw interactive mouse links
         if (mouse.active && mouse.x > 0 && mouse.y > 0) {
+          const mouseRadius = isLight ? 160 : 180;
           for (let i = 0; i < nodes.length; i++) {
             const p = nodes[i];
             const dx = p.x - mouse.x;
             const dy = p.y - mouse.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 180) {
-              const proximity = 1 - dist / 180;
+            if (dist < mouseRadius) {
+              const proximity = 1 - dist / mouseRadius;
+              const mFade = getFade(p.x, p.y);
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(mouse.x, mouse.y);
-              ctx.strokeStyle = `rgba(${blueColor}, ${0.45 * proximity})`;
-              ctx.lineWidth = 0.8;
+              ctx.strokeStyle = `rgba(${colors.primary}, ${(isLight ? 0.26 : 0.45) * proximity * mFade})`;
+              ctx.lineWidth = isLight ? 0.7 : 0.8;
               ctx.stroke();
             }
           }
@@ -505,51 +588,84 @@ document.addEventListener('DOMContentLoaded', () => {
           if (node.y < -10) node.y = h + 10;
           if (node.y > h + 10) node.y = -10;
 
-          const pulse = 0.72 + 0.28 * Math.sin(1.6 * time + node.pulseOffset);
+          const pulse = 0.75 + 0.25 * Math.sin(1.6 * time + node.pulseOffset);
           const r = node.radius * pulse;
           const a = node.baseAlpha * pulse;
+          const nFade = getFade(node.x, node.y);
 
           if (node.type === 'hub') {
-            // Glowing radial aura
-            const grad = ctx.createRadialGradient(node.x, node.y, r, node.x, node.y, r + 20);
-            grad.addColorStop(0, `rgba(${blueColor}, 0.35)`);
-            grad.addColorStop(1, `rgba(${blueColor}, 0)`);
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, r + 20, 0, 2 * Math.PI);
-            ctx.fillStyle = grad;
-            ctx.fill();
+            if (isLight) {
+              // Crisp architectural concentric rings - zero blurry smudge
+              ctx.beginPath();
+              ctx.arc(node.x, node.y, r + 6.5, 0, 2 * Math.PI);
+              ctx.strokeStyle = `rgba(${colors.primary}, ${0.18 * a * nFade})`;
+              ctx.lineWidth = 0.55;
+              ctx.stroke();
 
-            // Outer sharp ring
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, r + 7, 0, 2 * Math.PI);
-            ctx.strokeStyle = `rgba(${blueColor}, ${0.55 * a})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
+              ctx.beginPath();
+              ctx.arc(node.x, node.y, r + 3.5, 0, 2 * Math.PI);
+              ctx.strokeStyle = `rgba(${colors.primary}, ${0.4 * a * nFade})`;
+              ctx.lineWidth = 0.75;
+              ctx.stroke();
 
-            // Pure core
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, r, 0, 2 * Math.PI);
-            ctx.fillStyle = `rgba(242, 237, 230, ${a})`;
-            ctx.fill();
+              ctx.beginPath();
+              ctx.arc(node.x, node.y, r, 0, 2 * Math.PI);
+              ctx.fillStyle = `rgba(${colors.hubCore}, ${0.9 * a * nFade})`;
+              ctx.fill();
+            } else {
+              // Glowing radial aura in dark mode
+              const auraDist = r + 20;
+              const grad = ctx.createRadialGradient(node.x, node.y, r, node.x, node.y, auraDist);
+              grad.addColorStop(0, `rgba(${colors.primary}, 0.35)`);
+              grad.addColorStop(1, `rgba(${colors.primary}, 0)`);
+              ctx.beginPath();
+              ctx.arc(node.x, node.y, auraDist, 0, 2 * Math.PI);
+              ctx.fillStyle = grad;
+              ctx.fill();
+
+              ctx.beginPath();
+              ctx.arc(node.x, node.y, r + 7, 0, 2 * Math.PI);
+              ctx.strokeStyle = `rgba(${colors.primary}, ${0.55 * a * nFade})`;
+              ctx.lineWidth = 1;
+              ctx.stroke();
+
+              ctx.beginPath();
+              ctx.arc(node.x, node.y, r, 0, 2 * Math.PI);
+              ctx.fillStyle = `rgba(${colors.hubCore}, ${a * nFade})`;
+              ctx.fill();
+            }
           } else if (node.type === 'relay') {
-            // Relay ring
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, r + 5, 0, 2 * Math.PI);
-            ctx.strokeStyle = `rgba(${blueColor}, ${0.45 * a})`;
-            ctx.lineWidth = 0.9;
-            ctx.stroke();
+            if (isLight) {
+              ctx.beginPath();
+              ctx.arc(node.x, node.y, r + 3, 0, 2 * Math.PI);
+              ctx.strokeStyle = `rgba(${colors.primary}, ${0.32 * a * nFade})`;
+              ctx.lineWidth = 0.65;
+              ctx.stroke();
 
-            // Relay core
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, r, 0, 2 * Math.PI);
-            ctx.fillStyle = `rgba(${blueColor}, ${a})`;
-            ctx.fill();
+              ctx.beginPath();
+              ctx.arc(node.x, node.y, r, 0, 2 * Math.PI);
+              ctx.fillStyle = `rgba(${colors.primary}, ${0.85 * a * nFade})`;
+              ctx.fill();
+            } else {
+              ctx.beginPath();
+              ctx.arc(node.x, node.y, r + 5, 0, 2 * Math.PI);
+              ctx.strokeStyle = `rgba(${colors.primary}, ${0.45 * a * nFade})`;
+              ctx.lineWidth = 0.9;
+              ctx.stroke();
+
+              ctx.beginPath();
+              ctx.arc(node.x, node.y, r, 0, 2 * Math.PI);
+              ctx.fillStyle = `rgba(${colors.primary}, ${a * nFade})`;
+              ctx.fill();
+            }
           } else {
-            // Standard node with occasional green status pulse
-            const isGreen = Math.sin(3.7 * node.pulseOffset) > 0.65;
+            // Standard node
+            const isGreen = Math.sin(3.7 * node.pulseOffset) > 0.75;
             ctx.beginPath();
             ctx.arc(node.x, node.y, r, 0, 2 * Math.PI);
-            ctx.fillStyle = isGreen ? `rgba(34, 197, 94, ${a})` : `rgba(${blueColor}, ${a})`;
+            ctx.fillStyle = isGreen 
+              ? `rgba(16, 185, 129, ${(isLight ? 0.85 : 1) * a * nFade})` 
+              : `rgba(${colors.primary}, ${(isLight ? 0.65 : 1) * a * nFade})`;
             ctx.fill();
           }
         }
@@ -930,12 +1046,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const rect = ctaBox.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      ctaSpotlight.style.background = `radial-gradient(600px circle at ${x}px ${y}px, rgba(236,168,214,0.22), transparent 45%)`;
+      ctaSpotlight.style.background = `radial-gradient(600px circle at ${x}px ${y}px, rgba(46, 196, 182, 0.22), transparent 45%)`;
       ctaSpotlight.style.opacity = '0.35';
     });
 
     ctaBox.addEventListener('mouseleave', () => {
-      ctaSpotlight.style.background = 'radial-gradient(600px circle at 50% 50%, rgba(236,168,214,0.15), transparent 45%)';
+      ctaSpotlight.style.background = 'radial-gradient(600px circle at 50% 50%, rgba(46, 196, 182, 0.15), transparent 45%)';
       ctaSpotlight.style.opacity = '0.15';
     });
   }
@@ -1423,16 +1539,16 @@ COMMUNICATION STYLE:
 
     const projectThemes = [
       {
-        color: '#38bdf8',
-        glow: 'radial-gradient(circle, rgba(56,189,248,0.38) 0%, rgba(99,102,241,0.18) 50%, transparent 75%)'
+        color: '#2EC4B6',
+        glow: 'radial-gradient(circle, rgba(46,196,182,0.38) 0%, rgba(0,142,139,0.2) 50%, transparent 75%)'
       },
       {
-        color: '#60a5fa',
-        glow: 'radial-gradient(circle, rgba(96,165,250,0.38) 0%, rgba(59,130,246,0.18) 50%, transparent 75%)'
+        color: '#008E8B',
+        glow: 'radial-gradient(circle, rgba(0,142,139,0.4) 0%, rgba(46,196,182,0.18) 50%, transparent 75%)'
       },
       {
-        color: '#00D4FF',
-        glow: 'radial-gradient(circle, rgba(0,212,255,0.38) 0%, rgba(0,82,255,0.2) 50%, transparent 75%)'
+        color: '#2EC4B6',
+        glow: 'radial-gradient(circle, rgba(46,196,182,0.42) 0%, rgba(0,142,139,0.22) 50%, transparent 75%)'
       }
     ];
 
@@ -1466,6 +1582,8 @@ COMMUNICATION STYLE:
       const sideDepth = isMobile ? -130 : -180; // Z pushback px
       const sideScale = isMobile ? 0.74 : 0.78; // scale ratio
 
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+
       cards.forEach((card, i) => {
         let offset = i - activeIndex;
         if (offset < -Math.floor(total / 2)) offset += total;
@@ -1484,8 +1602,8 @@ COMMUNICATION STYLE:
           // Right Card: Visible side preview, clickable to switch
           card.style.transform = `translate3d(${sideShift}%, 0, ${sideDepth}px) rotateY(-${sideRotate}deg) scale(${sideScale})`;
           card.style.zIndex = '15';
-          card.style.opacity = '0.52';
-          card.style.filter = 'brightness(0.58)';
+          card.style.opacity = isLight ? '0.82' : '0.52';
+          card.style.filter = isLight ? 'none' : 'brightness(0.58)';
           card.style.pointerEvents = 'auto';
           card.classList.remove('is-active');
           card.setAttribute('aria-selected', 'false');
@@ -1493,8 +1611,8 @@ COMMUNICATION STYLE:
           // Left Card: Visible side preview, clickable to switch
           card.style.transform = `translate3d(-${sideShift}%, 0, ${sideDepth}px) rotateY(${sideRotate}deg) scale(${sideScale})`;
           card.style.zIndex = '15';
-          card.style.opacity = '0.52';
-          card.style.filter = 'brightness(0.58)';
+          card.style.opacity = isLight ? '0.82' : '0.52';
+          card.style.filter = isLight ? 'none' : 'brightness(0.58)';
           card.style.pointerEvents = 'auto';
           card.classList.remove('is-active');
           card.setAttribute('aria-selected', 'false');
@@ -1503,7 +1621,7 @@ COMMUNICATION STYLE:
           card.style.transform = `translate3d(${offset > 0 ? 100 : -100}%, 0, -320px) scale(0.6)`;
           card.style.zIndex = '5';
           card.style.opacity = '0';
-          card.style.filter = 'brightness(0.3)';
+          card.style.filter = isLight ? 'none' : 'brightness(0.3)';
           card.style.pointerEvents = 'none';
           card.classList.remove('is-active');
           card.setAttribute('aria-selected', 'false');
@@ -1595,8 +1713,11 @@ COMMUNICATION STYLE:
     stageWrapper.addEventListener('mouseenter', () => { isHovered = true; });
     stageWrapper.addEventListener('mouseleave', () => { isHovered = false; });
 
-    // Responsive update on resize
+    // Responsive update on resize and theme toggle
     window.addEventListener('resize', () => {
+      updateCoverflow(activeIndex);
+    });
+    window.addEventListener('themechange', () => {
       updateCoverflow(activeIndex);
     });
 
@@ -1878,4 +1999,69 @@ COMMUNICATION STYLE:
   };
 
   initCollapsiblePricing();
+
+  // =========================================================================
+  // 14. DUAL-THEME CONTROLLER (LIGHT MODE / DARK MODE ENGINE)
+  // =========================================================================
+  const initThemeSystem = () => {
+    const desktopToggle = document.getElementById('theme-toggle-btn');
+    const mobileToggle = document.getElementById('mobile-theme-toggle-btn');
+    const toggles = [desktopToggle, mobileToggle].filter(Boolean);
+
+    const applyTheme = (theme, isUserAction = false) => {
+      const isLight = theme === 'light';
+      if (isUserAction) {
+        document.documentElement.classList.add('theme-transitioning');
+        setTimeout(() => {
+          document.documentElement.classList.remove('theme-transitioning');
+        }, 450);
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+      try {
+        localStorage.setItem('klir-theme', theme);
+      } catch (e) {}
+
+      toggles.forEach((btn) => {
+        if (isUserAction) {
+          btn.classList.add('theme-toggle-spin');
+          setTimeout(() => btn.classList.remove('theme-toggle-spin'), 550);
+        }
+        const sunIcon = btn.querySelector('.theme-icon-sun');
+        const moonIcon = btn.querySelector('.theme-icon-moon');
+        if (sunIcon && moonIcon) {
+          if (isLight) {
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+            btn.setAttribute('aria-label', 'Switch to Dark Mode');
+            btn.setAttribute('title', 'Ganti ke Mode Gelap');
+          } else {
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+            btn.setAttribute('aria-label', 'Switch to Light Mode');
+            btn.setAttribute('title', 'Ganti ke Mode Terang');
+          }
+        }
+      });
+
+      // Notify reactive components (like neural canvas)
+      window.dispatchEvent(new CustomEvent('themechange', { detail: { theme } }));
+    };
+
+    // Initialize state
+    const saved = (typeof localStorage !== 'undefined' && localStorage.getItem('klir-theme')) ||
+      (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    applyTheme(saved, false);
+
+    toggles.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        const next = current === 'dark' ? 'light' : 'dark';
+        applyTheme(next, true);
+      });
+    });
+  };
+
+  initThemeSystem();
 });
+
