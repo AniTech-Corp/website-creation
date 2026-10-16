@@ -269,8 +269,9 @@ document.addEventListener('DOMContentLoaded', () => {
         "Sistem Bisnis"
       ]
     };
-    const darkPalette = ["#2EC4B6", "#008E8B", "#2EC4B6", "#5eead4", "#2EC4B6", "#008E8B"];
-    const lightPalette = ["#008E8B", "#2EC4B6", "#008E8B", "#2EC4B6", "#008E8B"];
+    // Original rainbow shimmer palette: pink -> purple -> blue -> cyan -> gold -> magenta -> pink
+    const darkPalette = ["#eca8d6", "#be95ee", "#92aafa", "#67e8f9", "#fbbf24", "#f472b6", "#eca8d6"];
+    const lightPalette = ["#d946ef", "#8b5cf6", "#3b82f6", "#06b6d4", "#f59e0b", "#ec4899", "#d946ef"];
     let wordIdx = 0;
     let animFrames = [];
     let animTimeouts = [];
@@ -291,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const palette = isLight ? lightPalette : darkPalette;
       const chars = word.split('');
       const totalLen = chars.length;
-      const revealTotalTime = 45 * totalLen + 500 + 200;
+      const revealTotalTime = 45 * totalLen + 500 + 400;
 
       heroShimmerSpan.innerHTML = '';
       const spans = chars.map((char, r) => {
@@ -305,8 +306,8 @@ document.addEventListener('DOMContentLoaded', () => {
         span.style.display = 'inline-block';
         span.style.whiteSpace = 'pre';
         span.style.opacity = isInitial ? '1' : '0';
-        span.style.filter = isInitial ? 'none' : (isLight ? 'none' : 'blur(16px)');
-        span.style.transition = 'color 0.4s ease';
+        span.style.filter = isInitial ? 'none' : 'blur(16px)';
+        span.style.transition = 'color 0.5s ease, opacity 0.3s ease, filter 0.3s ease';
 
         const a = (r / Math.max(totalLen - 1, 1)) * (palette.length - 1);
         const s = Math.floor(a);
@@ -333,11 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
               if (spans[t]) {
                 spans[t].style.opacity = ease;
-                if (!isLight) {
-                  spans[t].style.filter = `blur(${16 * (1 - ease)}px)`;
-                } else {
-                  spans[t].style.filter = 'none';
-                }
+                spans[t].style.filter = `blur(${16 * (1 - ease)}px)`;
               }
 
               if (progress < 1) {
@@ -382,7 +379,26 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         wordIdx = (wordIdx + 1) % list.length;
       }
-      animateWord(list[wordIdx], isInitial);
+
+      if (isInitial) {
+        animateWord(list[wordIdx], true);
+      } else {
+        // Smooth exit for existing letters before new word animates in
+        const existingSpans = heroShimmerSpan.querySelectorAll('span');
+        if (existingSpans.length > 0) {
+          existingSpans.forEach(s => {
+            s.style.transition = 'opacity 0.22s ease, filter 0.22s ease';
+            s.style.opacity = '0';
+            s.style.filter = 'blur(10px)';
+          });
+          const exitTimeout = setTimeout(() => {
+            animateWord(list[wordIdx], false);
+          }, 220);
+          animTimeouts.push(exitTimeout);
+        } else {
+          animateWord(list[wordIdx], false);
+        }
+      }
     };
 
     // Initialize first phrase immediately on load

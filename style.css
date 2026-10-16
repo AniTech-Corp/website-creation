@@ -3597,7 +3597,6 @@ html[data-theme="light"] p {
 html[data-theme="light"] #hero-title,
 html[data-theme="light"] #hero-title span,
 html[data-theme="light"] #hero-shimmer-word,
-html[data-theme="light"] #hero-shimmer-word span,
 html[data-theme="light"] .hero-accent-playfair,
 html[data-theme="light"] .hero-line {
   color: #090d16 !important;
