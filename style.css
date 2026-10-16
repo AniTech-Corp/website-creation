@@ -1248,58 +1248,6 @@ body[data-lang="id"] #hero-title .lang-en {
   40% { transform: scale(1.1); opacity: 1; }
 }
 
-.ai-chips-wrapper {
-  padding: 0.5rem 0.85rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(0, 0, 0, 0.35);
-  flex-shrink: 0;
-  width: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-.ai-chips-grid {
-  display: flex;
-  gap: 0.45rem;
-  overflow-x: auto;
-  padding-bottom: 0.25rem;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.ai-chips-grid::-webkit-scrollbar {
-  display: none;
-}
-
-.ai-chip-btn {
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
-  padding: 0.35rem 0.8rem;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.045);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.82);
-  font-family: var(--font-instrument), sans-serif;
-  font-size: 0.75rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  flex-shrink: 0;
-}
-
-.ai-chip-btn:hover {
-  background: rgba(46, 196, 182, 0.15);
-  border-color: rgba(46, 196, 182, 0.45);
-  color: #ffffff;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(46, 196, 182, 0.2);
-}
-
-.ai-chip-btn:active {
-  transform: scale(0.97);
-}
-
 .ai-chat-input-row {
   display: flex;
   align-items: center;

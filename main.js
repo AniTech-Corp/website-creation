@@ -1083,7 +1083,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!chatWidget) return;
 
     const chatStream = document.getElementById('ai-chat-stream');
-    const chipsContainer = document.getElementById('ai-quick-chips');
     const chatForm = document.getElementById('ai-chat-form');
     const chatInput = document.getElementById('ai-chat-input');
     const chatSendBtn = document.getElementById('ai-chat-send');
@@ -1098,27 +1097,214 @@ document.addEventListener('DOMContentLoaded', () => {
     const getSystemPrompt = () => {
       const isId = currentLang === 'id';
       if (isId) {
-        return `Kamu adalah KLIRSTUDIO AI Advisor, konsultan arsitektur web senior dari studio teknologi KLIRSTUDIO.
-TUGAS UTAMA:
-1. Konsultasi bebas & terbuka untuk pembuatan / renovasi website bisnis klien (apapun bidangnya: klinik kecantikan, kedai kopi/F&B, retail, kontraktor, B2B corporate, jasa hukum, sekolah, startup, dll).
-2. Analisis kebutuhan klien secara spesifik dan rekomendasikan fitur-fitur esensial yang meningkatkan konversi atau kredibilitas bisnis.
-3. Berikan estimasi waktu pengerjaan yang realistis dan fleksibel menyesuaikan kebutuhan klien (standar studio: 7–14 hari kerja, opsi express sprint: 3–5 hari untuk peluncuran mendesak).
-4. Bila relevan, sebutkan keunggulan teknis KLIRSTUDIO: performa 100/100 Google Lighthouse, TTFB <0.6 detik, 100% kepemilikan source code tanpa biaya sewa bulanan, dan garansi teknis 30 hari.
+        return `Kamu adalah KLIRSTUDIO AI Advisor, konsultan arsitektur web resmi dari studio teknologi KLIRSTUDIO.
+
+PEDOMAN UTAMA & BATASAN KETAT (STRICT GUARDRAILS):
+1. RUANG LINGKUP HANYA JASA PEMBUATAN WEBSITE & WEB APPLICATION KLIRSTUDIO:
+   - Kamu HANYA boleh menjawab pertanyaan seputar konsultasi jasa pembuatan website, aplikasi web kustom, sistem bisnis, fitur teknis, waktu pengerjaan, dan estimasi biaya layanan KLIRSTUDIO.
+   - DILARANG menjawab topik umum di luar layanan website (misalnya: resep makanan, politik, cerita fiksi, game, anime, tugas sekolah/kuliah non-website, matematika, curhat pribadi, gosip, cuaca, dll). Jika ada pertanyaan di luar topik, tolak dengan sopan dan ramah:
+     "Mohon maaf, saya adalah asisten konsultasi khusus layanan pembuatan website & aplikasi web KLIRSTUDIO. Saya hanya dapat membantu konsultasi seputar kebutuhan website, fitur bisnis, dan estimasi biaya proyek Anda. Ada konsep website yang ingin Anda diskusikan?"
+
+2. DILARANG MEMBACA ATAU MEREVIEW KODINGAN PIHAK KETIGA / ORANG LAIN:
+   - Kamu DILARANG membaca, menganalisis, mendebug, mencari error, atau membetulkan kodingan/script eksternal milik orang lain.
+   - Jika pengguna menempelkan kode program atau meminta kamu mereview kodingan orang lain, tolak dengan tegas dan ramah:
+     "Mohon maaf, sistem AI Advisor KLIRSTUDIO difokuskan khusus untuk konsultasi kebutuhan website, fitur bisnis, dan estimasi proyek pembuatan sistem di KLIRSTUDIO. Saya tidak dapat membaca atau mendebug kodingan pihak ketiga. Jika Anda memerlukan pengembangan atau rebuild website baru yang bersih & berkinerja tinggi, tim KLIRSTUDIO siap membantu!"
+
+3. PEDOMAN HARGA & KETENTUAN ESTIMASI BIAYA DI INDONESIA:
+   - Semua harga yang kamu sampaikan mengacu pada Master List KLIRSTUDIO dengan standar rupiah Indonesia.
+   - PENTING: Tegaskan selalu bahwa harga ini adalah ESTIMASI AWAL / ACUAN PERKIRAAN FLEKSIBEL di pasar Indonesia, bukan patokan kaku/mutlak. Biaya final disesuaikan fleksibel dengan kompleksitas, waktu pengerjaan, fitur, testing, dan kebutuhan unik bisnis klien saat diskusi WhatsApp.
+   - KETENTUAN BIAYA AI: Harga jasa AI hanya mencakup development dan integrasi sesuai scope. Biaya penggunaan API token AI TIDAK termasuk (dihitung terpisah berdasarkan model, token input/output, dan pemakaian aktual).
+
+MASTER LIST ESTIMASI JASA WEBSITE & WEB APPLICATION KLIRSTUDIO:
+1. BUSINESS / COMPANY WEBSITE:
+   - Company Profile: Rp2–5 juta
+   - Corporate Website: Rp5–15 juta
+   - Agency / Studio Website: Rp3–8 juta
+   - Portfolio Website: Rp1,5–4 juta
+   - Personal Branding: Rp1,5–5 juta
+   - Organisasi / Yayasan: Rp3–8 juta
+   - Sekolah / Kampus: Rp5–20 juta
+2. LANDING PAGE:
+   - Landing Page Sederhana: Rp1–3 juta
+   - Product / Service Landing Page: Rp1,5–4 juta
+   - Campaign / Promotion: Rp1,5–4 juta
+   - Event Landing Page: Rp1,5–5 juta
+   - Property Landing Page: Rp2–5 juta
+   - Lead Generation: Rp2–5 juta
+   - Landing Page Animasi / Integrasi: Rp3–7 juta
+3. UMKM / LOCAL BUSINESS:
+   - Restaurant / Cafe: Rp2–6 juta
+   - Catering / Laundry / Bengkel: Rp2–5 juta
+   - Barbershop / Salon / Gym: Rp2–6 juta
+   - Klinik: Rp3–10 juta
+   - Studio Foto: Rp2–5 juta
+   - Travel: Rp3–8 juta
+   - Hotel: Rp5–15 juta
+   - Wedding / Event Organizer: Rp2–6 juta
+   - Kontraktor / Supplier: Rp3–8 juta
+4. E-COMMERCE:
+   - Online Shop: Rp5–15 juta
+   - Product Catalog: Rp2–5 juta
+   - Shopping Cart / Checkout: Rp1–4 juta
+   - Payment Gateway: Rp1,5–5 juta
+   - Order / Stock Management: Rp2–5 juta
+   - Voucher / Discount: Rp1–3 juta
+   - Customer Account / Review / Wishlist: Rp1–3 juta
+5. BOOKING / RESERVATION:
+   - Hotel Booking: Rp8–25 juta
+   - Restaurant Reservation: Rp3–8 juta
+   - Doctor Appointment: Rp5–15 juta
+   - Salon / Studio Booking: Rp3–8 juta
+   - Lapangan Booking: Rp5–15 juta
+   - Vehicle Rental: Rp5–15 juta
+   - Consultation Booking: Rp3–8 juta
+   - Event Registration: Rp3–8 juta
+6. DASHBOARD / BUSINESS SYSTEM:
+   - CEO / Finance Dashboard: Rp8–20 juta
+   - Marketing / Sales Dashboard: Rp5–15 juta
+   - Inventory Dashboard: Rp5–15 juta
+   - CRM: Rp10–30 juta
+   - Project Management: Rp8–25 juta
+   - Employee Management: Rp5–15 juta
+   - Business Analytics: Rp8–25 juta
+   - Reporting System: Rp3–10 juta
+7. INTERNAL COMPANY SYSTEM:
+   - HRIS: Rp10–30 juta
+   - Attendance System (Absensi): Rp5–15 juta
+   - Leave Management: Rp3–8 juta
+   - Payroll: Rp8–25 juta
+   - Asset / Document Management: Rp5–15 juta
+   - Approval System: Rp5–15 juta
+   - Helpdesk / Ticketing: Rp5–15 juta
+   - Procurement: Rp8–25 juta
+   - Inventory Management: Rp5–20 juta
+8. EDUCATION / LEARNING:
+   - LMS: Rp10–35 juta
+   - E-Learning: Rp8–25 juta
+   - Online Course: Rp5–15 juta
+   - Online Exam / Tryout: Rp5–15 juta
+   - Quiz Platform: Rp3–10 juta
+   - Student / Teacher Portal: Rp5–15 juta
+   - Certificate System: Rp2–7 juta
+9. PORTAL / MEMBERSHIP:
+   - Customer / Employee Portal: Rp7–20 juta
+   - Member / Alumni Portal: Rp5–15 juta
+   - Vendor / Partner Portal: Rp8–25 juta
+   - Community Platform: Rp8–25 juta
+   - Forum / Discussion Platform: Rp5–20 juta
+10. MARKETPLACE:
+   - Job Marketplace: Rp15–40 juta
+   - Freelancer Marketplace: Rp20–50 juta
+   - Property Marketplace: Rp15–50 juta
+   - Service / Rental Marketplace: Rp15–40 juta
+   - B2B Marketplace: Rp20–60 juta
+   - Multi-Vendor Marketplace: Rp40–150 juta+
+11. PROPERTY / REAL ESTATE:
+   - Property Listing / Developer: Rp5–15 juta
+   - Housing / Apartment Website: Rp5–15 juta
+   - Kos / Boarding House: Rp3–10 juta
+   - Villa / Rental Website: Rp5–15 juta
+   - Property Search & Filter: Rp2–7 juta
+   - Agent Dashboard: Rp5–15 juta
+12. HEALTHCARE:
+   - Clinic Website: Rp3–10 juta
+   - Hospital Website: Rp8–25 juta
+   - Doctor Profile: Rp2–5 juta
+   - Doctor Appointment: Rp5–15 juta
+   - Patient Portal: Rp10–30 juta
+   - Healthcare Booking: Rp5–15 juta
+   - Pharmacy Catalog: Rp3–10 juta
+13. EVENT & TICKETING:
+   - Event Website: Rp2–7 juta
+   - Ticketing System: Rp8–25 juta
+   - Seminar / Workshop Website: Rp2–7 juta
+   - Conference / Exhibition Website: Rp5–15 juta
+   - Registration System: Rp3–8 juta
+   - QR Check-in: Rp2–7 juta
+   - Attendee Management: Rp3–8 juta
+   - Certificate System: Rp2–7 juta
+14. NEWS / MEDIA:
+   - News Portal: Rp5–15 juta
+   - Online Magazine: Rp4–12 juta
+   - Blog Platform: Rp2–7 juta
+   - Company News: Rp3–8 juta
+   - Publication Website: Rp4–12 juta
+   - CMS: Rp3–10 juta
+   - Author Management: Rp1,5–5 juta
+   - SEO / Analytics Integration: Rp1–4 juta
+15. AI-POWERED WEB / APPLICATION:
+   - AI Chatbot: Rp5–20 juta
+   - AI Customer Service: Rp8–25 juta
+   - AI Assistant: Rp5–20 juta
+   - AI Content Generator: Rp8–25 juta
+   - AI Document Analyzer: Rp8–30 juta
+   - AI Recommendation System: Rp10–30 juta
+   - AI Search: Rp5–20 juta
+   - AI Report Generator: Rp8–25 juta
+   - AI Data Analysis: Rp10–30 juta
+   - AI API Integration: Rp2–10 juta+
+   *TIER MODEL AI:
+   - Tier 1 — Economy: MiMo Flash atau sekelasnya (FAQ, ringkasan, tugas ringan)
+   - Tier 2 — Standard: MiMo, Qwen, DeepSeek sekelasnya (chatbot umum, konten, analisis standar)
+   - Tier 3 — Advanced: MiMo Pro, Claude Sonnet sekelasnya (analisis kompleks, reasoning mendalam)
+   - Tier 4 — Premium: Claude Opus sekelasnya (frontier reasoning kualitas tinggi)
+16. CUSTOM WEB APPLICATION:
+   - Sistem Koperasi: Rp10–30 juta
+   - Sistem Gudang: Rp8–25 juta
+   - Sistem Distribusi: Rp15–40 juta
+   - Sistem Rental: Rp8–25 juta
+   - Sistem Membership: Rp5–15 juta
+   - Sistem Pengaduan: Rp5–15 juta
+   - Sistem Monitoring: Rp8–25 juta
+   - Sistem Workflow / Approval: Rp5–30 juta
+   - Sistem Franchise: Rp15–40 juta
+   - Custom System Lainnya: Mulai Rp15 juta, sesuai scope.
+
+FITUR TAMBAHAN:
+- CMS / Admin Panel: Rp1–4 juta
+- Authentication / Login: Rp1–3 juta
+- Role & Permission: Rp1–4 juta
+- Payment Gateway: Rp1,5–5 juta
+- WhatsApp / Email Notification: Rp500 ribu–2,5 juta
+- API Integration: Rp1–5 juta
+- Reporting / Export Excel-PDF: Rp1–4 juta
+- Booking Calendar: Rp2–8 juta
+- Multi-language: Rp1–4 juta
+- Analytics Dashboard: Rp2–8 juta
+- AI API Integration: Rp2–10 juta+
+
+STANDAR & JAMINAN KLIRSTUDIO:
+- Standar Waktu: 7–14 hari kerja (opsi express sprint: 3–5 hari).
+- Kualitas & Kecepatan: 100/100 Google Lighthouse, loading super kilat <0.6 detik, bersih tanpa plugin berat.
+- Hak Milik: 100% full source code & aset digital tanpa biaya sewa bulanan.
+- Garansi: Garansi teknis 30 hari penuh pasca-live.
+
 GAYA KOMUNIKASI:
-- Komunikatif, hangat, ramah, dan solutif. Nyambung dengan gaya bahasa klien (baik santai, gaul, maupun formal).
-- Format jawaban rapi, gunakan markdown bold (**teks**) dan bullet points singkat bila memaparkan fitur.
-- Jangan terlalu panjang seperti esai; berikan jawaban padat, nyaman dibaca di layar chat, dan tawarkan diskusi langkah selanjutnya.`;
+- Hangat, profesional, ringkas, dan solutif.
+- Gunakan markdown bold (**teks**) dan bullet points rapi.
+- Hindari jawaban terlalu panjang seperti esai; berikan informasi terstruktur lalu tawarkan konsultasi santai via WhatsApp.`;
       } else {
-        return `You are KLIRSTUDIO AI Advisor, a senior digital architect from KLIRSTUDIO.
-KEY RESPONSIBILITIES:
-1. Free, open consultation on website creation for any client business (clinics, e-commerce, F&B, law firms, contractors, enterprise B2B, SaaS, etc.).
-2. Recommend high-converting, essential features tailored specifically to the client's business goals.
-3. Provide realistic, dynamic timeline estimates (standard 7–14 business days, or 3–5 days express sprint for urgent launches).
-4. Highlight KLIRSTUDIO standards: 100/100 Lighthouse speed, sub-0.6s TTFB, 100% source code ownership, and 30-day technical warranty.
-COMMUNICATION STYLE:
-- Warm, sharp, empathetic, and consultative. Match the user's tone.
-- Keep responses concise, structured with bullet points and bold text where helpful.
-- Respond in fluent English.`;
+        return `You are KLIRSTUDIO AI Advisor, senior digital architect from KLIRSTUDIO.
+
+STRICT GUARDRAILS & SCOPE:
+1. STRICTLY EXCLUSIVE TO KLIRSTUDIO WEBSITE & WEB APP SERVICES:
+   - You ONLY assist with website development, custom web applications, system features, timeline, and project pricing for KLIRSTUDIO.
+   - Refuse general off-topic queries (recipes, politics, trivia, homework, non-web questions):
+     "Apologies, I am a specialized consultant strictly for KLIRSTUDIO website and web application development services. I can only assist with your business website requirements, features, and cost estimates. What type of website are you looking to build?"
+
+2. FORBIDDEN FROM READING OR DEBUGGING THIRD-PARTY CODE:
+   - You CANNOT inspect, analyze, debug, or review external code from other parties.
+   - If the user provides code or asks for code debugging, politely decline:
+     "Apologies, KLIRSTUDIO AI Advisor is strictly designed for project scoping, feature consulting, and estimates for new KLIRSTUDIO builds. I cannot review or debug third-party code. If you're looking to build or rebuild a modern, high-performance website, our team is ready to help!"
+
+3. INDONESIAN MARKET PRICING GUIDELINES:
+   - All prices reflect fair standard estimates for the Indonesian market.
+   - ALWAYS clarify that all stated prices are INITIAL FLEXIBLE ESTIMATES. The final price adapts flexibly to specific feature scope, complexity, and client business budget via direct consultation on WhatsApp.
+   - For AI services: Note that development/integration fees are separate from actual AI token/API usage costs.
+
+[Use the 16 Master List categories with Indonesian Rupiah ranges, 4 AI tiers, additional features, and KLIRSTUDIO standards].
+
+COMMUNICATION STYLE: Concise, structured, elegant, professional, and consultative.`;
       }
     };
 
@@ -1162,7 +1348,7 @@ COMMUNICATION STYLE:
             model: GROQ_CONFIG.model,
             messages: conversationHistory,
             temperature: 0.6,
-            max_tokens: 450
+            max_tokens: 480
           }),
           signal: controller.signal
         });
@@ -1192,31 +1378,9 @@ COMMUNICATION STYLE:
     let conversationCount = 0;
     let isProcessing = false;
 
-    const quickTopics = {
-      en: [
-        { label: '⏱️ Timeline', query: 'How fast can our website be launched?' },
-        { label: '🛍️ WhatsApp Store', query: 'Can I have an online store that syncs directly to WhatsApp checkout?' },
-        { label: '🏢 Company Profile', query: 'I need a corporate website for our company.' },
-        { label: '⚡ Speed & SEO', query: 'How do you guarantee 100/100 Google Lighthouse and top organic SEO ranking?' },
-        { label: '🛡️ Code Ownership', query: 'Do I get 100% full source code ownership and technical warranty?' }
-      ],
-      id: [
-        { label: '⏱️ Waktu Pengerjaan', query: 'Berapa lama estimasi pengerjaan website sampai siap rilis?' },
-        { label: '🛍️ Toko / WhatsApp', query: 'Apakah bisa bikin katalog produk dengan checkout langsung 1-klik ke WhatsApp?' },
-        { label: '🏢 Company Profile', query: 'Saya butuh website profil perusahaan untuk kredibilitas bisnis & B2B.' },
-        { label: '⚡ Speed & SEO', query: 'Bagaimana standar performa kecepatan dan optimasi SEO Google?' },
-        { label: '🛡️ Garansi & Hak Milik', query: 'Apakah saya mendapatkan hak milik penuh source code dan garansi teknis?' }
-      ]
-    };
-
-    const welcomeMessages = {
-      en: "Hi! What kind of website does your business need? Ask anything below.",
-      id: "Halo! Mau buat website seperti apa untuk bisnis Anda? Tanyakan di sini."
-    };
-
     const placeholders = {
-      en: "Ask a question...",
-      id: "Ketik pertanyaan Anda..."
+      en: "Ask about website types, features, or price estimates...",
+      id: "Tanyakan jenis website, fitur, atau estimasi harga..."
     };
 
     const getTimeString = () => {
@@ -1271,8 +1435,8 @@ COMMUNICATION STYLE:
               </div>
               <p class="ai-welcome-text">
                 ${isId 
-                  ? 'Halo! Mau buat website seperti apa untuk bisnis Anda? Tanyakan estimasi waktu, rekomendasi fitur, atau konsultasi gratis langsung di sini.' 
-                  : 'Hello! What kind of website does your business need? Ask for timeline estimates, feature recommendations, or free consulting right here.'}
+                  ? 'Halo! Mau buat website seperti apa untuk bisnis Anda? Tanyakan estimasi biaya pasar Indonesia, fitur, atau waktu pengerjaan langsung di sini.' 
+                  : 'Hello! What kind of website does your business need? Ask for timeline estimates, Indonesian market pricing, or feature recommendations right here.'}
               </p>
             </div>
           </div>
@@ -1282,152 +1446,260 @@ COMMUNICATION STYLE:
       conversationCount = 0;
     };
 
-    const renderChips = () => {
-      if (!chipsContainer) return;
-      chipsContainer.innerHTML = '';
-      const list = quickTopics[currentLang] || quickTopics.en;
-
-      list.forEach(item => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'ai-chip-btn';
-        
-        const spaceIdx = item.label.indexOf(' ');
-        if (spaceIdx > 0) {
-          const icon = item.label.slice(0, spaceIdx);
-          const text = item.label.slice(spaceIdx + 1);
-          btn.innerHTML = `<span class="animated-chip-icon mr-1">${icon}</span><span>${text}</span>`;
-        } else {
-          btn.textContent = item.label;
-        }
-
-        btn.addEventListener('click', () => {
-          if (isProcessing) return;
-          processUserQuery(item.query, item.label);
-        });
-        chipsContainer.appendChild(btn);
-      });
-    };
-
     const updateInputPlaceholder = () => {
       if (chatInput) {
         chatInput.placeholder = placeholders[currentLang] || placeholders.en;
       }
     };
 
+    // Master Knowledge & Intent Guardrails Fallback
     const matchKnowledgeIntent = (query) => {
-      const q = query.toLowerCase();
+      const q = query.toLowerCase().trim();
       const isId = currentLang === 'id';
+      const priceDisclaimer = isId
+        ? "\n\n*Catatan: Semua harga di atas merupakan estimasi perkiraan acuan pasar di Indonesia. Biaya final disesuaikan fleksibel dengan skala fitur, tingkat kesulitan, dan kebutuhan bisnis Anda saat konsultasi WhatsApp.*"
+        : "\n\n*Note: All prices above are initial standard market estimates for Indonesia. Final pricing adapts flexibly to your feature scope and business needs via direct consultation.*";
 
-      // 1. Turnaround & Timeline
-      if (
-        q.includes('lama') || q.includes('durasi') || q.includes('waktu') ||
-        q.includes('kapan') || q.includes('timeline') || q.includes('turnaround') ||
-        q.includes('deadline') || q.includes('hari') || q.includes('minggu') ||
-        q.includes('fast') || q.includes('how long')
-      ) {
+      // GUARDRAIL 1: Code / Debugging Detection
+      const codeSignals = [
+        'function', 'const ', 'var ', 'let ', 'class ', 'import ', 'export ',
+        'def ', '<?php', '<html', '<script', 'select ', 'from ', 'console.log',
+        'return ', 'public ', 'private ', 'void ', 'debug', 'kodingan', 'script saya',
+        'baca kode', 'cek kodingan', 'benerin kode', 'error koding', 'baca script',
+        'syntax error', 'uncaught', 'exception'
+      ];
+      const hasCodeSnippet = (q.includes('{') && q.includes('}') && (q.includes(';') || q.includes('='))) || q.includes(String.fromCharCode(96, 96, 96));
+      if (codeSignals.some(s => q.includes(s)) || hasCodeSnippet) {
+        return {
+          topic: isId ? 'Batas Layanan AI' : 'Scope Limitation',
+          response: isId
+            ? "Mohon maaf, sistem AI Advisor KLIRSTUDIO difokuskan khusus untuk **konsultasi kebutuhan website, fitur bisnis, dan estimasi proyek pembuatan sistem di KLIRSTUDIO**.\n\nSaya tidak dapat membaca, mereview, atau mendebug kodingan pihak ketiga. Jika Anda memerlukan pengembangan atau rebuild sistem website baru yang bersih, aman, dan berkinerja tinggi, tim KLIRSTUDIO siap membantu!"
+            : "Apologies, KLIRSTUDIO AI Advisor is specialized exclusively for **project scoping, feature architecture, and cost estimation for KLIRSTUDIO builds**.\n\nI cannot review or debug third-party code. If you need a new website engineered with clean architecture and high performance, our team is ready to assist!"
+        };
+      }
+
+      // GUARDRAIL 2: General Off-Topic Detection
+      const offTopics = [
+        'resep', 'masak', 'cuaca', 'politik', 'presiden', 'pemilu', 'game',
+        'anime', 'film', 'pacar', 'jodoh', 'zodiak', 'ramalan', 'tugas kuliah',
+        'matematika', 'fisika', 'kimia', 'puisi', 'cerpen', 'curhat', 'siapa namamu',
+        'lagu', 'chord'
+      ];
+      if (offTopics.some(t => q.includes(t)) && !q.includes('web') && !q.includes('aplikasi') && !q.includes('sistem')) {
+        return {
+          topic: isId ? 'Konsultasi Khusus Website' : 'Web Consultation Only',
+          response: isId
+            ? "Mohon maaf, saya adalah asisten konsultasi khusus layanan pembuatan website & aplikasi web KLIRSTUDIO. Saya hanya dapat membantu konsultasi seputar kebutuhan website, fitur bisnis, dan estimasi biaya proyek Anda.\n\nAda konsep atau jenis website bisnis yang ingin Anda diskusikan?"
+            : "Apologies, I am a specialized consultant strictly for KLIRSTUDIO website and web application development services. I cannot assist with general topics outside of web design and development. What type of website does your business need?"
+        };
+      }
+
+      // 1. BUSINESS / COMPANY WEBSITE
+      if (q.includes('company profile') || q.includes('corporate') || q.includes('profil perusahaan') || q.includes('perusahaan') || q.includes('portfolio') || q.includes('portofolio') || q.includes('personal branding') || q.includes('yayasan') || q.includes('sekolah') || q.includes('kampus')) {
+        return {
+          topic: isId ? 'Business & Company Website' : 'Business & Corporate Websites',
+          response: isId
+            ? "Berikut estimasi acuan untuk **Business & Company Website**:\n• **Company Profile**: Rp2–5 juta\n• **Corporate Website**: Rp5–15 juta\n• **Agency / Studio Website**: Rp3–8 juta\n• **Portfolio Website**: Rp1,5–4 juta\n• **Personal Branding**: Rp1,5–5 juta\n• **Organisasi / Yayasan**: Rp3–8 juta\n• **Sekolah / Kampus**: Rp5–20 juta" + priceDisclaimer
+            : "Here is the standard estimate for **Business & Corporate Websites**:\n• **Company Profile**: Rp2–5M\n• **Corporate Website**: Rp5–15M\n• **Agency / Studio Website**: Rp3–8M\n• **Portfolio Website**: Rp1.5–4M\n• **Personal Branding**: Rp1.5–5M\n• **Organization / Foundation**: Rp3–8M\n• **School / Campus**: Rp5–20M" + priceDisclaimer
+        };
+      }
+
+      // 2. LANDING PAGE
+      if (q.includes('landing page') || q.includes('lp') || q.includes('lead gen') || q.includes('campaign') || q.includes('promosi') || q.includes('sales page')) {
+        return {
+          topic: isId ? 'Landing Page' : 'Landing Pages',
+          response: isId
+            ? "Estimasi acuan layanan **Landing Page** berkonversi tinggi:\n• **Landing Page Sederhana**: Rp1–3 juta\n• **Product / Service Landing Page**: Rp1,5–4 juta\n• **Campaign / Promotion**: Rp1,5–4 juta\n• **Event Landing Page**: Rp1,5–5 juta\n• **Property Landing Page**: Rp2–5 juta\n• **Lead Generation**: Rp2–5 juta\n• **Landing Page Animasi / Integrasi**: Rp3–7 juta" + priceDisclaimer
+            : "Standard estimates for high-converting **Landing Pages**:\n• **Simple Landing Page**: Rp1–3M\n• **Product / Service Landing Page**: Rp1.5–4M\n• **Campaign / Promotion**: Rp1.5–4M\n• **Event Landing Page**: Rp1.5–5M\n• **Lead Generation**: Rp2–5M\n• **Animated / Integrated Landing Page**: Rp3–7M" + priceDisclaimer
+        };
+      }
+
+      // 3. UMKM / LOCAL BUSINESS
+      if (q.includes('umkm') || q.includes('kafe') || q.includes('cafe') || q.includes('resto') || q.includes('restoran') || q.includes('laundry') || q.includes('bengkel') || q.includes('salon') || q.includes('barbershop') || q.includes('gym') || q.includes('studio foto') || q.includes('catering') || q.includes('wedding')) {
+        return {
+          topic: isId ? 'Website UMKM & Usaha Lokal' : 'Local Business & SME Websites',
+          response: isId
+            ? "Estimasi acuan untuk **UMKM / Usaha Lokal**:\n• **Restaurant / Cafe**: Rp2–6 juta\n• **Catering / Laundry / Bengkel**: Rp2–5 juta\n• **Barbershop / Salon / Gym**: Rp2–6 juta\n• **Klinik**: Rp3–10 juta\n• **Studio Foto**: Rp2–5 juta\n• **Travel**: Rp3–8 juta\n• **Wedding / Event Organizer**: Rp2–6 juta\n• **Kontraktor / Supplier**: Rp3–8 juta" + priceDisclaimer
+            : "Standard estimates for **Local Businesses & SMEs**:\n• **Restaurant / Cafe**: Rp2–6M\n• **Catering / Laundry / Auto**: Rp2–5M\n• **Barbershop / Salon / Gym**: Rp2–6M\n• **Clinic**: Rp3–10M\n• **Photo Studio**: Rp2–5M\n• **Travel / Tourism**: Rp3–8M\n• **Wedding / EO**: Rp2–6M" + priceDisclaimer
+        };
+      }
+
+      // 4. E-COMMERCE / TOKO ONLINE
+      if (q.includes('ecommerce') || q.includes('e-commerce') || q.includes('toko') || q.includes('olshop') || q.includes('shop') || q.includes('katalog') || q.includes('checkout') || q.includes('cart') || q.includes('keranjang')) {
+        return {
+          topic: isId ? 'E-Commerce & Toko Online' : 'E-Commerce Solutions',
+          response: isId
+            ? "Estimasi acuan pembuatan **E-Commerce & Toko Online**:\n• **Online Shop**: Rp5–15 juta\n• **Product Catalog**: Rp2–5 juta\n• **Shopping Cart / Checkout**: Rp1–4 juta\n• **Payment Gateway**: Rp1,5–5 juta\n• **Order / Stock Management**: Rp2–5 juta\n• **Voucher / Diskon**: Rp1–3 juta\n• **Akun Pelanggan / Wishlist**: Rp1–3 juta" + priceDisclaimer
+            : "Standard estimates for **E-Commerce & Web Stores**:\n• **Full Online Shop**: Rp5–15M\n• **Product Catalog**: Rp2–5M\n• **Shopping Cart / Checkout**: Rp1–4M\n• **Payment Gateway**: Rp1.5–5M\n• **Order & Inventory Sync**: Rp2–5M" + priceDisclaimer
+        };
+      }
+
+      // 5. BOOKING / RESERVATION
+      if (q.includes('booking') || q.includes('reservasi') || q.includes('janji temu') || q.includes('sewa') || q.includes('rental') || q.includes('lapangan')) {
+        return {
+          topic: isId ? 'Sistem Booking & Reservasi' : 'Booking & Reservation Systems',
+          response: isId
+            ? "Estimasi acuan untuk sistem **Booking & Reservasi**:\n• **Hotel Booking**: Rp8–25 juta\n• **Restaurant Reservation**: Rp3–8 juta\n• **Doctor Appointment (Janji Temu)**: Rp5–15 juta\n• **Salon / Studio Booking**: Rp3–8 juta\n• **Sewa Lapangan / Venue**: Rp5–15 juta\n• **Vehicle / Car Rental**: Rp5–15 juta\n• **Consultation Booking**: Rp3–8 juta" + priceDisclaimer
+            : "Standard estimates for **Booking & Reservation Systems**:\n• **Hotel Booking**: Rp8–25M\n• **Restaurant Reservation**: Rp3–8M\n• **Doctor Appointment**: Rp5–15M\n• **Studio / Salon Booking**: Rp3–8M\n• **Field / Venue Booking**: Rp5–15M\n• **Vehicle Rental**: Rp5–15M" + priceDisclaimer
+        };
+      }
+
+      // 6. DASHBOARD & BUSINESS SYSTEM
+      if (q.includes('dashboard') || q.includes('crm') || q.includes('analytics') || q.includes('reporting') || q.includes('manajemen proyek')) {
+        return {
+          topic: isId ? 'Dashboard & Sistem Bisnis' : 'Business Dashboards & CRM',
+          response: isId
+            ? "Estimasi acuan **Dashboard & Business System**:\n• **CEO / Finance Dashboard**: Rp8–20 juta\n• **Marketing / Sales Dashboard**: Rp5–15 juta\n• **Inventory Dashboard**: Rp5–15 juta\n• **CRM (Customer Relationship Management)**: Rp10–30 juta\n• **Project Management**: Rp8–25 juta\n• **Employee Management**: Rp5–15 juta\n• **Business Analytics**: Rp8–25 juta\n• **Reporting System (Export Excel/PDF)**: Rp3–10 juta" + priceDisclaimer
+            : "Standard estimates for **Dashboards & Business Systems**:\n• **Executive / Finance Dashboard**: Rp8–20M\n• **Sales / Marketing Dashboard**: Rp5–15M\n• **CRM Suite**: Rp10–30M\n• **Project Management**: Rp8–25M\n• **Analytics Engine**: Rp8–25M" + priceDisclaimer
+        };
+      }
+
+      // 7. INTERNAL COMPANY SYSTEM (HRIS, Payroll, Absensi)
+      if (q.includes('hris') || q.includes('absensi') || q.includes('payroll') || q.includes('gaji') || q.includes('internal') || q.includes('approval') || q.includes('helpdesk') || q.includes('procurement')) {
+        return {
+          topic: isId ? 'Internal Company System' : 'Internal Company Systems',
+          response: isId
+            ? "Estimasi acuan **Sistem Internal Perusahaan**:\n• **HRIS**: Rp10–30 juta\n• **Attendance System (Absensi)**: Rp5–15 juta\n• **Leave Management (Cuti)**: Rp3–8 juta\n• **Payroll (Penggajian)**: Rp8–25 juta\n• **Asset / Document Management**: Rp5–15 juta\n• **Approval System (Multi-level)**: Rp5–15 juta\n• **Helpdesk / Ticketing**: Rp5–15 juta\n• **Procurement (Pengadaan)**: Rp8–25 juta" + priceDisclaimer
+            : "Standard estimates for **Internal Enterprise Systems**:\n• **HRIS Suite**: Rp10–30M\n• **Attendance System**: Rp5–15M\n• **Payroll Engine**: Rp8–25M\n• **Asset Management**: Rp5–15M\n• **Approval Workflow**: Rp5–15M" + priceDisclaimer
+        };
+      }
+
+      // 8. EDUCATION / LMS
+      if (q.includes('lms') || q.includes('kursus') || q.includes('ujian') || q.includes('tryout') || q.includes('e-learning') || q.includes('elearning') || q.includes('quiz') || q.includes('sertifikat')) {
+        return {
+          topic: isId ? 'Education & Learning Platform' : 'Education & LMS Platforms',
+          response: isId
+            ? "Estimasi acuan **Pendidikan & E-Learning**:\n• **LMS (Learning Management System)**: Rp10–35 juta\n• **E-Learning Platform**: Rp8–25 juta\n• **Online Course Website**: Rp5–15 juta\n• **Ujian Online / Tryout System**: Rp5–15 juta\n• **Quiz Platform**: Rp3–10 juta\n• **Portal Siswa / Guru**: Rp5–15 juta\n• **Sistem Sertifikat Otomatis**: Rp2–7 juta" + priceDisclaimer
+            : "Standard estimates for **Education & LMS**:\n• **Full LMS**: Rp10–35M\n• **E-Learning Platform**: Rp8–25M\n• **Online Courses**: Rp5–15M\n• **Exam / Tryout System**: Rp5–15M\n• **Certificate Generation**: Rp2–7M" + priceDisclaimer
+        };
+      }
+
+      // 9. PORTAL & MEMBERSHIP
+      if (q.includes('portal') || q.includes('membership') || q.includes('member') || q.includes('alumni') || q.includes('komunitas') || q.includes('forum')) {
+        return {
+          topic: isId ? 'Portal & Membership Platform' : 'Portals & Community Platforms',
+          response: isId
+            ? "Estimasi acuan **Portal & Membership**:\n• **Customer / Employee Portal**: Rp7–20 juta\n• **Member / Alumni Portal**: Rp5–15 juta\n• **Vendor / Partner Portal**: Rp8–25 juta\n• **Community Platform**: Rp8–25 juta\n• **Forum / Diskusi**: Rp5–20 juta" + priceDisclaimer
+            : "Standard estimates for **Portals & Membership**:\n• **Customer / Employee Portal**: Rp7–20M\n• **Member / Alumni Portal**: Rp5–15M\n• **Vendor Portal**: Rp8–25M\n• **Community Platform**: Rp8–25M" + priceDisclaimer
+        };
+      }
+
+      // 10. MARKETPLACE
+      if (q.includes('marketplace') || q.includes('multivendor') || q.includes('multi-vendor') || q.includes('freelance') || q.includes('job board')) {
+        return {
+          topic: isId ? 'Platform Marketplace' : 'Marketplace Platforms',
+          response: isId
+            ? "Estimasi acuan sistem **Marketplace**:\n• **Job Marketplace**: Rp15–40 juta\n• **Freelancer Marketplace**: Rp20–50 juta\n• **Property Marketplace**: Rp15–50 juta\n• **Service / Rental Marketplace**: Rp15–40 juta\n• **B2B Marketplace**: Rp20–60 juta\n• **Multi-Vendor Marketplace**: Rp40–150 juta+" + priceDisclaimer
+            : "Standard estimates for **Marketplace Platforms**:\n• **Job / Freelance Marketplace**: Rp15–50M\n• **Property Marketplace**: Rp15–50M\n• **B2B Marketplace**: Rp20–60M\n• **Multi-Vendor Scale**: Rp40–150M+" + priceDisclaimer
+        };
+      }
+
+      // 11. PROPERTY / REAL ESTATE
+      if (q.includes('properti') || q.includes('property') || q.includes('real estate') || q.includes('kos') || q.includes('villa') || q.includes('apartemen')) {
+        return {
+          topic: isId ? 'Property & Real Estate' : 'Real Estate Platforms',
+          response: isId
+            ? "Estimasi acuan **Property & Real Estate**:\n• **Property Listing / Developer**: Rp5–15 juta\n• **Housing / Apartment Website**: Rp5–15 juta\n• **Kos / Boarding House Website**: Rp3–10 juta\n• **Villa / Rental Website**: Rp5–15 juta\n• **Property Search & Filter System**: Rp2–7 juta\n• **Agent Dashboard**: Rp5–15 juta" + priceDisclaimer
+            : "Standard estimates for **Real Estate Websites**:\n• **Listing / Developer Portal**: Rp5–15M\n• **Apartment / Kos Portal**: Rp3–10M\n• **Villa Booking**: Rp5–15M\n• **Search & Map Filter**: Rp2–7M" + priceDisclaimer
+        };
+      }
+
+      // 12. HEALTHCARE
+      if (q.includes('klinik') || q.includes('rumah sakit') || q.includes('hospital') || q.includes('dokter') || q.includes('pasien') || q.includes('apotek') || q.includes('farmasi')) {
+        return {
+          topic: isId ? 'Healthcare & Rumah Sakit' : 'Healthcare Solutions',
+          response: isId
+            ? "Estimasi acuan **Healthcare & Medis**:\n• **Clinic Website**: Rp3–10 juta\n• **Hospital / Rumah Sakit**: Rp8–25 juta\n• **Doctor Profile**: Rp2–5 juta\n• **Doctor Appointment**: Rp5–15 juta\n• **Patient Portal**: Rp10–30 juta\n• **Healthcare Booking**: Rp5–15 juta\n• **Katalog Apotek / Obat**: Rp3–10 juta" + priceDisclaimer
+            : "Standard estimates for **Healthcare & Clinics**:\n• **Clinic Website**: Rp3–10M\n• **Hospital Portal**: Rp8–25M\n• **Doctor Appointment**: Rp5–15M\n• **Patient Portal**: Rp10–30M" + priceDisclaimer
+        };
+      }
+
+      // 13. EVENT & TICKETING
+      if (q.includes('event') || q.includes('tiket') || q.includes('ticketing') || q.includes('seminar') || q.includes('workshop') || q.includes('pameran') || q.includes('qr')) {
+        return {
+          topic: isId ? 'Event & Ticketing' : 'Events & Ticketing',
+          response: isId
+            ? "Estimasi acuan **Event & Ticketing System**:\n• **Event Website**: Rp2–7 juta\n• **Ticketing System**: Rp8–25 juta\n• **Seminar / Workshop Website**: Rp2–7 juta\n• **Conference / Exhibition**: Rp5–15 juta\n• **Registration System**: Rp3–8 juta\n• **QR Check-in Scanner**: Rp2–7 juta\n• **Attendee Management**: Rp3–8 juta" + priceDisclaimer
+            : "Standard estimates for **Events & Ticketing**:\n• **Event Site**: Rp2–7M\n• **Ticketing Engine & QR Check-in**: Rp8–25M\n• **Conference Portal**: Rp5–15M" + priceDisclaimer
+        };
+      }
+
+      // 14. NEWS / MEDIA / BLOG
+      if (q.includes('berita') || q.includes('news') || q.includes('media') || q.includes('majalah') || q.includes('magazine') || q.includes('blog') || q.includes('cms')) {
+        return {
+          topic: isId ? 'News & Media Portal' : 'News & Media Portals',
+          response: isId
+            ? "Estimasi acuan **News, Media & Blog**:\n• **News Portal**: Rp5–15 juta\n• **Online Magazine**: Rp4–12 juta\n• **Blog Platform**: Rp2–7 juta\n• **Company News / Publikasi**: Rp3–8 juta\n• **CMS Editorial Khusus**: Rp3–10 juta\n• **Author Management**: Rp1,5–5 juta" + priceDisclaimer
+            : "Standard estimates for **News & Media Portals**:\n• **News Portal**: Rp5–15M\n• **Online Magazine**: Rp4–12M\n• **Blog Platform**: Rp2–7M\n• **Custom Editorial CMS**: Rp3–10M" + priceDisclaimer
+        };
+      }
+
+      // 15. AI-POWERED WEB / APPLICATION
+      if (q.includes('ai') || q.includes('artificial intelligence') || q.includes('chatbot') || q.includes('bot') || q.includes('claude') || q.includes('mimo') || q.includes('qwen') || q.includes('deepseek')) {
+        return {
+          topic: isId ? 'Layanan AI & Model Tiers' : 'AI-Powered Solutions & Model Tiers',
+          response: isId
+            ? "Estimasi acuan layanan **AI-Powered Web & Application**:\n• **AI Chatbot**: Rp5–20 juta\n• **AI Customer Service**: Rp8–25 juta\n• **AI Assistant**: Rp5–20 juta\n• **AI Content Generator**: Rp8–25 juta\n• **AI Document Analyzer**: Rp8–30 juta\n• **AI Recommendation System**: Rp10–30 juta\n• **AI Integration API**: Rp2–10 juta+\n\n**TIER MODEL AI KLIRSTUDIO**:\n• **Tier 1 — Economy**: MiMo Flash (FAQ, klasifikasi, ringkasan)\n• **Tier 2 — Standard**: MiMo, Qwen, DeepSeek (chatbot umum & konten)\n• **Tier 3 — Advanced**: MiMo Pro, Claude Sonnet (analisis kompleks & reasoning)\n• **Tier 4 — Premium**: Claude Opus (frontier reasoning kualitas tinggi)\n\n*Catatan Biaya AI: Biaya jasa hanya development & integrasi. Biaya penggunaan token API AI dihitung terpisah sesuai pemakaian aktual.*" + priceDisclaimer
+            : "Standard estimates for **AI Applications & Model Tiers**:\n• **AI Chatbot / CS**: Rp5–25M\n• **AI Generator / Analyzer**: Rp8–30M\n• **AI API Integration**: Rp2–10M+\n\n**AI MODEL TIERS**:\n• Tier 1 Economy (MiMo Flash)\n• Tier 2 Standard (Qwen, DeepSeek)\n• Tier 3 Advanced (Claude Sonnet)\n• Tier 4 Premium (Claude Opus)\n\n*Note: Development cost covers build & integration. Third-party AI API token usage is billed separately based on actual consumption.*" + priceDisclaimer
+        };
+      }
+
+      // 16. CUSTOM WEB APPLICATION
+      if (q.includes('koperasi') || q.includes('gudang') || q.includes('distribusi') || q.includes('franchise') || q.includes('workflow') || q.includes('kustom') || q.includes('custom app') || q.includes('web app')) {
+        return {
+          topic: isId ? 'Custom Web Application' : 'Custom Web Applications',
+          response: isId
+            ? "Estimasi acuan **Custom Web Application**:\n• **Sistem Koperasi**: Rp10–30 juta\n• **Sistem Gudang (Inventory)**: Rp8–25 juta\n• **Sistem Distribusi**: Rp15–40 juta\n• **Sistem Rental**: Rp8–25 juta\n• **Sistem Pengaduan**: Rp5–15 juta\n• **Sistem Monitoring**: Rp8–25 juta\n• **Sistem Workflow / Approval**: Rp5–30 juta\n• **Sistem Franchise**: Rp15–40 juta\n• **Custom System Lainnya**: Mulai Rp15 juta (sesuai scope)" + priceDisclaimer
+            : "Standard estimates for **Custom Web Applications**:\n• **Cooperative System**: Rp10–30M\n• **Warehouse / Inventory**: Rp8–25M\n• **Distribution Suite**: Rp15–40M\n• **Rental System**: Rp8–25M\n• **Workflow & Approvals**: Rp5–30M\n• **Franchise Management**: Rp15–40M\n• **Custom Apps**: Starting from Rp15M" + priceDisclaimer
+        };
+      }
+
+      // FITUR TAMBAHAN
+      if (q.includes('fitur') || q.includes('payment gateway') || q.includes('notifikasi') || q.includes('wa notif') || q.includes('auth') || q.includes('login') || q.includes('biaya tambahan')) {
+        return {
+          topic: isId ? 'Fitur Tambahan & Operasional' : 'Additional Features & Operations',
+          response: isId
+            ? "Estimasi acuan **Fitur Tambahan & Add-ons**:\n• **CMS / Admin Panel**: Rp1–4 juta\n• **Authentication / Login**: Rp1–3 juta\n• **Role & Permission**: Rp1–4 juta\n• **Payment Gateway**: Rp1,5–5 juta\n• **WhatsApp / Email Notification**: Rp500 ribu–2,5 juta\n• **API Integration**: Rp1–5 juta\n• **Reporting (Export Excel/PDF)**: Rp1–4 juta\n• **Booking Calendar**: Rp2–8 juta\n• **Multi-language**: Rp1–4 juta\n• **Analytics Dashboard**: Rp2–8 juta\n\n**Biaya Operasional**: Domain (tahunan), Hosting/VPS (bulanan/tahunan), Token AI API (sesuai pemakaian)." + priceDisclaimer
+            : "Standard estimates for **Add-on Features**:\n• **CMS / Admin Panel**: Rp1–4M\n• **Auth & Roles**: Rp1–4M\n• **Payment Gateway**: Rp1.5–5M\n• **WhatsApp / Email Alerts**: Rp500k–2.5M\n• **API Integrations**: Rp1–5M\n• **Export Reports (PDF/Excel)**: Rp1–4M" + priceDisclaimer
+        };
+      }
+
+      // ESTIMASI HARGA UMUM
+      if (q.includes('harga') || q.includes('biaya') || q.includes('budget') || q.includes('tarif') || q.includes('price') || q.includes('cost') || q.includes('murah') || q.includes('mahal') || q.includes('biayanya') || q.includes('pricelist') || q.includes('paket')) {
+        return {
+          topic: isId ? 'Estimasi Biaya KLIRSTUDIO' : 'KLIRSTUDIO Pricing Overview',
+          response: isId
+            ? "Estimasi layanan pembuatan website & aplikasi web KLIRSTUDIO disesuaikan dengan pasar Indonesia:\n• **Landing Page**: Rp1–7 juta\n• **Company Profile / Corporate**: Rp2–15 juta\n• **UMKM / Bisnis Lokal**: Rp2–8 juta\n• **E-Commerce / Toko Online**: Rp5–15 juta\n• **Sistem Booking & Reservasi**: Rp3–25 juta\n• **Dashboard, CRM & HRIS**: Rp8–30 juta\n• **LMS & Platform Edukasi**: Rp5–35 juta\n• **Marketplace & Custom Web App**: Rp15–60 juta+" + priceDisclaimer
+            : "KLIRSTUDIO project scoping overview for the Indonesian market:\n• **Landing Pages**: Rp1–7M\n• **Company Profile / Corporate**: Rp2–15M\n• **Local Business / UMKM**: Rp2–8M\n• **E-Commerce**: Rp5–15M\n• **Booking & Systems**: Rp3–25M\n• **Dashboards & Internal Tools**: Rp8–30M\n• **Marketplaces & Custom Apps**: Rp15–60M+" + priceDisclaimer
+        };
+      }
+
+      // TIMELINE & WAKTU PENGERJAAN
+      if (q.includes('lama') || q.includes('durasi') || q.includes('waktu') || q.includes('kapan') || q.includes('timeline') || q.includes('deadline') || q.includes('hari') || q.includes('minggu') || q.includes('cepat')) {
         return {
           topic: isId ? 'Waktu Pengerjaan' : 'Timeline & Delivery',
           response: isId
-            ? "Pengerjaan standar **7–14 hari kerja** (ada opsi express 3–5 hari). Progres dipantau via link staging aktif."
-            : "Standard delivery is **7–14 business days** (express sprint 3–5 days available) with live staging access."
+            ? "Estimasi pengerjaan standar KLIRSTUDIO:\n• **Pengerjaan Standar**: 7–14 hari kerja.\n• **Express Sprint**: 3–5 hari kerja (untuk kebutuhan peluncuran mendesak).\n• Progres dapat dipantau langsung via link staging aktif transparan setiap hari."
+            : "Standard delivery timeline at KLIRSTUDIO:\n• **Standard Sprint**: 7–14 business days.\n• **Express Sprint**: 3–5 business days for urgent launches.\n• Live staging link provided for real-time progress inspection."
         };
       }
 
-      // 2. WhatsApp Catalog / E-commerce / Shop
-      if (
-        q.includes('toko') || q.includes('katalog') || q.includes('wa') ||
-        q.includes('whatsapp') || q.includes('checkout') || q.includes('cart') ||
-        q.includes('keranjang') || q.includes('ecommerce') || q.includes('e-commerce') ||
-        q.includes('store') || q.includes('jual') || q.includes('produk')
-      ) {
+      // GARANSI & HAK MILIK
+      if (q.includes('garansi') || q.includes('hak milik') || q.includes('source code') || q.includes('maintenance') || q.includes('support') || q.includes('sewa')) {
         return {
-          topic: isId ? 'Katalog Toko WhatsApp' : 'WhatsApp Catalog Store',
+          topic: isId ? 'Garansi & Hak Milik' : 'Warranty & Code Ownership',
           response: isId
-            ? "Katalog modern dengan **checkout 1-klik ke WhatsApp**. Order otomatis terhitung tanpa potongan komisi marketplace."
-            : "Modern catalog with **1-click WhatsApp checkout**. Instant order routing with zero marketplace fees."
+            ? "**100% Hak Milik & Garansi Penuh KLIRSTUDIO**:\n• Anda mendapatkan **100% kepemilikan source code** dan seluruh aset digital tanpa sistem sewa bulanan tersembunyi.\n• **Garansi teknis 30 hari** penuh pasca-launching untuk menjamin website berjalan lancar, aman, dan stabil."
+            : "**100% Code Ownership & Technical Warranty**:\n• Full **100% source code and asset ownership** with zero monthly lock-in fees.\n• **30-day dedicated technical warranty** post-launch ensuring rock-solid stability."
         };
       }
 
-      // 3. Company Profile / B2B / Corporate
-      if (
-        q.includes('company') || q.includes('profil') || q.includes('profile') ||
-        q.includes('b2b') || q.includes('perusahaan') || q.includes('korporat') ||
-        q.includes('corporate') || q.includes('pt') || q.includes('cv') ||
-        q.includes('kredibilitas') || q.includes('branding')
-      ) {
-        return {
-          topic: isId ? 'Website Company Profile' : 'Company Profile B2B',
-          response: isId
-            ? "Desain mewah, berwibawa, dan profesional untuk meningkatkan reputasi bisnis Anda di depan klien besar, investor, dan mitra B2B."
-            : "High-trust visual architecture designed to elevate corporate credibility and win enterprise clients."
-        };
-      }
-
-      // 4. Speed & Google SEO
-      if (
-        q.includes('speed') || q.includes('cepat') || q.includes('lambat') ||
-        q.includes('seo') || q.includes('google') || q.includes('lighthouse') ||
-        q.includes('pagespeed') || q.includes('ranking') || q.includes('performa') ||
-        q.includes('loading') || q.includes('ttfb')
-      ) {
-        return {
-          topic: isId ? 'Speed 100/100 & SEO' : '100/100 Lighthouse & SEO',
-          response: isId
-            ? "Garansi skor **100/100 Google Lighthouse** & loading super cepat <0.6 detik dengan struktur Schema.org agar mudah tembus halaman 1 Google."
-            : "Guaranteed **100/100 Lighthouse** scores & sub-0.6s loading with Schema.org for organic Google ranking."
-        };
-      }
-
-      // 5. Price / Budget / Cost
-      if (
-        q.includes('harga') || q.includes('biaya') || q.includes('budget') ||
-        q.includes('tarif') || q.includes('price') || q.includes('cost') ||
-        q.includes('murah') || q.includes('mahal') || q.includes('bayar') ||
-        q.includes('investasi') || q.includes('biayanya')
-      ) {
-        return {
-          topic: isId ? 'Estimasi Biaya' : 'Pricing & Scoping',
-          response: isId
-            ? "Biaya transparan sesuai fitur yang benar-benar bisnis Anda butuhkan (tanpa biaya tersembunyi). Yuk ngobrol santai di WhatsApp untuk estimasi cepat!"
-            : "Transparent pricing tailored to your scope. Connect on WhatsApp for a clear fixed-scope estimate."
-        };
-      }
-
-      // 6. Warranty & Code Ownership
-      if (
-        q.includes('garansi') || q.includes('hak milik') || q.includes('source code') ||
-        q.includes('maintenance') || q.includes('pemeliharaan') || q.includes('support') ||
-        q.includes('bantuan') || q.includes('warranty') || q.includes('ownership')
-      ) {
-        return {
-          topic: isId ? 'Garansi & Hak Milik' : 'Warranty & Ownership',
-          response: isId
-            ? "**100% hak milik website & source code** tanpa ikatan biaya bulanan tersembunyi, plus **garansi pendampingan 30 hari** setelah website live."
-            : "**100% source code ownership** with zero monthly lock-in, plus **30-day technical warranty** post-launch."
-        };
-      }
-
-      // 7. Tech Stack
-      if (
-        q.includes('stack') || q.includes('teknologi') || q.includes('tech') ||
-        q.includes('react') || q.includes('next') || q.includes('wordpress') ||
-        q.includes('bahasa') || q.includes('coding') || q.includes('framework')
-      ) {
-        return {
-          topic: isId ? 'Teknologi Pembuatan' : 'Tech Stack Architecture',
-          response: isId
-            ? "Bebas lemot & tanpa plugin berat: Website kami buat dengan kode bersih (Vanilla modern / React/Next.js) agar loading instan di HP pelanggan."
-            : "Zero bloatware: Vanilla HTML/CSS/JS for instant raw speed or Next.js/React for dynamic web apps."
-        };
-      }
-
-      // Fallback
+      // Default Fallback
       return {
-        topic: isId ? 'Konsultasi Website' : 'Website Consultation',
+        topic: isId ? 'Konsultasi Website KLIRSTUDIO' : 'KLIRSTUDIO Consultation',
         response: isId
-          ? "Pertanyaan bagus! Kami siap bantu wujudkan website berkelas yang siap mendatangkan pelanggan untuk bisnis Anda. Yuk ngobrol santai via WhatsApp!"
-          : "Great question! We build high-performance custom websites. Let's chat directly on WhatsApp for details."
+          ? "Pertanyaan bagus! KLIRSTUDIO melayani pembuatan berbagai jenis website dan aplikasi web: Landing Page, Company Profile, Toko Online, Sistem Booking, Dashboard Bisnis, hingga Custom Web App.\n\nBerapa estimasi budget atau konsep website yang sedang Anda rencanakan? Mari diskusikan santai!"
+          : "Great question! KLIRSTUDIO crafts high-performance websites and custom web applications: Landing Pages, Corporate Profiles, E-Commerce, Booking Engines, and Enterprise Dashboards.\n\nTell us about your project vision or budget expectations to get a tailored scope!"
       };
     };
 
@@ -1530,14 +1802,12 @@ COMMUNICATION STYLE:
 
     // Initial setup
     renderWelcomeMessage();
-    renderChips();
     updateInputPlaceholder();
 
     // Global hook for language synchronization
     window.aiAdvisor = {
       setLanguage: (lang) => {
         resetConversationHistory();
-        renderChips();
         updateInputPlaceholder();
         // If only initial welcome message is showing, update it
         if (conversationCount === 0) {
