@@ -4,9 +4,9 @@
   "private": true,
   "description": "COMPUTE WEB — High-Performance Web Development & Digital Engineering Studio",
   "scripts": {
-    "dev": "serve . -l 3000",
-    "start": "serve . -l 3000",
-    "serve": "serve . -l 3000",
+    "dev": "node server.js",
+    "start": "node server.js",
+    "serve": "node server.js",
     "build": "node -e \"console.log('Website assets verified and ready.')\"",
     "check": "node -e \"console.log('Validating structure...'); require('fs').accessSync('index.html'); require('fs').accessSync('style.css'); require('fs').accessSync('main.js'); console.log('All core assets present!')\""
   },
