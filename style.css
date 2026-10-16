@@ -1486,7 +1486,7 @@ body[data-lang="id"] #hero-title .lang-en {
 .coverflow-stage {
   position: relative;
   width: 100%;
-  height: 410px;
+  height: clamp(205px, 56vw, 240px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1499,7 +1499,7 @@ body[data-lang="id"] #hero-title .lang-en {
 
 @media (min-width: 640px) {
   .coverflow-stage {
-    height: 445px;
+    height: 340px;
   }
 }
 
@@ -1822,16 +1822,17 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 .process-cards-grid {
   display: grid !important;
   grid-template-columns: 1fr !important;
-  gap: 28px !important; /* Generous spacing - eliminates dempetan completely */
+  gap: 16px !important;
   width: 100% !important;
-  margin-top: 2rem !important;
+  margin-top: 1.5rem !important;
 }
 
 @media (min-width: 640px) {
   #process-cards-container,
   .process-cards-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 28px !important;
+    gap: 22px !important;
+    margin-top: 2rem !important;
   }
 }
 
@@ -1839,19 +1840,21 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   #process-cards-container,
   .process-cards-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 32px !important; /* 32px crisp separation between cards */
+    gap: 32px !important;
+    margin-top: 2.5rem !important;
   }
 }
 
 .process-card-tile {
-  border-radius: 24px !important;
+  border-radius: 18px !important;
   background: #090a0f !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  padding: 32px 28px !important;
-  min-height: 250px !important;
+  padding: 20px 18px !important;
+  min-height: auto !important;
   display: flex !important;
   flex-direction: column !important;
-  justify-content: space-between !important;
+  justify-content: flex-start !important;
+  gap: 14px !important;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.35s ease, opacity 0.3s ease !important;
@@ -1860,6 +1863,24 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   position: relative;
   text-align: left;
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6) !important;
+}
+
+@media (min-width: 768px) {
+  .process-card-tile {
+    border-radius: 22px !important;
+    padding: 28px 24px !important;
+    min-height: 240px !important;
+    justify-content: space-between !important;
+    gap: 0 !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .process-card-tile {
+    border-radius: 24px !important;
+    padding: 32px 28px !important;
+    min-height: 290px !important;
+  }
 }
 
 .process-card-tile:hover {
@@ -2464,31 +2485,48 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 /* Mobile Stack Spread */
 @media (max-width: 640px) {
   .team-stack-stage {
-    height: 480px;
+    height: 410px;
   }
   .team-stack-card {
-    width: 250px;
-    height: 390px;
-    padding: 20px;
+    width: min(220px, 68vw);
+    height: 350px;
+    padding: 16px;
+    border-radius: 18px;
+  }
+  .team-stack-card .team-card-avatar-box {
+    height: 180px;
+    border-radius: 12px;
+  }
+  .team-stack-card .team-card-name {
+    font-size: 1.05rem;
+    line-height: 1.25;
+  }
+  .team-stack-card .team-card-desc {
+    font-size: 0.78rem;
+    line-height: 1.4;
+  }
+  .team-stack-card .team-card-role {
+    font-size: 9px;
+    padding: 2px 7px;
   }
   .team-stack-stage.is-expanded .team-stack-card[data-index="0"] {
-    transform: translate3d(-105px, 20px, 0) rotate(-9deg) scale(0.86);
+    transform: translate3d(-52px, 12px, 0) rotate(-6deg) scale(0.88);
     z-index: 10;
   }
   .team-stack-stage.is-expanded .team-stack-card[data-index="1"] {
-    transform: translate3d(-52px, 8px, 0) rotate(-4deg) scale(0.91);
+    transform: translate3d(-26px, 6px, 0) rotate(-3deg) scale(0.94);
     z-index: 20;
   }
   .team-stack-stage.is-expanded .team-stack-card[data-index="2"] {
-    transform: translate3d(0, -10px, 0) rotate(0deg) scale(1.0);
+    transform: translate3d(0, -6px, 0) rotate(0deg) scale(1.0);
     z-index: 50;
   }
   .team-stack-stage.is-expanded .team-stack-card[data-index="3"] {
-    transform: translate3d(52px, 8px, 0) rotate(4deg) scale(0.91);
+    transform: translate3d(26px, 6px, 0) rotate(3deg) scale(0.94);
     z-index: 20;
   }
   .team-stack-stage.is-expanded .team-stack-card[data-index="4"] {
-    transform: translate3d(105px, 20px, 0) rotate(9deg) scale(0.86);
+    transform: translate3d(52px, 12px, 0) rotate(6deg) scale(0.88);
     z-index: 10;
   }
 }
@@ -2747,14 +2785,23 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 
 .footer-content-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem 1.25rem;
+}
+
+.footer-brand-box {
+  grid-column: 1 / -1;
+  max-width: 100%;
 }
 
 @media (min-width: 640px) {
   .footer-content-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 2.25rem;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 2rem 1.5rem;
+  }
+  .footer-brand-box {
+    grid-column: span 1;
+    max-width: 300px;
   }
 }
 
@@ -2764,6 +2811,10 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
     gap: 2.5rem;
     align-items: flex-start;
   }
+  .footer-brand-box {
+    grid-column: span 1;
+    max-width: 320px;
+  }
 }
 
 @media (min-width: 1100px) {
@@ -2771,10 +2822,6 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
     grid-template-columns: 1.6fr 1fr 1fr 1fr;
     gap: 3.25rem;
   }
-}
-
-.footer-brand-box {
-  max-width: 320px;
 }
 
 .footer-brand-box p {
@@ -5069,6 +5116,351 @@ html[data-theme="light"] .obsidian-discover-button::after {
     animation: none !important;
   }
 }
+
+/* =========================================================================
+   20. ULTRA-REFINED COMPREHENSIVE RESPONSIVE DESIGN SYSTEM (MOBILE, PHABLET & TABLET)
+   Ensures razor-sharp layout, zero awkward line breaks, no horizontal overflow,
+   and balanced vertical pacing across all screen sizes.
+   ========================================================================= */
+
+/* 1. Global Section Pacing & Heading Scaling on Mobile & Tablet */
+@media (max-width: 640px) {
+  section {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+  #hero {
+    padding-top: 5.5rem !important;
+    padding-bottom: 3rem !important;
+    min-height: calc(100vh - 50px) !important;
+  }
+  .section-eyebrow {
+    font-size: 10px !important;
+    letter-spacing: 0.14em !important;
+    margin-bottom: 0.5rem !important;
+  }
+  h2 {
+    font-size: clamp(1.75rem, 6.5vw, 2.5rem) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.02em !important;
+  }
+  #nav-inner {
+    height: 64px !important;
+    padding-left: 1.15rem !important;
+    padding-right: 1.15rem !important;
+  }
+  #brand-title {
+    font-size: 1.25rem !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  section {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+  #hero {
+    padding-top: 6.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+  h2 {
+    font-size: clamp(2.25rem, 5vw, 3.25rem) !important;
+    line-height: 1.15 !important;
+  }
+}
+
+/* 2. Hero Stats Cards: Compact 3-Column Metric Row on Mobile */
+.hero-stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .hero-stats-row {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 440px !important;
+    margin-top: 1.5rem !important;
+    padding: 0 4px !important;
+  }
+
+  .hero-stat-card {
+    min-width: 0 !important;
+    width: 100% !important;
+    padding: 0.65rem 0.35rem !important;
+    border-radius: 12px !important;
+  }
+
+  .hero-stat-card .stat-counter,
+  .hero-stat-card span.text-3xl {
+    font-size: 1.35rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .hero-stat-card span.font-mono {
+    font-size: 9.5px !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0.01em !important;
+    margin-top: 3px !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .hero-stats-row {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+  }
+  .hero-stat-card {
+    min-width: 140px !important;
+    padding: 0.85rem 1rem !important;
+  }
+}
+
+/* 3. Coverflow Showcase Section: Eliminate Gap on Mobile & Tablet */
+@media (max-width: 640px) {
+  #coverflow-stage-wrapper {
+    margin-top: 1rem !important;
+  }
+  .coverflow-stage {
+    height: clamp(205px, 56vw, 240px) !important;
+  }
+  #coverflow-dots-bar {
+    margin-top: 0.75rem !important;
+  }
+  #coverflow-details-wrapper {
+    margin-top: 1.25rem !important;
+  }
+  .coverflow-details-card {
+    padding: 1.25rem 1rem !important;
+    border-radius: 18px !important;
+  }
+  .coverflow-detail-panel h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.25 !important;
+  }
+  .coverflow-detail-panel p {
+    font-size: 0.8125rem !important;
+    line-height: 1.55 !important;
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+  }
+  .coverflow-nav-prev {
+    left: 4px !important;
+    width: 34px !important;
+    height: 34px !important;
+  }
+  .coverflow-nav-next {
+    right: 4px !important;
+    width: 34px !important;
+    height: 34px !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .coverflow-stage {
+    height: 340px !important;
+  }
+  .coverflow-details-card {
+    padding: 2rem !important;
+  }
+}
+
+/* 4. Speed & Performance (#infra) Bento Grid Fixes */
+@media (max-width: 640px) {
+  .infra-bento-grid {
+    gap: 14px !important;
+  }
+  .infra-main-card {
+    padding: 1.5rem 1.15rem !important;
+    border-radius: 18px !important;
+    min-height: auto !important;
+  }
+  .lighthouse-gauge-svg {
+    width: 86px !important;
+    height: 86px !important;
+  }
+  .infra-side-cards-col {
+    gap: 12px !important;
+  }
+  .infra-side-card {
+    padding: 1.25rem 1rem !important;
+    border-radius: 16px !important;
+  }
+  .infra-side-card h4 {
+    font-size: 1.05rem !important;
+  }
+  .infra-side-card p {
+    font-size: 0.8125rem !important;
+    line-height: 1.45 !important;
+  }
+  .infra-card-icon {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    border-radius: 10px !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .infra-side-cards-col {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1.25rem !important;
+  }
+}
+
+/* 5. Features & Integrations (#integrations) Compact 2-Col Mobile Grid */
+@media (max-width: 640px) {
+  #integrations .grid {
+    gap: 10px !important;
+  }
+  .integration-card {
+    padding: 1rem 0.85rem !important;
+    border-radius: 14px !important;
+  }
+  .integration-card .w-10.h-10 {
+    width: 32px !important;
+    height: 32px !important;
+    margin-bottom: 0.75rem !important;
+  }
+  .integration-card .w-6.h-6 {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .integration-card > span.font-medium {
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    line-height: 1.25 !important;
+  }
+  .integration-card > span.font-mono {
+    font-size: 0.6875rem !important;
+    line-height: 1.35 !important;
+    margin-top: 4px !important;
+  }
+  .integration-card > span[class*="absolute"] {
+    top: 8px !important;
+    right: 8px !important;
+    font-size: 9px !important;
+    padding: 1px 6px !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  #integrations .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 1rem !important;
+  }
+  .integration-card {
+    padding: 1.25rem !important;
+    border-radius: 16px !important;
+  }
+}
+
+/* 6. Testimonials Marquee Mobile Card Dimensions */
+@media (max-width: 640px) {
+  .testimonial-marquee-card {
+    width: min(300px, 82vw) !important;
+    padding: 1.25rem 1.1rem !important;
+    border-radius: 16px !important;
+  }
+  .testimonial-marquee-card span.text-3xl {
+    font-size: 1.75rem !important;
+    line-height: 1.1 !important;
+  }
+  .testimonial-marquee-card span.font-mono {
+    font-size: 10px !important;
+  }
+  .testimonial-marquee-card blockquote {
+    font-size: 0.8125rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1rem !important;
+  }
+  .testimonial-avatar {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 13px !important;
+  }
+  .testimonial-author-name {
+    font-size: 0.8125rem !important;
+  }
+  .testimonial-author-role {
+    font-size: 0.72rem !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .testimonial-marquee-card {
+    width: 360px !important;
+    padding: 1.75rem !important;
+  }
+}
+
+/* 7. Final CTA Box & AI Consultation Assistant Mobile Optimization */
+@media (max-width: 640px) {
+  #cta-box {
+    border-radius: 20px !important;
+  }
+  #cta-box .relative.z-10 {
+    padding: 1.5rem 1.15rem !important;
+  }
+  #cta-box h2 {
+    font-size: 1.65rem !important;
+    line-height: 1.22 !important;
+    margin-bottom: 1rem !important;
+  }
+  .ai-consult-card {
+    border-radius: 16px !important;
+  }
+  .ai-chat-input {
+    font-size: 16px !important; /* Critical: prevent iOS auto-zoom */
+  }
+  .ai-chip-btn {
+    font-size: 11px !important;
+    padding: 4px 10px !important;
+  }
+}
+
+/* 8. Floating WhatsApp Button Safe Alignment */
+@media (max-width: 640px) {
+  #wa-floating-btn {
+    bottom: 1rem !important;
+    right: 1rem !important;
+  }
+  .wa-floating-link {
+    padding: 8px 14px !important;
+    gap: 8px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .wa-floating-link span.text-xs {
+    font-size: 11px !important;
+  }
+}
+
+/* 9. Light Mode Adjustments for New Responsive Classes */
+html[data-theme="light"] .hero-stat-card {
+  background: rgba(255, 255, 255, 0.72) !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06) !important;
+}
+html[data-theme="light"] .hero-stat-card .stat-counter,
+html[data-theme="light"] .hero-stat-card span.text-white {
+  color: #090d16 !important;
+}
+html[data-theme="light"] .hero-stat-card span.font-mono {
+  color: #4b5563 !important;
+}
+
 
 
 

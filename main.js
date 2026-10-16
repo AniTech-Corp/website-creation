@@ -1867,7 +1867,7 @@ COMMUNICATION STYLE:
     const updateCardHoverOffsets = () => {
       const isMobile = window.innerWidth <= 640;
       const isTablet = window.innerWidth > 640 && window.innerWidth < 1024;
-      const offsets = isMobile ? [-105, -52, 0, 52, 105] : (isTablet ? [-260, -130, 0, 130, 260] : [-410, -205, 0, 205, 410]);
+      const offsets = isMobile ? [-52, -26, 0, 26, 52] : (isTablet ? [-210, -105, 0, 105, 210] : [-410, -205, 0, 205, 410]);
       cards.forEach(card => {
         const idx = parseInt(card.getAttribute('data-index'), 10) || 0;
         card.style.setProperty('--hover-tx', `${offsets[idx] || 0}px`);
