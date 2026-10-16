@@ -320,11 +320,23 @@ html, body {
    LANGUAGE TOGGLE SYSTEM (Pure EN or Pure ID, Zero Layout Shift)
    ========================================================================= */
 body[data-lang="en"] .lang-id,
+html body[data-lang="en"] .lang-id,
+html[data-theme="light"] body[data-lang="en"] .lang-id,
+html[data-theme="dark"] body[data-lang="en"] .lang-id,
+body[data-lang="en"] span.lang-id,
+body[data-lang="en"] .section-eyebrow .lang-id,
+body[data-lang="en"] .section-eyebrow span.lang-id,
 body[data-lang="en"] #hero-title .lang-id {
   display: none !important;
 }
 
 body[data-lang="id"] .lang-en,
+html body[data-lang="id"] .lang-en,
+html[data-theme="light"] body[data-lang="id"] .lang-en,
+html[data-theme="dark"] body[data-lang="id"] .lang-en,
+body[data-lang="id"] span.lang-en,
+body[data-lang="id"] .section-eyebrow .lang-en,
+body[data-lang="id"] .section-eyebrow span.lang-en,
 body[data-lang="id"] #hero-title .lang-en {
   display: none !important;
 }
@@ -433,8 +445,8 @@ body[data-lang="id"] #hero-title .lang-en {
 
 @media (max-width: 768px) {
   #hero-title {
-    font-size: clamp(1.4rem, 5.2vw, 2.65rem) !important;
-    line-height: 1.2 !important;
+    font-size: clamp(1.85rem, 6.8vw, 3.1rem) !important;
+    line-height: 1.15 !important;
     text-align: center !important;
   }
   #hero-title .hero-line {
@@ -445,8 +457,9 @@ body[data-lang="id"] #hero-title .lang-en {
 
 @media (max-width: 480px) {
   #hero-title {
-    font-size: clamp(1.15rem, 5vw, 1.75rem) !important;
-    line-height: 1.22 !important;
+    font-size: clamp(1.68rem, 7.8vw, 2.35rem) !important;
+    line-height: 1.16 !important;
+    font-weight: 800 !important;
   }
 }
 
@@ -3694,32 +3707,19 @@ html[data-theme="light"] .hero-accent-gradient {
 }
 
 html[data-theme="light"] .section-eyebrow {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 6px !important;
+  display: inline-block !important;
   font-family: var(--font-mono, monospace) !important;
-  font-size: 0.72rem !important;
+  font-size: 0.75rem !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.12em !important;
-  color: #007370 !important;
-  background: #E2FAF7 !important;
-  border: 1px solid rgba(46, 196, 182, 0.4) !important;
-  border-radius: 9999px !important;
-  padding: 4px 14px !important;
-  line-height: 1.4 !important;
-  box-shadow: 0 1px 2px rgba(0, 142, 139, 0.06) !important;
-  margin-bottom: 0.85rem !important;
-}
-
-html[data-theme="light"] .section-eyebrow span {
-  color: inherit !important;
-  background: transparent !important;
+  letter-spacing: 0.14em !important;
+  color: #008E8B !important;
+  background: none !important;
   border: none !important;
-  padding: 0 !important;
   border-radius: 0 !important;
+  padding: 0 !important;
   box-shadow: none !important;
-  display: inline !important;
+  margin-bottom: 0.75rem !important;
 }
 
 /* Fix text-white variants so text is crisp slate/ink, NEVER washed out */
@@ -4127,13 +4127,14 @@ html[data-theme="light"] #infra h2 span.text-white\/30 {
 }
 
 html[data-theme="light"] #infra .section-eyebrow {
-  background: rgba(0, 142, 139, 0.08) !important;
-  border: 1px solid rgba(0, 142, 139, 0.2) !important;
-  color: #007370 !important;
+  background: none !important;
+  border: none !important;
+  color: #008E8B !important;
+  padding: 0 !important;
 }
 
 html[data-theme="light"] #infra .section-eyebrow span {
-  color: #007370 !important;
+  color: #008E8B !important;
 }
 
 html[data-theme="light"] .infra-card {
@@ -5219,22 +5220,59 @@ html[data-theme="light"] .obsidian-discover-button::after {
   .hero-stat-card {
     min-width: 0 !important;
     width: 100% !important;
-    padding: 0.65rem 0.35rem !important;
-    border-radius: 12px !important;
+    padding: 0.75rem 0.45rem !important;
+    border-radius: 14px !important;
   }
 
   .hero-stat-card .stat-counter,
   .hero-stat-card span.text-3xl {
-    font-size: 1.35rem !important;
+    font-size: 1.6rem !important;
     line-height: 1.15 !important;
+    font-weight: 700 !important;
   }
 
   .hero-stat-card span.font-mono {
-    font-size: 9.5px !important;
-    line-height: 1.25 !important;
+    font-size: 11px !important;
+    line-height: 1.3 !important;
     letter-spacing: 0.01em !important;
-    margin-top: 3px !important;
+    margin-top: 4px !important;
+    font-weight: 500 !important;
   }
+}
+
+.footer-wa-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: 9999px;
+  background: rgba(46, 196, 182, 0.1);
+  border: 1px solid rgba(46, 196, 182, 0.35);
+  color: #2EC4B6;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.footer-wa-pill:hover {
+  background: rgba(46, 196, 182, 0.2);
+  border-color: #2EC4B6;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(46, 196, 182, 0.3);
+}
+
+html[data-theme="light"] .footer-wa-pill {
+  background: #E6F9F6 !important;
+  border: 1px solid rgba(0, 142, 139, 0.35) !important;
+  color: #007370 !important;
+}
+
+html[data-theme="light"] .footer-wa-pill:hover {
+  background: #D1F4EF !important;
+  border-color: #008E8B !important;
+  color: #004D4A !important;
 }
 
 @media (min-width: 641px) and (max-width: 1023px) {
