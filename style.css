@@ -3678,7 +3678,8 @@ html[data-theme="light"] .infra-bg-light {
 }
 
 html[data-theme="light"] .infra-bg-overlay,
-html[data-theme="light"] .infra-aurora-glow {
+html[data-theme="light"] .infra-aurora-glow,
+html[data-theme="light"] .infra-edge-fade {
   display: none !important;
 }
 
@@ -4228,16 +4229,16 @@ html[data-theme="light"] #infra .section-eyebrow span {
 
 html[data-theme="light"] .infra-card {
   background: #ffffff !important;
-  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+  border: 1px solid rgba(0, 142, 139, 0.14) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02) !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 142, 139, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03) !important;
 }
 
 html[data-theme="light"] .infra-card:hover {
-  border-color: rgba(0, 142, 139, 0.3) !important;
+  border-color: rgba(0, 142, 139, 0.35) !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(0, 142, 139, 0.15) !important;
+  box-shadow: 0 14px 32px -6px rgba(0, 142, 139, 0.14), 0 0 0 1px rgba(0, 142, 139, 0.18) !important;
 }
 
 html[data-theme="light"] .infra-card h3,
@@ -4252,12 +4253,43 @@ html[data-theme="light"] .infra-card p span {
   line-height: 1.6 !important;
 }
 
+html[data-theme="light"] .infra-icon-emerald {
+  background: rgba(46, 196, 182, 0.15) !important;
+  border: 1px solid rgba(0, 142, 139, 0.28) !important;
+  color: #008E8B !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="light"] .infra-icon-blue {
+  background: rgba(0, 142, 139, 0.12) !important;
+  border: 1px solid rgba(0, 142, 139, 0.28) !important;
+  color: #008E8B !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="light"] .infra-icon-purple {
+  background: rgba(226, 250, 247, 0.85) !important;
+  border: 1px solid rgba(0, 142, 139, 0.25) !important;
+  color: #008E8B !important;
+  box-shadow: none !important;
+}
+
 html[data-theme="light"] .lighthouse-gauge-svg circle:first-child {
-  stroke: rgba(15, 23, 42, 0.08) !important;
+  stroke: rgba(0, 142, 139, 0.12) !important;
+}
+
+html[data-theme="light"] .lighthouse-gauge-circle {
+  filter: drop-shadow(0 2px 6px rgba(0, 142, 139, 0.35)) !important;
+}
+
+html[data-theme="light"] #infra .lighthouse-gauge-svg + span {
+  color: #008E8B !important;
+  text-shadow: none !important;
+  font-weight: 700 !important;
 }
 
 html[data-theme="light"] #infra .text-emerald-400 {
-  color: #059669 !important;
+  color: #008E8B !important;
   font-weight: 600 !important;
 }
 
