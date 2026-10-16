@@ -5240,41 +5240,6 @@ html[data-theme="light"] .obsidian-discover-button::after {
   }
 }
 
-.footer-wa-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 0.95rem;
-  border-radius: 9999px;
-  background: rgba(46, 196, 182, 0.1);
-  border: 1px solid rgba(46, 196, 182, 0.35);
-  color: #2EC4B6;
-  font-family: var(--font-mono), monospace;
-  font-size: 0.75rem;
-  text-decoration: none;
-  transition: all 0.25s ease;
-}
-
-.footer-wa-pill:hover {
-  background: rgba(46, 196, 182, 0.2);
-  border-color: #2EC4B6;
-  color: #ffffff;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(46, 196, 182, 0.3);
-}
-
-html[data-theme="light"] .footer-wa-pill {
-  background: #E6F9F6 !important;
-  border: 1px solid rgba(0, 142, 139, 0.35) !important;
-  color: #007370 !important;
-}
-
-html[data-theme="light"] .footer-wa-pill:hover {
-  background: #D1F4EF !important;
-  border-color: #008E8B !important;
-  color: #004D4A !important;
-}
-
 @media (min-width: 641px) and (max-width: 1023px) {
   .hero-stats-row {
     display: flex !important;
