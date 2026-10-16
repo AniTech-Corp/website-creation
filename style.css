@@ -2096,20 +2096,24 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 
 .infra-card {
   border-radius: 20px !important;
-  background: rgba(8, 10, 16, 0.75) !important;
-  border: 1px solid rgba(255, 255, 255, 0.09) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.04);
-  transition: border-color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  background: linear-gradient(145deg, rgba(3, 24, 21, 0.78) 0%, rgba(1, 14, 12, 0.88) 100%) !important;
+  border: 1px solid rgba(46, 196, 182, 0.18) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(46, 196, 182, 0.08), inset 0 1px 0 rgba(226, 250, 247, 0.08) !important;
+  transition: border-color 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
   overflow: hidden;
   position: relative;
 }
 
 .infra-card:hover {
-  border-color: rgba(255, 255, 255, 0.22) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.9), 0 0 25px rgba(46, 196, 182, 0.15);
+  border-color: rgba(46, 196, 182, 0.45) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 28px 60px -14px rgba(0, 0, 0, 0.95), 0 0 35px -5px rgba(46, 196, 182, 0.28), inset 0 1px 0 rgba(226, 250, 247, 0.15) !important;
+}
+
+.infra-card .card-spotlight-layer {
+  background: radial-gradient(circle 350px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(46, 196, 182, 0.16), transparent 70%);
 }
 
 .infra-card-icon {
@@ -2128,24 +2132,24 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 }
 
 .infra-icon-emerald {
-  background: rgba(52, 211, 153, 0.12) !important;
-  border: 1px solid rgba(52, 211, 153, 0.28) !important;
-  color: #34d399 !important;
-  box-shadow: 0 0 16px -4px rgba(52, 211, 153, 0.25);
+  background: rgba(46, 196, 182, 0.14) !important;
+  border: 1px solid rgba(46, 196, 182, 0.35) !important;
+  color: #2EC4B6 !important;
+  box-shadow: 0 0 18px -2px rgba(46, 196, 182, 0.32);
 }
 
 .infra-icon-blue {
-  background: rgba(46, 196, 182, 0.12) !important;
-  border: 1px solid rgba(46, 196, 182, 0.28) !important;
+  background: rgba(0, 142, 139, 0.18) !important;
+  border: 1px solid rgba(0, 142, 139, 0.42) !important;
   color: #2EC4B6 !important;
-  box-shadow: 0 0 16px -4px rgba(46, 196, 182, 0.25);
+  box-shadow: 0 0 18px -2px rgba(0, 142, 139, 0.35);
 }
 
 .infra-icon-purple {
-  background: rgba(168, 85, 247, 0.12) !important;
-  border: 1px solid rgba(168, 85, 247, 0.28) !important;
-  color: #c084fc !important;
-  box-shadow: 0 0 16px -4px rgba(168, 85, 247, 0.25);
+  background: rgba(46, 196, 182, 0.12) !important;
+  border: 1px solid rgba(46, 196, 182, 0.3) !important;
+  color: #E2FAF7 !important;
+  box-shadow: 0 0 18px -2px rgba(46, 196, 182, 0.25);
 }
 
 .lighthouse-gauge-svg {
@@ -2156,7 +2160,26 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 .lighthouse-gauge-circle {
   transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1);
   stroke: url(#lighthouse-glow-gradient);
-  filter: drop-shadow(0 0 6px rgba(52, 211, 153, 0.8));
+  filter: drop-shadow(0 0 10px rgba(46, 196, 182, 0.85));
+}
+
+@keyframes infraAuroraPulse {
+  0%, 100% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.12) translate(15px, -10px);
+    opacity: 1;
+  }
+}
+
+.infra-aurora-glow-1 {
+  animation: infraAuroraPulse 9s ease-in-out infinite alternate;
+}
+
+.infra-aurora-glow-2 {
+  animation: infraAuroraPulse 12s ease-in-out infinite alternate-reverse;
 }
 
 .metric-micro-badge {
@@ -3589,7 +3612,8 @@ html[data-theme="light"] .infra-bg-light {
   display: block !important;
 }
 
-html[data-theme="light"] .infra-bg-overlay {
+html[data-theme="light"] .infra-bg-overlay,
+html[data-theme="light"] .infra-aurora-glow {
   display: none !important;
 }
 
