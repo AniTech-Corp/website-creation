@@ -1239,11 +1239,11 @@ COMMUNICATION STYLE:
       formatted = formatted.replace(/^### (.*$)/gim, '<div class="text-xs font-semibold text-white mt-2 mb-1">$1</div>');
       formatted = formatted.replace(/^## (.*$)/gim, '<div class="text-xs font-semibold text-white mt-2 mb-1">$1</div>');
       // Bold
-      formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>');
       // Bullet points
-      formatted = formatted.replace(/^\s*[\*\-]\s+(.*)$/gim, '<div class="flex items-start gap-1.5 my-0.5"><span class="text-[#eca8d6]">•</span><span>$1</span></div>');
+      formatted = formatted.replace(/^\s*[\*\-]\s+(.*)$/gim, '<div class="flex items-start gap-1.5 my-0.5"><span class="text-[#2EC4B6] font-bold">•</span><span>$1</span></div>');
       // Numbered lists
-      formatted = formatted.replace(/^\s*(\d+)\.\s+(.*)$/gim, '<div class="flex items-start gap-1.5 my-0.5"><span class="text-[#eca8d6] font-mono text-[10px]">$1.</span><span>$2</span></div>');
+      formatted = formatted.replace(/^\s*(\d+)\.\s+(.*)$/gim, '<div class="flex items-start gap-1.5 my-0.5"><span class="text-[#2EC4B6] font-mono text-[10px] font-semibold">$1.</span><span>$2</span></div>');
       // Paragraph spacing
       formatted = formatted.replace(/\n\n/g, '<div class="h-1.5"></div>');
       formatted = formatted.replace(/\n/g, '<br/>');
@@ -1260,9 +1260,22 @@ COMMUNICATION STYLE:
 
     const renderWelcomeMessage = () => {
       if (!chatStream) return;
+      const isId = currentLang === 'id';
       chatStream.innerHTML = `
         <div class="ai-msg ai-msg-assistant">
-          <div class="ai-msg-bubble">${welcomeMessages[currentLang] || welcomeMessages.en}</div>
+          <div class="ai-msg-bubble">
+            <div class="ai-welcome-card">
+              <div class="ai-welcome-badge">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#2EC4B6] animate-pulse"></span>
+                <span>${isId ? 'Konsultasi Web Instan' : 'Instant Web Consultation'}</span>
+              </div>
+              <p class="ai-welcome-text">
+                ${isId 
+                  ? 'Halo! Mau buat website seperti apa untuk bisnis Anda? Tanyakan estimasi waktu, rekomendasi fitur, atau konsultasi gratis langsung di sini.' 
+                  : 'Hello! What kind of website does your business need? Ask for timeline estimates, feature recommendations, or free consulting right here.'}
+              </p>
+            </div>
+          </div>
           <span class="ai-msg-time">${getTimeString()}</span>
         </div>
       `;
