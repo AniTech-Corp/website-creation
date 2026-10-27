@@ -3152,39 +3152,213 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
    Clean, Authoritative, High-Conversion SaaS Tier Cards
    ========================================================================= */
 
+/* Multi-Category Navigation Tabs (#pricing) */
+.pricing-cat-nav-wrap {
+  width: 100%;
+  overflow-x: auto;
+  padding: 0.5rem 0.25rem 1.25rem 0.25rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pricing-cat-nav-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.pricing-cat-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #10141f;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 9999px;
+  padding: 0.4rem 0.5rem;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+}
+
+.pricing-cat-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.72);
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.pricing-cat-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.pricing-cat-btn.active {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #008E8B 0%, #2EC4B6 100%) !important;
+  border: 1px solid #2EC4B6 !important;
+  box-shadow: 0 4px 20px rgba(46, 196, 182, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+}
+
+.pricing-cat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.pricing-cat-icon svg {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Delivery Time Badge */
+.gl-delivery-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  flex-direction: row !important;
+  gap: 0.45rem !important;
+  padding: 0.3rem 0.75rem !important;
+  border-radius: 9999px !important;
+  background: rgba(46, 196, 182, 0.12) !important;
+  border: 1px solid rgba(46, 196, 182, 0.35) !important;
+  color: #2EC4B6 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  margin-top: 0.6rem !important;
+  margin-bottom: 0.85rem !important;
+  width: fit-content !important;
+  line-height: 1 !important;
+}
+
+.gl-delivery-badge svg {
+  display: inline-block !important;
+  width: 13px !important;
+  height: 13px !important;
+  flex-shrink: 0 !important;
+  color: #2EC4B6 !important;
+  stroke: #2EC4B6 !important;
+}
+
+.gl-pricing-fade-in {
+  animation: glPricingFadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes glPricingFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Grid Architecture */
+#pricing-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.75rem;
+  align-items: stretch;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  #pricing-cards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
+
+/* Pricing Card Architecture */
 .gl-pricing-card {
   position: relative;
-  background: #0b0d13;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, #111522 0%, #080a11 100%);
+  border: 1px solid rgba(255, 255, 255, 0.11);
   border-radius: 24px;
-  padding: 2.25rem 2rem 2.25rem 2rem;
+  padding: 2.25rem 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.65);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.35s ease;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  height: 100%;
 }
 
 .gl-pricing-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.75);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.85);
 }
 
-/* Featured / Most Popular Tier */
 .gl-pricing-card--featured {
-  background: linear-gradient(180deg, #101420 0%, #090b10 100%);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-top: 1px solid rgba(255, 255, 255, 0.42);
-  box-shadow: 0 0 60px -15px rgba(46, 196, 182, 0.22), 0 20px 45px -10px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-  z-index: 2;
+  background: linear-gradient(180deg, #111522 0%, #080a11 100%);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 24px;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.65);
 }
 
 .gl-pricing-card--featured:hover {
-  border-color: rgba(46, 196, 182, 0.5);
-  box-shadow: 0 0 75px -10px rgba(46, 196, 182, 0.32), 0 28px 60px -10px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.85);
+}
+
+.gl-card-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.gl-card-top {
+  display: flex;
+  flex-direction: column;
+}
+
+.gl-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+.gl-card-title {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.25;
 }
 
 /* Badge for Popular Tier */
@@ -3192,83 +3366,93 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.2rem 0.65rem;
+  padding: 0.28rem 0.8rem;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #f4f4f5;
+  background: rgba(46, 196, 182, 0.16);
+  border: 1px solid rgba(46, 196, 182, 0.45);
+  color: #2EC4B6;
   font-family: 'Instrument Sans', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 /* Price Section */
 .gl-price-row {
   display: flex;
   align-items: baseline;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
-  margin-bottom: 0.35rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .gl-price-strike {
   font-family: 'Instrument Sans', sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.32);
+  color: rgba(255, 255, 255, 0.38);
   text-decoration: line-through;
-}
-
-.gl-card-tagline {
-  font-family: 'Instrument Sans', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #ffffff;
-  line-height: 1.35;
-  margin-top: 0.25rem;
-  margin-bottom: 0.5rem;
-}
-
-.gl-card-desc {
-  font-family: 'Instrument Sans', sans-serif;
-  font-size: 0.8125rem;
-  color: rgba(255, 255, 255, 0.65);
-  line-height: 1.5;
-  margin-bottom: 1.25rem;
+  line-height: 1;
 }
 
 .gl-price-amount {
   font-family: 'Instrument Sans', sans-serif;
-  font-size: 1.75rem;
+  font-size: 2.15rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
   color: #ffffff;
-  line-height: 1.2;
+  letter-spacing: -0.025em;
+  line-height: 1;
 }
 
-@media (min-width: 640px) {
-  .gl-price-amount {
-    font-size: 2rem;
-  }
-}
-
-.gl-price-subtitle {
+.gl-card-desc {
   font-family: 'Instrument Sans', sans-serif;
-  font-size: 0.8125rem;
-  color: rgba(255, 255, 255, 0.55);
-  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.55;
+  margin-top: 0.35rem;
+  margin-bottom: 1.25rem;
+  min-height: 2.6rem;
 }
 
-.gl-price-micro {
-  font-family: 'Instrument Sans', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.75);
+/* Feature Checklist */
+.gl-features-list {
   display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  margin-bottom: 1.5rem;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 0.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gl-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.gl-feature-item svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  color: #2EC4B6;
+  stroke: #2EC4B6;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.gl-feature-item strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.gl-card-bottom {
+  margin-top: 2rem;
+  padding-top: 0.5rem;
 }
 
 /* CTA Pill Buttons */
@@ -3277,69 +3461,157 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 0.8rem 1.25rem;
+  box-sizing: border-box;
+  padding: 0.95rem 1.5rem;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
   font-family: 'Instrument Sans', sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.925rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   text-decoration: none;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
   user-select: none;
 }
 
 .gl-cta-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.45);
   color: #ffffff;
-  transform: translateY(-1.5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-}
-
-.gl-cta-btn:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
 .gl-cta-btn--featured {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-top: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 4px 18px rgba(0, 0, 0, 0.45);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
 .gl-cta-btn--featured:hover {
-  background: #008E8B;
-  border-color: #2EC4B6;
-  box-shadow: 0 6px 25px rgba(46, 196, 182, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.45);
   color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
-/* Feature Checklist */
-.gl-features-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-  margin-top: 1.75rem;
+/* Custom Enterprise & Special Needs Consultation Strip */
+.pricing-custom-strip {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  margin-top: 2.75rem !important;
+  padding: 2rem 2.5rem !important;
+  background: linear-gradient(135deg, rgba(16, 21, 32, 0.94) 0%, rgba(9, 12, 19, 0.98) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.13) !important;
+  border-radius: 20px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 2rem !important;
+  box-shadow: 0 16px 45px -10px rgba(0, 0, 0, 0.65) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
 }
 
-.gl-feature-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.65rem;
-  font-size: 0.8125rem;
-  line-height: 1.45;
-  color: rgba(255, 255, 255, 0.8);
+.pricing-custom-strip-content {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  max-width: 780px !important;
+  text-align: left !important;
 }
 
-.gl-feature-item.is-excluded {
-  color: rgba(255, 255, 255, 0.28);
-  text-decoration: line-through;
-  text-decoration-color: rgba(255, 255, 255, 0.2);
+.pricing-custom-strip-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: #2EC4B6 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.pricing-custom-strip-badge-dot {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 9999px !important;
+  background: #2EC4B6 !important;
+  box-shadow: 0 0 10px #2EC4B6 !important;
+  display: inline-block !important;
+  flex-shrink: 0 !important;
+}
+
+.pricing-custom-strip h4 {
+  font-family: 'Instrument Sans', sans-serif !important;
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+  margin: 0 0 0.4rem 0 !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.pricing-custom-strip p {
+  font-family: 'Instrument Sans', sans-serif !important;
+  font-size: 0.875rem !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
+}
+
+.pricing-custom-strip-cta {
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0.85rem 1.85rem !important;
+  border-radius: 9999px !important;
+  background: #ffffff !important;
+  border: 1px solid #ffffff !important;
+  color: #090d16 !important;
+  font-family: 'Instrument Sans', sans-serif !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.15) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  width: auto !important;
+}
+
+.pricing-custom-strip-cta:hover {
+  background: #2EC4B6 !important;
+  border-color: #2EC4B6 !important;
+  color: #000000 !important;
+  box-shadow: 0 6px 24px rgba(46, 196, 182, 0.45) !important;
+  transform: translateY(-2px) !important;
+}
+
+@media (max-width: 860px) {
+  .pricing-custom-strip {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 1.5rem !important;
+    padding: 1.75rem 1.5rem !important;
+  }
+  .pricing-custom-strip-content {
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+  .pricing-custom-strip-badge {
+    justify-content: center !important;
+  }
+  .pricing-custom-strip-cta {
+    width: 100% !important;
+  }
 }
 
 .gl-pill-new {
@@ -4775,25 +5047,79 @@ html[data-theme="light"] .gl-pricing-card:hover {
 
 html[data-theme="light"] .gl-pricing-card--featured {
   background: #ffffff !important;
-  border: 2px solid #008E8B !important;
-  box-shadow: 0 20px 50px -12px rgba(0, 142, 139, 0.18), 0 0 0 1px #008E8B !important;
+  border: 1px solid rgba(15, 23, 42, 0.09) !important;
+  box-shadow: 0 14px 34px -10px rgba(15, 23, 42, 0.07), 0 0 0 1px rgba(15, 23, 42, 0.03) !important;
 }
 
 html[data-theme="light"] .gl-pricing-card--featured:hover {
-  border-color: #007370 !important;
-  box-shadow: 0 24px 60px -12px rgba(0, 142, 139, 0.28), 0 0 30px -4px rgba(0, 142, 139, 0.22) !important;
+  transform: translateY(-4px) !important;
+  border-color: rgba(0, 142, 139, 0.35) !important;
+  box-shadow: 0 20px 45px -12px rgba(15, 23, 42, 0.12), 0 0 24px -6px rgba(0, 142, 139, 0.16) !important;
 }
 
 html[data-theme="light"] .gl-badge-popular {
   background: #E2FAF7 !important;
-  border: 1px solid rgba(46, 196, 182, 0.4) !important;
+  border: 1px solid rgba(46, 196, 182, 0.45) !important;
   color: #007370 !important;
   font-weight: 600 !important;
 }
 
+html[data-theme="light"] .pricing-cat-nav {
+  background: #f1f5f9 !important;
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
+}
+
+html[data-theme="light"] .pricing-cat-btn {
+  color: #475569 !important;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+html[data-theme="light"] .pricing-cat-btn:hover {
+  color: #0f172a !important;
+  background: rgba(15, 23, 42, 0.06) !important;
+}
+
+html[data-theme="light"] .pricing-cat-btn.active {
+  color: #ffffff !important;
+  background: #008E8B !important;
+  border: 1px solid #007370 !important;
+  box-shadow: 0 4px 14px rgba(0, 142, 139, 0.28) !important;
+}
+
+html[data-theme="light"] .gl-delivery-badge {
+  background: #E2FAF7 !important;
+  border: 1px solid rgba(0, 142, 139, 0.3) !important;
+  color: #007370 !important;
+}
+
+html[data-theme="light"] .gl-delivery-badge svg {
+  color: #007370 !important;
+  stroke: #007370 !important;
+}
+
+html[data-theme="light"] .gl-pricing-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(15, 23, 42, 0.1) !important;
+  box-shadow: 0 16px 40px -10px rgba(15, 23, 42, 0.08) !important;
+}
+
+html[data-theme="light"] .gl-pricing-card:hover {
+  border-color: rgba(15, 23, 42, 0.2) !important;
+  box-shadow: 0 24px 50px -10px rgba(15, 23, 42, 0.14) !important;
+}
+
+html[data-theme="light"] .gl-pricing-card--featured {
+  background: #ffffff !important;
+  border: 1px solid rgba(15, 23, 42, 0.1) !important;
+  box-shadow: 0 16px 40px -10px rgba(15, 23, 42, 0.08) !important;
+}
+
+html[data-theme="light"] .gl-card-title,
 html[data-theme="light"] .gl-pricing-card h3 {
   color: #090d16 !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
 }
 
 html[data-theme="light"] .gl-price-amount {
@@ -4808,6 +5134,10 @@ html[data-theme="light"] .gl-price-strike {
 html[data-theme="light"] .gl-card-desc,
 html[data-theme="light"] .gl-price-subtitle {
   color: #64748b !important;
+}
+
+html[data-theme="light"] .gl-features-list {
+  border-top-color: rgba(15, 23, 42, 0.08) !important;
 }
 
 html[data-theme="light"] .gl-feature-item {
@@ -4825,30 +5155,67 @@ html[data-theme="light"] .gl-feature-item svg {
 
 html[data-theme="light"] .gl-cta-btn {
   background: #f8fafc !important;
-  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+  border: 1px solid rgba(15, 23, 42, 0.15) !important;
   color: #090d16 !important;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05) !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
 }
 
 html[data-theme="light"] .gl-cta-btn:hover {
   background: #090d16 !important;
   border-color: #090d16 !important;
   color: #ffffff !important;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.18) !important;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.2) !important;
 }
 
 html[data-theme="light"] .gl-cta-btn--featured {
-  background: #008E8B !important;
-  border: 1px solid #008E8B !important;
-  color: #ffffff !important;
-  box-shadow: 0 4px 16px rgba(0, 142, 139, 0.3) !important;
+  background: #f8fafc !important;
+  border: 1px solid rgba(15, 23, 42, 0.15) !important;
+  color: #090d16 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
 }
 
 html[data-theme="light"] .gl-cta-btn--featured:hover {
-  background: #007370 !important;
-  border-color: #007370 !important;
+  background: #090d16 !important;
+  border-color: #090d16 !important;
   color: #ffffff !important;
-  box-shadow: 0 8px 24px rgba(0, 142, 139, 0.45) !important;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.2) !important;
+}
+
+html[data-theme="light"] .pricing-custom-strip {
+  background: #ffffff !important;
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+html[data-theme="light"] .pricing-custom-strip-badge {
+  color: #008E8B !important;
+}
+
+html[data-theme="light"] .pricing-custom-strip-badge-dot {
+  background: #008E8B !important;
+  box-shadow: 0 0 10px #008E8B !important;
+}
+
+html[data-theme="light"] .pricing-custom-strip h4 {
+  color: #090d16 !important;
+}
+
+html[data-theme="light"] .pricing-custom-strip p {
+  color: #475569 !important;
+}
+
+html[data-theme="light"] .pricing-custom-strip-cta {
+  background: #090d16 !important;
+  border-color: #090d16 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(9, 13, 22, 0.15) !important;
+}
+
+html[data-theme="light"] .pricing-custom-strip-cta:hover {
+  background: #008E8B !important;
+  border-color: #008E8B !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(0, 142, 139, 0.35) !important;
 }
 
 /* =========================================================================
@@ -5610,6 +5977,48 @@ html[data-theme="light"] .hero-stat-card span.text-white {
 html[data-theme="light"] .hero-stat-card span.font-mono {
   color: #4b5563 !important;
 }
+
+/* ==========================================================================
+   ADAPTIVE HARDWARE ACCELERATION & MOBILE RENDERING ENGINE
+   Ensures 60 FPS buttery smooth scrolling across ALL devices without
+   altering visual aesthetics
+   ========================================================================== */
+
+/* 1. Prevent expensive repaints during scroll with GPU layer containment */
+.coverflow-stage,
+.coverflow-card,
+.parallax-layer,
+.footer-stone-arch-video,
+.footer-starry-video {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* 2. Adaptive GPU Blur on Mobile Touch Screens */
+@media (max-width: 768px) {
+  /* On mobile, keep blur on floating overlays (header, drawer, modals),
+     while rendering static cards with clean opaque-translucent layers */
+  .process-card,
+  .metric-card,
+  .hero-stat-card,
+  .solution-card,
+  .stat-badge-glow {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* 3. Respect user reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 
 
 
