@@ -531,6 +531,13 @@
     if (!cat) return;
 
     const currentLang = document.body.getAttribute('data-lang') || 'id';
+
+    // Update live active category indicator badge
+    const activeBadge = document.getElementById('pricing-active-cat-name');
+    if (activeBadge && cat.categoryName) {
+      activeBadge.textContent = cat.categoryName[currentLang] || cat.categoryName.id;
+    }
+
     const grid = document.getElementById('pricing-cards-grid');
     if (!grid) return;
 

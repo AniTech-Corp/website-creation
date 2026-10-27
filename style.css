@@ -3155,18 +3155,12 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 /* Multi-Category Navigation Tabs (#pricing) */
 .pricing-cat-nav-wrap {
   width: 100%;
-  overflow-x: auto;
-  padding: 0.5rem 0.25rem 1.25rem 0.25rem;
+  padding: 0.5rem 0.25rem 0.75rem 0.25rem;
   margin-bottom: 2rem;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.pricing-cat-nav-wrap::-webkit-scrollbar {
-  display: none;
 }
 
 .pricing-cat-nav {
@@ -3176,35 +3170,37 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   background: #10141f;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 9999px;
-  padding: 0.4rem 0.5rem;
+  padding: 0.35rem 0.45rem;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   white-space: nowrap;
+  max-width: 100%;
 }
 
 .pricing-cat-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.25rem;
+  justify-content: center;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: rgba(255, 255, 255, 0.72);
-  font-family: 'Instrument Sans', sans-serif;
-  font-size: 0.84rem;
-  font-weight: 600;
   cursor: pointer;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
-  white-space: nowrap;
+  flex-shrink: 0;
+  outline: none;
 }
 
 .pricing-cat-btn:hover {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
 }
 
 .pricing-cat-btn.active {
@@ -3220,11 +3216,12 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   justify-content: center;
   line-height: 1;
   flex-shrink: 0;
+  pointer-events: none;
 }
 
 .pricing-cat-icon svg {
-  width: 15px;
-  height: 15px;
+  width: 17px;
+  height: 17px;
   stroke: currentColor;
   fill: none;
   stroke-width: 2;
@@ -3232,6 +3229,87 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   stroke-linejoin: round;
   display: inline-block;
   vertical-align: middle;
+}
+
+/* Floating Tooltip Bubble on Hover */
+.pricing-cat-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  background: rgba(16, 21, 32, 0.96);
+  border: 1px solid rgba(46, 196, 182, 0.45);
+  color: #ffffff;
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.75), 0 0 16px rgba(46, 196, 182, 0.2);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s;
+  z-index: 60;
+}
+
+.pricing-cat-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px 5px 0 5px;
+  border-style: solid;
+  border-color: rgba(46, 196, 182, 0.45) transparent transparent transparent;
+}
+
+.pricing-cat-btn:hover .pricing-cat-tooltip,
+.pricing-cat-btn:focus-visible .pricing-cat-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Real-Time Active Category Indicator Badge */
+.pricing-current-cat-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  padding: 0.3rem 0.95rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.pricing-cat-indicator-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: #2EC4B6;
+  box-shadow: 0 0 8px #2EC4B6;
+  display: inline-block;
+  animation: pulse 2s infinite;
+}
+
+.pricing-cat-indicator-label {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.pricing-cat-indicator-name {
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 /* Delivery Time Badge */
@@ -3500,117 +3578,101 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
-/* Custom Enterprise & Special Needs Consultation Strip */
-.pricing-custom-strip {
-  width: 100% !important;
-  box-sizing: border-box !important;
-  margin-top: 2.75rem !important;
-  padding: 2rem 2.5rem !important;
-  background: linear-gradient(135deg, rgba(16, 21, 32, 0.94) 0%, rgba(9, 12, 19, 0.98) 100%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.13) !important;
-  border-radius: 20px !important;
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 2rem !important;
-  box-shadow: 0 16px 45px -10px rgba(0, 0, 0, 0.65) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
-}
-
-.pricing-custom-strip-content {
-  flex: 1 1 auto !important;
-  min-width: 0 !important;
-  max-width: 780px !important;
-  text-align: left !important;
-}
-
-.pricing-custom-strip-badge {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 0.5rem !important;
-  font-family: 'JetBrains Mono', monospace !important;
-  font-size: 0.75rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.06em !important;
-  color: #2EC4B6 !important;
-  margin-bottom: 0.5rem !important;
-}
-
-.pricing-custom-strip-badge-dot {
-  width: 8px !important;
-  height: 8px !important;
-  border-radius: 9999px !important;
-  background: #2EC4B6 !important;
-  box-shadow: 0 0 10px #2EC4B6 !important;
-  display: inline-block !important;
-  flex-shrink: 0 !important;
-}
-
-.pricing-custom-strip h4 {
-  font-family: 'Instrument Sans', sans-serif !important;
-  font-size: 1.25rem !important;
-  font-weight: 600 !important;
-  color: #ffffff !important;
-  margin: 0 0 0.4rem 0 !important;
-  line-height: 1.35 !important;
-  letter-spacing: -0.01em !important;
-}
-
-.pricing-custom-strip p {
-  font-family: 'Instrument Sans', sans-serif !important;
-  font-size: 0.875rem !important;
-  color: rgba(255, 255, 255, 0.7) !important;
-  line-height: 1.55 !important;
-  margin: 0 !important;
-}
-
-.pricing-custom-strip-cta {
-  flex-shrink: 0 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 0.85rem 1.85rem !important;
-  border-radius: 9999px !important;
-  background: #ffffff !important;
-  border: 1px solid #ffffff !important;
-  color: #090d16 !important;
-  font-family: 'Instrument Sans', sans-serif !important;
-  font-size: 0.875rem !important;
-  font-weight: 600 !important;
-  text-decoration: none !important;
-  white-space: nowrap !important;
-  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.15) !important;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  width: auto !important;
-}
-
-.pricing-custom-strip-cta:hover {
-  background: #2EC4B6 !important;
-  border-color: #2EC4B6 !important;
-  color: #000000 !important;
-  box-shadow: 0 6px 24px rgba(46, 196, 182, 0.45) !important;
-  transform: translateY(-2px) !important;
-}
-
-@media (max-width: 860px) {
-  .pricing-custom-strip {
-    flex-direction: column !important;
-    text-align: center !important;
-    gap: 1.5rem !important;
-    padding: 1.75rem 1.5rem !important;
+/* Responsive Refinements for Pricing Grid & Cards */
+@media (max-width: 639px) {
+  .pricing-cat-nav-wrap {
+    padding: 0.25rem 0.25rem 0.5rem 0.25rem;
+    margin-bottom: 1.5rem;
   }
-  .pricing-custom-strip-content {
-    max-width: 100% !important;
-    text-align: center !important;
+
+  .pricing-cat-nav {
+    padding: 0.25rem 0.35rem;
+    gap: 0.25rem;
   }
-  .pricing-custom-strip-badge {
-    justify-content: center !important;
+
+  .pricing-cat-btn {
+    width: 38px;
+    height: 38px;
   }
-  .pricing-custom-strip-cta {
-    width: 100% !important;
+
+  .pricing-cat-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .pricing-current-cat-indicator {
+    margin-top: 0.65rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.74rem;
+  }
+
+  #pricing-cards-grid {
+    gap: 1.25rem;
+  }
+
+  .gl-pricing-card {
+    padding: 1.65rem 1.25rem !important;
+    border-radius: 20px !important;
+  }
+
+  .gl-card-title {
+    font-size: 1.3rem !important;
+  }
+
+  .gl-price-row {
+    gap: 0.5rem !important;
+    margin-top: 0.35rem !important;
+  }
+
+  .gl-price-strike {
+    font-size: 0.95rem !important;
+  }
+
+  .gl-price-amount {
+    font-size: 1.75rem !important;
+  }
+
+  .gl-card-desc {
+    font-size: 0.825rem !important;
+    min-height: auto !important;
+    margin-bottom: 0.85rem !important;
+  }
+
+  .gl-features-list {
+    gap: 0.65rem !important;
+    padding-top: 1rem !important;
+  }
+
+  .gl-feature-item {
+    font-size: 0.825rem !important;
+    gap: 0.65rem !important;
+  }
+
+  .gl-feature-item svg {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+
+  .gl-card-bottom {
+    margin-top: 1.5rem !important;
+  }
+
+  .gl-cta-btn {
+    padding: 0.85rem 1.25rem !important;
+    font-size: 0.875rem !important;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  #pricing-cards-grid {
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 1.5rem;
+  }
+
+  .gl-pricing-card {
+    padding: 2rem 1.75rem !important;
   }
 }
 
@@ -5065,7 +5127,7 @@ html[data-theme="light"] .gl-badge-popular {
 }
 
 html[data-theme="light"] .pricing-cat-nav {
-  background: #f1f5f9 !important;
+  background: #ffffff !important;
   border: 1px solid rgba(15, 23, 42, 0.12) !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
 }
@@ -5078,7 +5140,7 @@ html[data-theme="light"] .pricing-cat-btn {
 
 html[data-theme="light"] .pricing-cat-btn:hover {
   color: #0f172a !important;
-  background: rgba(15, 23, 42, 0.06) !important;
+  background: rgba(15, 23, 42, 0.08) !important;
 }
 
 html[data-theme="light"] .pricing-cat-btn.active {
@@ -5086,6 +5148,28 @@ html[data-theme="light"] .pricing-cat-btn.active {
   background: #008E8B !important;
   border: 1px solid #007370 !important;
   box-shadow: 0 4px 14px rgba(0, 142, 139, 0.28) !important;
+}
+
+html[data-theme="light"] .pricing-cat-tooltip {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 142, 139, 0.35) !important;
+  color: #0f172a !important;
+  box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.12) !important;
+}
+
+html[data-theme="light"] .pricing-cat-tooltip::after {
+  border-color: rgba(0, 142, 139, 0.35) transparent transparent transparent !important;
+}
+
+html[data-theme="light"] .pricing-current-cat-indicator {
+  background: #ffffff !important;
+  border: 1px solid rgba(15, 23, 42, 0.1) !important;
+  color: #64748b !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+}
+
+html[data-theme="light"] .pricing-cat-indicator-name {
+  color: #0f172a !important;
 }
 
 html[data-theme="light"] .gl-delivery-badge {
