@@ -2309,13 +2309,14 @@ COMMUNICATION STYLE: Concise, structured, elegant, professional, and consultativ
 
         if (shouldScroll) {
           setTimeout(() => {
-            const headerOffset = 90;
+            const headerOffset = 80;
             const sectionPos = pricingSection.getBoundingClientRect().top + window.pageYOffset - headerOffset;
             window.scrollTo({
               top: sectionPos,
+              left: 0,
               behavior: 'smooth'
             });
-          }, 150);
+          }, 200);
         }
       } else {
         pricingSection.classList.remove('is-open');
@@ -2327,10 +2328,11 @@ COMMUNICATION STYLE: Concise, structured, elegant, professional, and consultativ
         }
 
         if (shouldScroll && ctaBox) {
-          const headerOffset = 90;
+          const headerOffset = 80;
           const ctaPos = ctaBox.getBoundingClientRect().top + window.pageYOffset - headerOffset;
           window.scrollTo({
             top: ctaPos,
+            left: 0,
             behavior: 'smooth'
           });
         }
@@ -2356,10 +2358,11 @@ COMMUNICATION STYLE: Concise, structured, elegant, professional, and consultativ
         if (!isOpen) {
           setPricingState(true, true);
         } else {
-          const headerOffset = 90;
+          const headerOffset = 80;
           const sectionPos = pricingSection.getBoundingClientRect().top + window.pageYOffset - headerOffset;
           window.scrollTo({
             top: sectionPos,
+            left: 0,
             behavior: 'smooth'
           });
         }
