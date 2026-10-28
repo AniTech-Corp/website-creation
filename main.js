@@ -494,26 +494,26 @@ document.addEventListener('DOMContentLoaded', () => {
       const initNodes = () => {
         const isLight = document.documentElement.getAttribute('data-theme') === 'light';
         const isMobile = window.innerWidth < 768;
-        // Adaptive density: 20-22 nodes on mobile, 38-44 nodes on desktop
-        // Produces the identical gorgeous visual density while cutting O(N^2) CPU math by 85%!
-        const maxNodes = isMobile ? 22 : 44;
-        const count = isLight 
-          ? Math.min(maxNodes, Math.max(16, Math.floor((w * h) / 18000))) 
-          : Math.min(maxNodes, Math.max(20, Math.floor((w * h) / 14000)));
+        // Rich constellation network density across entire hero screen
+        const count = isMobile
+          ? Math.max(35, Math.min(60, Math.floor((w * h) / 6500)))
+          : (isLight 
+              ? Math.max(55, Math.min(130, Math.floor((w * h) / 5500))) 
+              : Math.max(80, Math.min(165, Math.floor((w * h) / 3600))));
         nodes = Array.from({ length: count }, () => {
           const rand = Math.random();
-          const type = rand < 0.08 ? 'hub' : rand < 0.28 ? 'relay' : 'node';
-          const speedFactor = isLight ? (type === 'hub' ? 0.12 : 0.26) : (type === 'hub' ? 0.15 : 0.4);
+          const type = rand < 0.10 ? 'hub' : rand < 0.32 ? 'relay' : 'node';
+          const speedFactor = isLight ? (type === 'hub' ? 0.12 : 0.26) : (type === 'hub' ? 0.18 : 0.42);
           const baseRadius = isLight 
-            ? (type === 'hub' ? 4.5 : type === 'relay' ? 3 : 2)
-            : (type === 'hub' ? 6 : type === 'relay' ? 4 : 2.5);
+            ? (type === 'hub' ? 4.8 : type === 'relay' ? 3.2 : 2)
+            : (type === 'hub' ? 6.5 : type === 'relay' ? 4.2 : 2.6);
           return {
             x: Math.random() * w,
             y: Math.random() * h,
             vx: (Math.random() - 0.5) * speedFactor,
             vy: (Math.random() - 0.5) * speedFactor,
             radius: baseRadius,
-            baseAlpha: type === 'hub' ? 0.95 : type === 'relay' ? 0.8 : (0.55 + 0.35 * Math.random()),
+            baseAlpha: type === 'hub' ? 0.95 : type === 'relay' ? 0.82 : (0.55 + 0.35 * Math.random()),
             pulseOffset: Math.random() * Math.PI * 2,
             type: type
           };
@@ -575,8 +575,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const dy = p1.y - p2.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
             const maxDist = isLight
-              ? ((p1.type === 'hub' || p2.type === 'hub') ? 185 : 120)
-              : ((p1.type === 'hub' || p2.type === 'hub') ? 220 : 140);
+              ? ((p1.type === 'hub' || p2.type === 'hub') ? 210 : 145)
+              : ((p1.type === 'hub' || p2.type === 'hub') ? 250 : 165);
 
             if (dist < maxDist) {
               const proximity = 1 - dist / maxDist;
@@ -587,13 +587,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
               let alpha, color, lineWidth;
               if (isLight) {
-                alpha = (isNotable ? 0.20 : 0.07) * proximity * fade;
+                alpha = (isNotable ? 0.22 : 0.08) * proximity * fade;
                 color = isNotable ? colors.primary : colors.subtle;
-                lineWidth = isNotable ? 0.7 : 0.4;
+                lineWidth = isNotable ? 0.75 : 0.45;
               } else {
-                alpha = isNotable ? (0.55 * proximity) : (0.18 * proximity);
+                alpha = isNotable ? (0.6 * proximity) : (0.22 * proximity);
                 color = isNotable ? colors.primary : colors.subtle;
-                lineWidth = isNotable ? 1 : 0.5;
+                lineWidth = isNotable ? 1.1 : 0.55;
               }
 
               if (alpha > 0.01) {
@@ -605,13 +605,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.stroke();
 
                 // Moving data packet
-                if (isNotable && dist < 0.85 * maxDist) {
+                if (isNotable && dist < 0.88 * maxDist) {
                   const packetProgress = (0.55 * time + 0.37 * i + 0.19 * j) % 1;
                   const px = p1.x + (p2.x - p1.x) * packetProgress;
                   const py = p1.y + (p2.y - p1.y) * packetProgress;
                   const pktFade = getFade(px, py);
                   ctx.beginPath();
-                  ctx.arc(px, py, isLight ? 1.6 : 2, 0, 2 * Math.PI);
+                  ctx.arc(px, py, isLight ? 1.8 : 2.2, 0, 2 * Math.PI);
                   ctx.fillStyle = `rgba(${colors.primary}, ${isLight ? 0.85 * pktFade : 0.95})`;
                   ctx.fill();
                 }
@@ -622,7 +622,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Draw interactive mouse links
         if (mouse.active && mouse.x > 0 && mouse.y > 0) {
-          const mouseRadius = isLight ? 160 : 180;
+          const mouseRadius = isLight ? 180 : 220;
           for (let i = 0; i < nodes.length; i++) {
             const p = nodes[i];
             const dx = p.x - mouse.x;
