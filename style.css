@@ -5078,24 +5078,23 @@ html[data-theme="light"] #integrations {
   border-top: 1px solid rgba(15, 23, 42, 0.08) !important;
 }
 
-/* Typography: Universal typography matching other sections */
-html[data-theme="light"] #infra h2,
-html[data-theme="light"] #infra h2 span {
+/* Typography: Universal typography matching #team / Gambar 2 */
+html[data-theme="light"] #infra h2 {
   color: #090d16 !important;
-  font-family: inherit !important;
-  font-weight: inherit !important;
-  letter-spacing: inherit !important;
-  line-height: inherit !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="light"] #infra h2 span {
+  color: inherit;
 }
 
 html[data-theme="light"] #infra h2 span.text-white\/40,
 html[data-theme="light"] #infra h2 span.text-white\/30 {
   color: #64748b !important;
-  font-family: inherit !important;
-  font-weight: inherit !important;
+  opacity: 1 !important;
 }
 
-/* Eyebrow: Universal clean text overline, exactly matching other sections */
+/* Eyebrow: Universal clean text overline, exactly matching Gambar 2 */
 html[data-theme="light"] #infra .section-eyebrow {
   background: none !important;
   border: none !important;
@@ -5108,7 +5107,11 @@ html[data-theme="light"] #infra .section-eyebrow {
   font-weight: 700 !important;
   letter-spacing: 0.14em !important;
   text-transform: uppercase !important;
-  display: inline-block !important;
+  display: block !important;
+  margin-bottom: 0.85rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
 }
 
 html[data-theme="light"] #infra .section-eyebrow span {
