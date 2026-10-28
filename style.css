@@ -3317,17 +3317,17 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   display: inline-flex !important;
   align-items: center !important;
   flex-direction: row !important;
-  gap: 0.42rem !important;
-  padding: 0.24rem 0.7rem !important;
+  gap: 0.45rem !important;
+  padding: 0.28rem 0.75rem !important;
   border-radius: 9999px !important;
-  background: rgba(255, 255, 255, 0.04) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  color: rgba(255, 255, 255, 0.65) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.7) !important;
   font-family: 'JetBrains Mono', monospace !important;
   font-size: 0.74rem !important;
   font-weight: 500 !important;
-  margin-top: 0.5rem !important;
-  margin-bottom: 0.75rem !important;
+  margin-top: 0.65rem !important;
+  margin-bottom: 1.15rem !important;
   width: fit-content !important;
   line-height: 1 !important;
   letter-spacing: 0.01em !important;
@@ -3357,19 +3357,28 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   }
 }
 
-/* Grid Architecture */
+/* Grid Architecture (Generous Breathing Room & Centered Cluster) */
 #pricing-cards-grid {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: 1.75rem;
+  gap: 2rem !important;
   align-items: stretch;
   width: 100%;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (min-width: 1024px) {
   #pricing-cards-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2rem;
+    gap: 2.5rem !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  #pricing-cards-grid {
+    gap: 2.75rem !important;
   }
 }
 
@@ -3378,8 +3387,8 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   position: relative;
   background: linear-gradient(180deg, #111522 0%, #080a11 100%);
   border: 1px solid rgba(255, 255, 255, 0.11);
-  border-radius: 24px;
-  padding: 2.25rem 2rem;
+  border-radius: 26px;
+  padding: 2.65rem 2.25rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -3393,21 +3402,22 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 
 .gl-pricing-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.85);
+  border-color: rgba(46, 196, 182, 0.35);
+  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.85), 0 0 25px -5px rgba(46, 196, 182, 0.15);
 }
 
 .gl-pricing-card--featured {
   background: linear-gradient(180deg, #111522 0%, #080a11 100%);
   border: 1px solid rgba(255, 255, 255, 0.11);
-  border-radius: 24px;
+  border-radius: 26px;
+  padding: 2.65rem 2.25rem;
   box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.65);
 }
 
 .gl-pricing-card--featured:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.85);
+  border-color: rgba(46, 196, 182, 0.35);
+  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.85), 0 0 25px -5px rgba(46, 196, 182, 0.15);
 }
 
 .gl-card-inner {
@@ -3461,9 +3471,9 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 .gl-price-row {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  margin-top: 0.45rem;
-  margin-bottom: 0.65rem;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+  margin-bottom: 0.85rem;
 }
 
 .gl-price-strike {
@@ -3472,7 +3482,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   font-weight: 500;
   color: rgba(255, 255, 255, 0.42);
   text-decoration: line-through;
-  line-height: 1.2;
+  line-height: 1.35;
   letter-spacing: 0.01em;
 }
 
@@ -3482,7 +3492,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.03em;
-  line-height: 1.05;
+  line-height: 1.15;
 }
 
 .gl-card-desc {
@@ -3490,8 +3500,8 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.65);
   line-height: 1.55;
-  margin-top: 0.25rem;
-  margin-bottom: 1.15rem;
+  margin-top: 0.4rem;
+  margin-bottom: 1.35rem;
   min-height: 2.6rem;
 }
 
@@ -3499,19 +3509,19 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 .gl-features-list {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  margin-top: 0.4rem;
-  padding-top: 1.25rem;
+  gap: 0.95rem;
+  margin-top: 0.5rem;
+  padding-top: 1.35rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .gl-feature-item {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: 0.85rem;
   font-family: 'Instrument Sans', sans-serif;
   font-size: 0.885rem;
-  line-height: 1.48;
+  line-height: 1.5;
   color: rgba(255, 255, 255, 0.85);
 }
 
@@ -3521,7 +3531,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   color: #2EC4B6;
   stroke: #2EC4B6;
   flex-shrink: 0;
-  margin-top: 0.18rem;
+  margin-top: 0.2rem;
 }
 
 .gl-feature-item strong {
@@ -3530,7 +3540,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 }
 
 .gl-card-bottom {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   padding-top: 0.5rem;
 }
 
