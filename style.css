@@ -4483,10 +4483,26 @@ html[data-theme="light"] p {
 }
 
 html[data-theme="light"] #hero-title,
-html[data-theme="light"] #hero-title span,
-html[data-theme="light"] #hero-shimmer-word,
-html[data-theme="light"] .hero-accent-playfair,
 html[data-theme="light"] .hero-line {
+  color: #090d16 !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="light"] #hero-title span:not(#hero-shimmer-word):not(#hero-shimmer-word *) {
+  color: #090d16;
+}
+
+/* Ensure letters inside #hero-shimmer-word preserve their dynamic rainbow colors in light mode */
+html[data-theme="light"] #hero-shimmer-word {
+  color: inherit !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="light"] #hero-shimmer-word > span {
+  text-shadow: none !important;
+}
+
+html[data-theme="light"] .hero-accent-playfair {
   color: #090d16 !important;
   text-shadow: none !important;
 }

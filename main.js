@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     // Original rainbow shimmer palette: pink -> purple -> blue -> cyan -> gold -> magenta -> pink
     const darkPalette = ["#eca8d6", "#be95ee", "#92aafa", "#67e8f9", "#fbbf24", "#f472b6", "#eca8d6"];
-    const lightPalette = ["#d946ef", "#8b5cf6", "#3b82f6", "#06b6d4", "#f59e0b", "#ec4899", "#d946ef"];
+    const lightPalette = ["#db2777", "#8b5cf6", "#2563eb", "#06b6d4", "#10b981", "#f59e0b", "#db2777"];
     let wordIdx = 0;
     let animFrames = [];
     let animTimeouts = [];
@@ -340,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
         span.style.whiteSpace = 'pre';
         span.style.opacity = isInitial ? '1' : '0';
         span.style.filter = isInitial ? 'none' : 'blur(16px)';
-        span.style.transition = 'color 0.5s ease, opacity 0.3s ease, filter 0.3s ease';
+        span.style.transition = 'color 0.4s ease, opacity 0.3s ease, filter 0.3s ease';
 
         const a = (r / Math.max(totalLen - 1, 1)) * (palette.length - 1);
         const s = Math.floor(a);
@@ -351,7 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const b = Math.round(u + (h - u) * i);
         const v = Math.round(m + (f - m) * i);
         const y = Math.round(x + (g - x) * i);
-        span.style.color = isLight && isInitial ? '#090d16' : `rgb(${b},${v},${y})`;
+        span.style.setProperty('color', `rgb(${b},${v},${y})`, 'important');
 
         heroShimmerSpan.appendChild(span);
         return span;
@@ -382,27 +382,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
-      // Smoothly transition all letters to crisp final color (theme-aware)
-      const whiteTimeout = setTimeout(() => {
-        const currentlyLight = document.documentElement.getAttribute('data-theme') === 'light';
+      // Settle all letters cleanly while preserving their rich rainbow colors
+      const settleTimeout = setTimeout(() => {
         spans.forEach(span => {
-          span.style.color = currentlyLight ? '#090d16' : '#ffffff';
           span.style.filter = 'none';
           span.style.opacity = '1';
         });
       }, revealTotalTime);
-      animTimeouts.push(whiteTimeout);
+      animTimeouts.push(settleTimeout);
     };
 
     window.addEventListener('themechange', () => {
-      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-      if (heroShimmerSpan) {
-        const spans = heroShimmerSpan.querySelectorAll('span');
-        spans.forEach(s => {
-          s.style.color = isLight ? '#090d16' : '#ffffff';
-          s.style.filter = 'none';
-        });
-      }
+      const list = shimmerWords[currentLang] || shimmerWords.en;
+      const currentWord = list[wordIdx] || list[0];
+      animateWord(currentWord, true);
     });
 
     cycleShimmerWord = (reset = false, isInitial = false) => {
