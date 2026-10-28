@@ -548,9 +548,9 @@
 
     grid.innerHTML = cat.tiers
       .map((tier) => {
-        // Distinctive featured highlight for popular tier
-        const cardClass = tier.featured ? 'gl-pricing-card gl-pricing-card--featured' : 'gl-pricing-card';
-        const ctaClass = tier.featured ? 'gl-cta-btn gl-cta-btn--featured' : 'gl-cta-btn';
+        // Uniform styling and animations across all cards
+        const cardClass = 'gl-pricing-card';
+        const ctaClass = 'gl-cta-btn';
 
         const tierIcons = {
           starter: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>`,
@@ -599,10 +599,6 @@
                 </div>
                 <div class="gl-card-badges-group">
                   ${popularBadge}
-                  <div class="gl-delivery-badge">
-                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="12" width="12" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    <span>${deliveryText}</span>
-                  </div>
                 </div>
               </div>
 
