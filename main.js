@@ -382,20 +382,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
-      // Settle all letters cleanly while preserving their rich rainbow colors
+      // Pas sudah selesai animasi (jadi): Tulisannya berubah jadi warna hitam (mode terang) atau putih (mode gelap)
+      const settleDelay = isInitial ? 750 : revealTotalTime;
       const settleTimeout = setTimeout(() => {
+        const currentlyLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const finalColor = currentlyLight ? '#090d16' : '#ffffff';
         spans.forEach(span => {
+          span.style.transition = 'color 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, filter 0.3s ease';
+          span.style.setProperty('color', finalColor, 'important');
           span.style.filter = 'none';
           span.style.opacity = '1';
         });
-      }, revealTotalTime);
+      }, settleDelay);
       animTimeouts.push(settleTimeout);
     };
 
     window.addEventListener('themechange', () => {
-      const list = shimmerWords[currentLang] || shimmerWords.en;
-      const currentWord = list[wordIdx] || list[0];
-      animateWord(currentWord, true);
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      if (heroShimmerSpan) {
+        const spans = heroShimmerSpan.querySelectorAll('span');
+        const finalColor = isLight ? '#090d16' : '#ffffff';
+        spans.forEach(s => {
+          s.style.setProperty('color', finalColor, 'important');
+        });
+      }
     });
 
     cycleShimmerWord = (reset = false, isInitial = false) => {
