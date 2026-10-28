@@ -4073,6 +4073,49 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   transform: rotate(180deg);
 }
 
+/* CTA Left Column Benefits List & Spacious Layout */
+#cta-box h2 {
+  margin-bottom: 2.25rem !important; /* 36px clean downward breathing room */
+}
+
+.cta-benefit-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 22px !important;
+}
+
+.cta-benefit-item {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 16px !important;
+}
+
+.cta-benefit-check {
+  margin-top: 3px !important;
+}
+
+.cta-benefit-heading {
+  font-size: 15px !important;
+  line-height: 1.4 !important;
+  color: #ffffff !important;
+  margin-bottom: 6px !important;
+}
+
+.cta-benefit-desc {
+  font-size: 13.5px !important;
+  line-height: 1.55 !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+  margin: 0 !important;
+}
+
+html[data-theme="light"] .cta-benefit-heading {
+  color: #090d16 !important;
+}
+
+html[data-theme="light"] .cta-benefit-desc {
+  color: #475569 !important;
+}
+
 /* Pricing Toggle Wrap - Generous downward spacing */
 .pricing-toggle-wrap {
   margin-top: 52px !important;
@@ -6517,7 +6560,20 @@ html[data-theme="light"] .obsidian-discover-button::after {
   #cta-box h2 {
     font-size: 1.65rem !important;
     line-height: 1.22 !important;
-    margin-bottom: 1rem !important;
+    margin-bottom: 1.85rem !important;
+  }
+  .cta-benefit-list {
+    gap: 18px !important;
+  }
+  .cta-benefit-item {
+    gap: 14px !important;
+  }
+  .cta-benefit-heading {
+    font-size: 14.5px !important;
+    margin-bottom: 5px !important;
+  }
+  .cta-benefit-desc {
+    font-size: 13px !important;
   }
   .ai-consult-card {
     border-radius: 16px !important;
