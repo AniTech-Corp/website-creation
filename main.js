@@ -2524,22 +2524,6 @@ COMMUNICATION STYLE: Concise, structured, elegant, professional, and consultativ
     });
   };
 
-  // Floating WhatsApp Pop-up Bubble dismiss handler
-  const waPopupBubble = document.getElementById('wa-popup-bubble');
-  const waPopupCloseBtn = document.getElementById('wa-popup-close-btn');
-  if (waPopupCloseBtn && waPopupBubble) {
-    waPopupCloseBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      waPopupBubble.style.opacity = '0';
-      waPopupBubble.style.transform = 'translateY(6px) scale(0.95)';
-      waPopupBubble.style.pointerEvents = 'none';
-      setTimeout(() => {
-        waPopupBubble.style.display = 'none';
-      }, 300);
-    });
-  }
-
   initFooterVideoEngine();
   initThemeSystem();
 });

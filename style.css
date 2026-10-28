@@ -6493,125 +6493,62 @@ html[data-theme="light"] .hero-stat-card span.font-mono {
 }
 
 /* ==========================================================================
-   GLOBAL FLOATING WHATSAPP WIDGET & POPUP
+   GLOBAL FLOATING WHATSAPP BUTTON (PURE CIRCULAR FAB)
    ========================================================================== */
 .wa-floating-container {
   position: fixed;
-  bottom: 26px;
-  right: 26px;
+  bottom: 28px;
+  right: 28px;
   z-index: 99999;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
-  pointer-events: auto;
-  font-family: inherit;
-}
-
-/* 1. Speech Bubble / Tooltip Pop-up */
-.wa-floating-tooltip {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(11, 15, 22, 0.94);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  padding: 8px 14px 8px 12px;
-  border-radius: 9999px;
-  box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(37, 211, 102, 0.25);
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.4;
-  white-space: nowrap;
-  cursor: pointer;
-  transform-origin: bottom right;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  animation: wa-float-bob 4s ease-in-out infinite alternate;
-}
-
-.wa-floating-tooltip:hover {
-  transform: translateY(-2px) scale(1.02);
-  border-color: rgba(37, 211, 102, 0.45);
-  box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.75), 0 0 20px rgba(37, 211, 102, 0.3);
-}
-
-.wa-tooltip-pulse {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #25D366;
-  box-shadow: 0 0 8px #25D366;
-  flex-shrink: 0;
-  animation: wa-dot-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-.wa-tooltip-text {
-  color: rgba(255, 255, 255, 0.92);
-}
-
-.wa-tooltip-close {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  border: none;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 14px;
-  line-height: 1;
-  cursor: pointer;
-  margin-left: 2px;
-  transition: all 0.2s ease;
+  pointer-events: auto;
 }
 
-.wa-tooltip-close:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-}
-
-/* 2. Main WhatsApp Action Button */
+/* Main WhatsApp Circular Action Button */
 .wa-floating-btn {
   position: relative;
-  display: inline-flex;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  display: flex;
   align-items: center;
-  gap: 10px;
-  background: linear-gradient(135deg, #101620 0%, #0c1017 100%);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  padding: 6px 16px 6px 6px;
-  border-radius: 9999px;
+  justify-content: center;
   color: #ffffff;
   text-decoration: none;
-  box-shadow: 0 14px 34px -6px rgba(0, 0, 0, 0.7), 0 0 25px -4px rgba(37, 211, 102, 0.35);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 28px -4px rgba(37, 211, 102, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.22);
   cursor: pointer;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   -webkit-tap-highlight-color: transparent;
 }
 
 .wa-floating-btn:hover {
-  transform: translateY(-3px) scale(1.03);
-  border-color: rgba(37, 211, 102, 0.55);
-  box-shadow: 0 18px 40px -6px rgba(0, 0, 0, 0.8), 0 0 32px rgba(37, 211, 102, 0.55);
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 16px 36px -4px rgba(37, 211, 102, 0.7), 0 0 28px rgba(37, 211, 102, 0.5);
 }
 
 .wa-floating-btn:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(0) scale(0.96);
 }
 
-/* 3. Glowing / Pulsing Beacon Ring */
+/* WhatsApp SVG Icon inside Button */
+.wa-floating-btn .wa-svg {
+  width: 30px;
+  height: 30px;
+  fill: #ffffff;
+  transition: transform 0.3s ease;
+}
+
+.wa-floating-btn:hover .wa-svg {
+  transform: scale(1.06) rotate(-4deg);
+}
+
+/* Radiant Beacon Pulse Ring */
 .wa-pulse-ring {
   position: absolute;
-  left: 6px;
-  top: 6px;
-  width: 44px;
-  height: 44px;
+  inset: -4px;
   border-radius: 50%;
   pointer-events: none;
   animation: wa-ring-pulse 2.4s cubic-bezier(0.24, 0, 0.38, 1) infinite;
@@ -6619,11 +6556,11 @@ html[data-theme="light"] .hero-stat-card span.font-mono {
 
 @keyframes wa-ring-pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.65);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
     opacity: 1;
   }
   60% {
-    box-shadow: 0 0 0 16px rgba(37, 211, 102, 0);
+    box-shadow: 0 0 0 18px rgba(37, 211, 102, 0);
     opacity: 0;
   }
   100% {
@@ -6632,156 +6569,49 @@ html[data-theme="light"] .hero-stat-card span.font-mono {
   }
 }
 
-@keyframes wa-dot-pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.4;
-    transform: scale(0.85);
-  }
-}
-
-@keyframes wa-float-bob {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-4px);
-  }
-}
-
-/* 4. Green Icon Bubble */
-.wa-icon-bubble {
-  position: relative;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  flex-shrink: 0;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 4px 12px rgba(37, 211, 102, 0.45);
-  transition: transform 0.3s ease;
-}
-
-.wa-floating-btn:hover .wa-icon-bubble {
-  transform: scale(1.06) rotate(-5deg);
-}
-
-.wa-svg {
-  width: 24px;
-  height: 24px;
-  fill: #ffffff;
-}
-
-/* Live Online Status Dot on Icon */
+/* Live Online Status Dot on Circle Edge */
 .wa-status-dot {
   position: absolute;
-  bottom: 0px;
-  right: 0px;
-  width: 12px;
-  height: 12px;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
   background-color: #22c55e;
-  border: 2px solid #0c1017;
+  border: 2.5px solid #080a0f;
   border-radius: 50%;
-  box-shadow: 0 0 6px rgba(34, 197, 94, 0.8);
-}
-
-/* 5. Button Text Label */
-.wa-btn-text {
-  font-family: inherit;
-  font-size: 13.5px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #ffffff;
-  padding-right: 4px;
-  white-space: nowrap;
-}
-
-/* Light Mode Overrides */
-html[data-theme="light"] .wa-floating-tooltip {
-  background: rgba(255, 255, 255, 0.94);
-  border-color: rgba(0, 0, 0, 0.08);
-  color: #0f172a;
-  box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(37, 211, 102, 0.3);
-}
-
-html[data-theme="light"] .wa-tooltip-text {
-  color: #0f172a;
-}
-
-html[data-theme="light"] .wa-tooltip-close {
-  background: rgba(0, 0, 0, 0.06);
-  color: #475569;
-}
-
-html[data-theme="light"] .wa-tooltip-close:hover {
-  background: rgba(0, 0, 0, 0.12);
-  color: #0f172a;
-}
-
-html[data-theme="light"] .wa-floating-btn {
-  background: #ffffff;
-  border-color: rgba(0, 0, 0, 0.08);
-  box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.14), 0 0 20px rgba(37, 211, 102, 0.25);
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.9);
 }
 
 html[data-theme="light"] .wa-status-dot {
   border-color: #ffffff;
 }
 
-html[data-theme="light"] .wa-btn-text {
-  color: #0f172a;
-}
-
-/* 6. Responsive Adjustments for Mobile Screens */
+/* Mobile Screens */
 @media (max-width: 640px) {
   .wa-floating-container {
     bottom: 20px;
-    right: 18px;
-    gap: 8px;
-  }
-
-  .wa-floating-tooltip {
-    font-size: 12px;
-    padding: 6px 12px;
-    max-width: calc(100vw - 40px);
+    right: 20px;
   }
 
   .wa-floating-btn {
-    padding: 4px 12px 4px 4px;
+    width: 52px;
+    height: 52px;
   }
 
-  .wa-pulse-ring {
-    left: 4px;
-    top: 4px;
-    width: 38px;
-    height: 38px;
-  }
-
-  .wa-icon-bubble {
-    width: 38px;
-    height: 38px;
-  }
-
-  .wa-svg {
-    width: 21px;
-    height: 21px;
+  .wa-floating-btn .wa-svg {
+    width: 26px;
+    height: 26px;
   }
 
   .wa-status-dot {
-    width: 10px;
-    height: 10px;
-  }
-
-  .wa-btn-text {
-    font-size: 12.5px;
+    width: 12px;
+    height: 12px;
+    bottom: 1px;
+    right: 1px;
+    border-width: 2px;
   }
 }
+
 
 
 
