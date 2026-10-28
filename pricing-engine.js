@@ -548,9 +548,9 @@
 
     grid.innerHTML = cat.tiers
       .map((tier) => {
-        // Uniform color and structure across all 3 cards
-        const cardClass = 'gl-pricing-card';
-        const ctaClass = 'gl-cta-btn';
+        // Distinctive featured highlight for popular tier
+        const cardClass = tier.featured ? 'gl-pricing-card gl-pricing-card--featured' : 'gl-pricing-card';
+        const ctaClass = tier.featured ? 'gl-cta-btn gl-cta-btn--featured' : 'gl-cta-btn';
 
         const tierIcons = {
           starter: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>`,
@@ -657,8 +657,28 @@
         activeCategory = cat;
         renderPricingCards(activeCategory);
 
-        // Smoothly bring selected button into view on mobile
-        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        // Smoothly scroll only the category navigation container if overflowed, NEVER the window/viewport
+        const navContainer = document.querySelector('.pricing-cat-nav-wrap');
+        if (navContainer && navContainer.scrollWidth > navContainer.clientWidth) {
+          const scrollTarget = btn.offsetLeft - (navContainer.clientWidth / 2) + (btn.clientWidth / 2);
+          navContainer.scrollTo({ left: Math.max(0, scrollTarget), behavior: 'smooth' });
+        }
+
+        // Hard-lock window scroll to avoid any accidental horizontal viewport shift
+        if (window.scrollX !== 0) {
+          window.scrollTo(0, window.scrollY);
+        }
+        requestAnimationFrame(() => {
+          if (window.scrollX !== 0) {
+            window.scrollTo(0, window.scrollY);
+          }
+          if (document.documentElement.scrollLeft !== 0) {
+            document.documentElement.scrollLeft = 0;
+          }
+          if (document.body && document.body.scrollLeft !== 0) {
+            document.body.scrollLeft = 0;
+          }
+        });
       });
     });
 

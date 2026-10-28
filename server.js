@@ -81,8 +81,10 @@ const server = http.createServer((req, res) => {
       'Accept-Ranges': 'bytes',
     };
 
-    if (ext === '.html') {
-      headers['Cache-Control'] = 'no-cache, must-revalidate';
+    if (ext === '.html' || ext === '.js' || ext === '.css') {
+      headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+      headers['Pragma'] = 'no-cache';
+      headers['Expires'] = '0';
     } else {
       headers['Cache-Control'] = 'public, max-age=86400';
     }

@@ -3,7 +3,24 @@
  * 1:1 Interactive Engine matching https://v0-compute-11.vercel.app/
  */
 
+// Global horizontal scroll lock to prevent any unwanted horizontal viewport shifting
+const lockHorizontalScroll = () => {
+  if (window.scrollX !== 0) {
+    window.scrollTo(0, window.scrollY);
+  }
+  if (document.documentElement && document.documentElement.scrollLeft !== 0) {
+    document.documentElement.scrollLeft = 0;
+  }
+  if (document.body && document.body.scrollLeft !== 0) {
+    document.body.scrollLeft = 0;
+  }
+};
+window.addEventListener('scroll', lockHorizontalScroll, { passive: true });
+window.addEventListener('resize', lockHorizontalScroll, { passive: true });
+window.addEventListener('orientationchange', lockHorizontalScroll, { passive: true });
+
 document.addEventListener('DOMContentLoaded', () => {
+  lockHorizontalScroll();
 
   // =========================================================================
   // 0. TOP SCROLL PROGRESS INDICATOR
