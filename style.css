@@ -4047,6 +4047,16 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   transform: rotate(180deg);
 }
 
+/* Pricing Toggle Wrap - Generous downward spacing */
+.pricing-toggle-wrap {
+  margin-top: 52px !important;
+  padding-top: 12px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
 /* Enlarged & Prominent Toggle Pricing Button */
 #toggle-pricing-btn {
   height: 54px !important;
@@ -4058,13 +4068,15 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   transition: all 350ms cubic-bezier(0.16, 1, 0.3, 1) !important;
   outline: none !important;
   outline-offset: 0 !important;
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 #toggle-pricing-btn:focus,
-#toggle-pricing-btn:focus-visible {
+#toggle-pricing-btn:focus-visible,
+#toggle-pricing-btn:active {
   outline: none !important;
   outline-offset: 0 !important;
-  box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(46, 196, 182, 0.4) !important;
+  box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.6) !important;
 }
 
 #toggle-pricing-btn .obsidian-discover-button__fill {
