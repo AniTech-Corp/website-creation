@@ -5094,7 +5094,7 @@ html[data-theme="light"] #infra h2 span.text-white\/30 {
   opacity: 1 !important;
 }
 
-/* Eyebrow: Universal clean text overline, exactly matching Gambar 2 */
+/* Eyebrow: Universal clean text overline, left-aligned */
 html[data-theme="light"] #infra .section-eyebrow {
   background: none !important;
   border: none !important;
@@ -5107,11 +5107,11 @@ html[data-theme="light"] #infra .section-eyebrow {
   font-weight: 700 !important;
   letter-spacing: 0.14em !important;
   text-transform: uppercase !important;
-  display: block !important;
+  display: inline-block !important;
   margin-bottom: 0.85rem !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  text-align: center !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  text-align: left !important;
 }
 
 html[data-theme="light"] #infra .section-eyebrow span {
