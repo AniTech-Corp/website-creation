@@ -660,8 +660,10 @@
         // Smoothly scroll only the category navigation container if overflowed, NEVER the window/viewport
         const navContainer = document.querySelector('.pricing-cat-nav-wrap');
         if (navContainer && navContainer.scrollWidth > navContainer.clientWidth) {
-          const scrollTarget = btn.offsetLeft - (navContainer.clientWidth / 2) + (btn.clientWidth / 2);
-          navContainer.scrollTo({ left: Math.max(0, scrollTarget), behavior: 'smooth' });
+          setTimeout(() => {
+            const scrollTarget = btn.offsetLeft - (navContainer.clientWidth / 2) + (btn.clientWidth / 2);
+            navContainer.scrollTo({ left: Math.max(0, scrollTarget), behavior: 'smooth' });
+          }, 60);
         }
 
         // Hard-lock window scroll to avoid any accidental horizontal viewport shift

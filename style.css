@@ -3207,36 +3207,58 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   flex-shrink: 0;
 }
 
+/* Expanding Segmented Pill Category Tabs (#pricing) */
 .pricing-cat-btn {
   position: relative;
-  width: 44px;
   height: 44px;
+  min-width: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.68);
   cursor: pointer;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0 13px;
   user-select: none;
   flex-shrink: 0;
   outline: none;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pricing-cat-btn:not(.active):not(:hover) {
+  width: 44px;
+  padding: 0;
+  justify-content: center;
 }
 
 .pricing-cat-btn:hover {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.28);
+  padding: 0 16px 0 13px;
+  transform: translateY(-1px);
 }
 
 .pricing-cat-btn.active {
   color: #ffffff !important;
   background: linear-gradient(135deg, #008E8B 0%, #2EC4B6 100%) !important;
   border: 1px solid #2EC4B6 !important;
-  box-shadow: 0 4px 20px rgba(46, 196, 182, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 4px 20px rgba(46, 196, 182, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+  padding: 0 18px 0 14px;
+}
+
+.pricing-cat-btn.active:hover {
+  transform: translateY(-1px);
 }
 
 .pricing-cat-icon {
@@ -3246,11 +3268,13 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   line-height: 1;
   flex-shrink: 0;
   pointer-events: none;
+  width: 18px;
+  height: 18px;
 }
 
 .pricing-cat-icon svg {
-  width: 17px;
-  height: 17px;
+  width: 18px;
+  height: 18px;
   stroke: currentColor;
   fill: none;
   stroke-width: 2;
@@ -3258,87 +3282,41 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   stroke-linejoin: round;
   display: inline-block;
   vertical-align: middle;
+  flex-shrink: 0;
 }
 
-/* Floating Tooltip Bubble on Hover */
-.pricing-cat-tooltip {
-  position: absolute;
-  bottom: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%) translateY(6px);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  background: rgba(16, 21, 32, 0.96);
-  border: 1px solid rgba(46, 196, 182, 0.45);
-  color: #ffffff;
-  font-family: 'Instrument Sans', sans-serif;
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  padding: 0.35rem 0.75rem;
-  border-radius: 8px;
-  white-space: nowrap;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.75), 0 0 16px rgba(46, 196, 182, 0.2);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s;
-  z-index: 60;
-}
-
-.pricing-cat-tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 5px 5px 0 5px;
-  border-style: solid;
-  border-color: rgba(46, 196, 182, 0.45) transparent transparent transparent;
-}
-
-.pricing-cat-btn:hover .pricing-cat-tooltip,
-.pricing-cat-btn:focus-visible .pricing-cat-tooltip {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-}
-
-/* Real-Time Active Category Indicator Badge */
-.pricing-current-cat-indicator {
+/* Inline Expanding Label Beside the Logo */
+.pricing-cat-label {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.85rem;
-  padding: 0.3rem 0.95rem;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  font-family: 'Instrument Sans', sans-serif;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.65);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-}
-
-.pricing-cat-indicator-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 9999px;
-  background: #2EC4B6;
-  box-shadow: 0 0 8px #2EC4B6;
-  display: inline-block;
-  animation: pulse 2s infinite;
-}
-
-.pricing-cat-indicator-label {
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.pricing-cat-indicator-name {
-  color: #ffffff;
-  font-weight: 700;
+  font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
   letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 0;
+  opacity: 0;
+  transform: translateX(-4px);
+  pointer-events: none;
+  margin-left: 0;
+  transition: max-width 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              margin-left 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pricing-cat-btn.active .pricing-cat-label,
+.pricing-cat-btn:hover .pricing-cat-label {
+  max-width: 220px;
+  opacity: 1;
+  transform: translateX(0);
+  margin-left: 0.52rem;
+}
+
+.pricing-cat-btn.active .pricing-cat-label {
+  font-weight: 700;
+  color: #ffffff !important;
 }
 
 /* Delivery Time Badge */
@@ -3718,7 +3696,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
 /* Responsive Refinements for Pricing Grid & Cards */
 @media (max-width: 639px) {
   .pricing-cat-nav-wrap {
-    padding: 0.25rem 0.25rem 0.5rem 0.25rem;
+    padding: 0.35rem 0.5rem 0.65rem 0.5rem;
     margin-bottom: 1.5rem;
   }
 
@@ -3728,8 +3706,23 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
   }
 
   .pricing-cat-btn {
-    width: 38px;
     height: 38px;
+    min-width: 38px;
+  }
+
+  .pricing-cat-btn:not(.active):not(:hover) {
+    width: 38px;
+    padding: 0;
+  }
+
+  .pricing-cat-btn:hover,
+  .pricing-cat-btn.active {
+    padding: 0 13px 0 10px;
+  }
+
+  .pricing-cat-icon {
+    width: 15px;
+    height: 15px;
   }
 
   .pricing-cat-icon svg {
@@ -3737,10 +3730,14 @@ h1, h2, h3, h4, h5, h6, p, span, a, label, li, code, kbd, samp, pre,
     height: 15px;
   }
 
-  .pricing-current-cat-indicator {
-    margin-top: 0.65rem;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.74rem;
+  .pricing-cat-label {
+    font-size: 0.77rem;
+  }
+
+  .pricing-cat-btn.active .pricing-cat-label,
+  .pricing-cat-btn:hover .pricing-cat-label {
+    margin-left: 0.4rem;
+    max-width: 180px;
   }
 
   #pricing-cards-grid {
@@ -5264,41 +5261,28 @@ html[data-theme="light"] .pricing-cat-nav {
 
 html[data-theme="light"] .pricing-cat-btn {
   color: #475569 !important;
-  background: transparent !important;
-  border-color: transparent !important;
+  background: rgba(15, 23, 42, 0.04) !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
 }
 
 html[data-theme="light"] .pricing-cat-btn:hover {
   color: #0f172a !important;
-  background: rgba(15, 23, 42, 0.08) !important;
+  background: rgba(15, 23, 42, 0.09) !important;
+  border-color: rgba(15, 23, 42, 0.16) !important;
 }
 
 html[data-theme="light"] .pricing-cat-btn.active {
   color: #ffffff !important;
-  background: #008E8B !important;
+  background: linear-gradient(135deg, #008E8B 0%, #2EC4B6 100%) !important;
   border: 1px solid #007370 !important;
-  box-shadow: 0 4px 14px rgba(0, 142, 139, 0.28) !important;
+  box-shadow: 0 4px 16px rgba(0, 142, 139, 0.35) !important;
 }
 
-html[data-theme="light"] .pricing-cat-tooltip {
-  background: #ffffff !important;
-  border: 1px solid rgba(0, 142, 139, 0.35) !important;
-  color: #0f172a !important;
-  box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.12) !important;
+html[data-theme="light"] .pricing-cat-btn.active .pricing-cat-label {
+  color: #ffffff !important;
 }
 
-html[data-theme="light"] .pricing-cat-tooltip::after {
-  border-color: rgba(0, 142, 139, 0.35) transparent transparent transparent !important;
-}
-
-html[data-theme="light"] .pricing-current-cat-indicator {
-  background: #ffffff !important;
-  border: 1px solid rgba(15, 23, 42, 0.1) !important;
-  color: #64748b !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important;
-}
-
-html[data-theme="light"] .pricing-cat-indicator-name {
+html[data-theme="light"] .pricing-cat-btn:hover:not(.active) .pricing-cat-label {
   color: #0f172a !important;
 }
 
