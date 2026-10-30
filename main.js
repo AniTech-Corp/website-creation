@@ -2018,8 +2018,9 @@ COMMUNICATION STYLE: Concise, structured, elegant, professional, and consultativ
       });
 
       // Synchronize ambient glow
-      if (ambientGlow && projectThemes[activeIndex]) {
-        ambientGlow.style.background = projectThemes[activeIndex].glow;
+      const themeItem = projectThemes[activeIndex % projectThemes.length];
+      if (ambientGlow && themeItem) {
+        ambientGlow.style.background = themeItem.glow;
       }
 
       // Synchronize pagination dots
